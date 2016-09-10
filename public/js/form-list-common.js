@@ -192,7 +192,7 @@ $(document).ready(function(){
      */
     $('#filter-created_by').select2({
         ajax: {
-            url: '/app/modules/users_filter',
+            url: '/app/users/users_filter',
             dataType: 'json',
             type: 'GET',
             delay: 100,
@@ -214,7 +214,7 @@ $(document).ready(function(){
      */
     $('#filter-updated_by').select2({
         ajax: {
-            url: '/app/modules/users_filter',
+            url: '/app/users/users_filter',
             dataType: 'json',
             type: 'GET',
             delay: 100,

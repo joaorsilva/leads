@@ -111,6 +111,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     <th class="text-center">&nbsp;</th>
                                     <th class="text-center hidden-xs"><a href="javascript:void(0)" id="field-id">#<i class="glyphicon glyphicon-sort-by-attributes pull-right"></i></a></th>
                                     <th class="text-left"><a href="javascript:void(0)" id="field-name">Name&nbsp;<i class="glyphicon glyphicon-sort pull-right"></i></a></th>
+                                    <th class="text-left"><a href="javascript:void(0)" id="field-app_modules_id">Module&nbsp;<i class="glyphicon glyphicon-sort pull-right"></i></a></th>
                                     <th class="text-left hidden-sm hidden-xs" nowrap><a href="javascript:void(0)" id="field-created_by">Created By&nbsp;<i class="glyphicon glyphicon-sort pull-right"></i></a></th>
                                     <th class="text-right hidden-sm hidden-xs"><a href="javascript:void(0)" id="field-created_date">Created Date&nbsp;<i class="glyphicon glyphicon-sort pull-right"></i></a></th>
                                     <th class="text-left hidden-sm hidden-xs"><a href="javascript:void(0)" id="field-updated_by">Updated By&nbsp;<i class="glyphicon glyphicon-sort pull-right"></i></a></th>
@@ -121,10 +122,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             </thead>
                             <tbody>
                                 <tr id="row-single" class="hidden">
-                                    <td colspan="9" class="text-center"><i class="fa fa-spinner fa-spin"></i>&nbsp;<?php echo($this->spagi_i18n->_('__lists__Loading...'))?></td>
+                                    <td colspan="10" class="text-center"><i class="fa fa-spinner fa-spin"></i>&nbsp;<?php echo($this->spagi_i18n->_('__lists__Loading...'))?></td>
                                 </tr>    
                                 <tr id="row-error" class="hidden">
-                                    <td colspan="9" class="text-center">
+                                    <td colspan="10" class="text-center">
                                         <div class="callout callout-danger">
                                             <h4><i class="fa fa-warning"></i>&nbsp;<?php echo($this->spagi_i18n->_('__lists__Error loading your data'))?></h4>
                                             <p><?php echo($this->spagi_i18n->_('__lists__Problem loading'))?></p>
@@ -133,7 +134,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     </td>
                                 </tr>    
                                 <tr id="row-no-data" class="hidden">
-                                    <td colspan="9" class="text-center">
+                                    <td colspan="10" class="text-center">
                                         <div class="callout callout-warning">
                                             <h4><i class="fa fa-exclamation-circle"></i>&nbsp;<?php echo($this->spagi_i18n->_('__lists__No data found'))?></h4>
                                             <p><?php echo($this->spagi_i18n->_('__lists__No data found criteria'))?></p>
@@ -143,6 +144,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <tr id="row-template" class="hidden">
                                     <td class="text-center table-row"><input type="checkbox" class="dynamic-checkbox" name="selected[0]" value="0"/></td>
                                     <td class="text-center table-row hidden-xs"></td>
+                                    <td class="text-left table-row"></td>
                                     <td class="text-left table-row"></td>
                                     <td class="text-left table-row hidden-sm hidden-xs"></td>
                                     <td class="text-right table-row hidden-sm hidden-xs"></td>
@@ -197,5 +199,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </div>
     <span id="base-url" data-url="<?php echo($this->spagi_pagedata->route)?>" class="hidden"></span>
 </section>
+
+
+
 
 

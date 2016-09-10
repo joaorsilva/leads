@@ -1,29 +1,29 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 /**
- * Description of Login
+ * Description of Controllers
  * Copyright (c) 2016 SPAGI Sistemas, ME.
  * Todos os direitos reservados.
  * @author João Lopes Ribeiro da Silva <joao.r.silva@gmail.com>
  */
-class Modules extends CI_Controller {
-
-    public $route = '/app/modules/';
+class Controllers extends CI_Controller {
+    
+    public $route = '/app/controllers/';
     public $menu = 'users';
-    public $submenu = 'modules';
+    public $submenu = 'controllers';
     
     public function __construct() 
     {
         parent::__construct();
     }
-    
+
     public function index()
     {
         $this->spagi_pagedata->route = $this->route;
         $this->spagi_pagedata->set_page_menu($this->menu, $this->submenu)
                             ->set_page(
-                                     'Application Modules',
-                                     'Application Modules',
+                                     'Application Controllers',
+                                     'Application Controllers',
                                      'Details list'
                                      )
                             ->addBreadcrumb(
@@ -32,21 +32,21 @@ class Modules extends CI_Controller {
                                      'fa fa-dashboard'
                                      )
                             ->addBreadcrumb(
-                                     'Application Modules',
+                                     'Application Controllers',
                                      '',
-                                     'fa fa-th-large'
+                                     'fa fa-th'
                                      )
                             ->addCss('/public/lte/plugins/daterangepicker/daterangepicker-bs3.css')
                             ->addJs('https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js')
                             ->addJs('/public/lte/plugins/daterangepicker/daterangepicker.js')
                             ->addJs('/public/js/languages/english/date-options.js')
                             ->addJs('/public/js/form-list-common.js')
-                            ->addJs('/public/js/app/modules/index.js')
+                            ->addJs('/public/js/app/controllers/index.js')
                             ->addCss('/public/css/form-list-common.css');
         
         $this->spagi_i18n->load('lists-common');
         $this->load->view('outframes/admin_header.php');
-        $this->load->view('app/modules/index.php');
+        $this->load->view('app/controllers/index.php');
         $this->load->view('outframes/admin_footer.php');
     }
     
@@ -54,26 +54,26 @@ class Modules extends CI_Controller {
     {
         $icon = 'fa-edit';
         $subtitle = 'Edit Record';
-        $text = 'Edit Module';
+        $text = 'Edit Controller';
         if($show) 
         {
             $icon = 'fa-television';
             $subtitle = 'Show Record';
-            $text = 'Show Module';
+            $text = 'Show Controller';
         }
         
         if($id === 'new') 
         {
             $icon = 'fa-file-text-o';
             $subtitle = 'New Record';
-            $text = 'New Module';            
+            $text = 'New Controller';
         }
                 
         $this->spagi_pagedata->route = $this->route;
         $this->spagi_pagedata->set_page_menu($this->menu, $this->submenu)
                              ->set_page(
-                                     'Application Module',
-                                     'Application Module',
+                                     'Application Controller',
+                                     'Application Controller',
                                      $subtitle,
                                      $show
                                      )
@@ -83,8 +83,8 @@ class Modules extends CI_Controller {
                                      'fa fa-dashboard'
                                      )
                              ->addBreadcrumb(
-                                     'Application Modules',
-                                     '/app/modules',
+                                     'Application Controllers',
+                                     '/app/controllers',
                                      'fa fa-th-large'
                                      )
                              ->addBreadcrumb(
@@ -93,14 +93,14 @@ class Modules extends CI_Controller {
                                      'fa ' . $icon
                                      )
                              ->addJs('/public/js/form-edit-common.js')
-                             ->addJs('/public/js/app/modules/edit.js');
+                             ->addJs('/public/js/app/controllers/edit.js');
         
         if($id)
         {
             $this->spagi_pagedata->page['id'] = $id;
         }
         $this->load->view('outframes/admin_header.php');
-        $this->load->view('app/modules/edit.php');
+        $this->load->view('app/controllers/edit.php');
         $this->load->view('outframes/admin_footer.php');        
     }
     
@@ -117,14 +117,14 @@ class Modules extends CI_Controller {
     public function get($id) 
     {
         $this->load->library('Spagi_FormHandler');
-        $this->load->model('App_modules_model');
+        $this->load->model('App_controllers_model');
         $this->spagi_formhandler->request_type = 'form';
         $this->spagi_formhandler->receive(__METHOD__);
         
         $res = array();
         if($id && is_numeric($id)) 
         {
-            $res = $this->App_modules_model->get($id);
+            $res = $this->App_controllers_model->get($id);
         }
         
         $this->spagi_formhandler->rows = $res;
@@ -135,17 +135,17 @@ class Modules extends CI_Controller {
     {
         $this->load->library('Spagi_FormHandler');
         $this->load->library('Spagi_Pagination');
-        $this->load->model('App_modules_model');
+        $this->load->model('App_controllers_model');
         $this->spagi_formhandler->request_type='list';
         $this->spagi_formhandler->receive(__METHOD__);
 
-        $total_rows = $this->App_modules_model->select_count_list(
+        $total_rows = $this->App_controllers_model->select_count_list(
                     $this->spagi_formhandler->filter
                 );
         
         $this->spagi_formhandler->pagination['total_rows'] = $total_rows;
         
-        $res = $this->App_modules_model->select_list(
+        $res = $this->App_controllers_model->select_list(
                     $this->spagi_formhandler->pagination,
                     $this->spagi_formhandler->filter,
                     $this->spagi_formhandler->sort
@@ -162,10 +162,28 @@ class Modules extends CI_Controller {
         //$this->spagi_formhandler->clear(__METHOD__);
     }
     
+    public function users_filter() 
+    {    
+        $filter = $this->input->get('q');
+        
+        $this->load->model('User_users_model');
+        $res = $this->User_users_model->select_users_filter($filter);
+        $rows = array();
+        
+        foreach($res as $row) 
+        {
+            $item['id'] = $row->id;
+            $item['text'] = $row->name;
+            $rows[] = $item;
+        }
+        $this->output->set_content_type('application/json');
+        $this->output->set_output(json_encode($rows));
+    }
+    
     public function save() 
     {
         $this->load->library('Spagi_FormHandler');
-        $this->load->model('App_modules_model');
+        $this->load->model('App_controllers_model');
         $this->spagi_formhandler->request_type = 'form';
         $this->spagi_formhandler->receive(__METHOD__);
         
@@ -175,7 +193,7 @@ class Modules extends CI_Controller {
             if($this->validate()) 
             {
                 $this->spagi_formhandler->form['key'] = md5($this->spagi_formhandler->form['name']);
-                $res = $this->App_modules_model->update($this->spagi_formhandler->form);
+                $res = $this->App_controllers_model->update($this->spagi_formhandler->form);
             }
         } 
         else 
@@ -183,7 +201,7 @@ class Modules extends CI_Controller {
             if($this->validate()) 
             {
                 $this->spagi_formhandler->form['key'] = md5($this->spagi_formhandler->form['name']);
-                $res = $this->App_modules_model->insert($this->spagi_formhandler->form);
+                $res = $this->App_controllers_model->insert($this->spagi_formhandler->form);
             }
         }
         
@@ -194,7 +212,7 @@ class Modules extends CI_Controller {
     
     public function delete($id=0) 
     {
-        $this->load->model('App_modules_model');
+        $this->load->model('App_controllers_model');
         $this->output->set_content_type('application/json');
         
         if(!$id) 
@@ -209,32 +227,13 @@ class Modules extends CI_Controller {
         }
         
         foreach($ids as $id) {
-            $row = $this->App_modules_model->get($id);
+            $row = $this->App_controllers_model->get($id);
             if($row) {
-                $this->App_modules_model->delete($row);
+                $this->App_controllers_model->delete($row);
             }
         }
         $this->output->set_output(json_encode(array('result'=>'ok','message'=>'')));
     }
-    
-    public function modules_filter() 
-    {    
-        $filter = $this->input->get('q');
-        
-        $this->load->model('App_modules_model');
-        $res = $this->App_modules_model->select_modules_filter($filter);
-        $rows = array();
-        
-        foreach($res as $row) 
-        {
-            $item['id'] = $row->id;
-            $item['text'] = $row->name;
-            $rows[] = $item;
-        }
-        $this->output->set_content_type('application/json');
-        $this->output->set_output(json_encode($rows));
-    }
-    
     
     private function validate() 
     {
@@ -243,12 +242,15 @@ class Modules extends CI_Controller {
             $this->spagi_formhandler->addError('form-name','This field must not be empty!');
         }
         
+        if(!is_numeric($this->spagi_formhandler->form['app_modules_id'])) {
+            $this->spagi_formhandler->addError('form-app_modules_id','You must choose a module!');
+        }
+        
         if(count($this->spagi_formhandler->error)) 
         {
             return FALSE;
         }
         
         return TRUE;
-    }
-    
+    }    
 }

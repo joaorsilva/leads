@@ -39,7 +39,14 @@ class App_modules_model extends Spagi_Model {
     }
     
     public function get($id) {
-        $result = parent::get($id);
+        $this->db->select($this->_table_name.'.*, CONCAT(`user1`.first_name,\' \',`user1`.surename) as created_by, CONCAT(`user2`.first_name,\' \',`user2`.surename) as updated_by')
+            ->from($this->_table_name)
+            ->join('user_users as user1','user1.id = ' . $this->_table_name .'.created_by','LEFT')
+            ->join('user_users as user2','user2.id = ' . $this->_table_name .'.updated_by','LEFT')
+            ->where($this->_table_name . '.id = ',$id);
+        
+        $query = $this->db->get();
+        $result = $query->result();
         foreach($result as $row) {
             $row = $this->convertDates($row);
         }
@@ -50,6 +57,54 @@ class App_modules_model extends Spagi_Model {
         $result = parent::get_record($id);
         $result = $this->convertDates($result);
         return $result;
+    }
+    
+    public function select_list($paging,$filters=array(),$order=array('id','ASC')) 
+    {
+        $this->db->select($this->_table_name.'.*, CONCAT(`user1`.first_name,\' \',`user1`.surename) as created_by, CONCAT(`user2`.first_name,\' \',`user2`.surename) as updated_by')
+            ->from($this->_table_name)
+            ->join('user_users as user1','user1.id = ' . $this->_table_name .'.created_by','LEFT')
+            ->join('user_users as user2','user2.id = ' . $this->_table_name .'.updated_by','LEFT');
+        
+        $this->list_where($filters);
+        $this->list_sort($order);
+        $this->db->limit($paging["page_size"], $paging["page"] * $paging["page_size"]);
+        $query = $this->db->get();
+        $result = $query->result();
+        foreach($result as $row) {
+            $row = $this->convertDates($row);
+        }
+        return $result;
+    }
+    
+    public function select_count_list($filters=array()) 
+    {
+        $this->db->select('COUNT(*) as total')
+            ->from($this->_table_name)
+            ->join('user_users as user1','user1.id = ' . $this->_table_name .'.created_by','LEFT')
+            ->join('user_users as user2','user2.id = ' . $this->_table_name .'.updated_by','LEFT');
+        if($filters) 
+        {
+            $this->list_where($filters);
+        }
+        
+        $query = $this->db->get();
+        $res = $query->result();
+        if(isset($res[0]->total)) {
+            return $res[0]->total;
+        }
+        return 0;
+    }    
+    
+    public function select_modules_filter($filter) {
+        $this->db->select('id, name');
+        $this->db->from($this->_table_name);
+        $this->db->where('deleted = ', 0);
+        if($filter) {
+            $this->db->like('name',$filter,'both');
+        }
+        $query = $this->db->get();
+        return $query->result();
     }
     
     protected function convertDates($object){
