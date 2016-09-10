@@ -19,11 +19,12 @@ class Controllers extends CI_Controller {
 
     public function index()
     {
+        $this->spagi_i18n->load('controllers/index');
         $this->spagi_pagedata->route = $this->route;
         $this->spagi_pagedata->set_page_menu($this->menu, $this->submenu)
                             ->set_page(
-                                     'Application Controllers',
-                                     'Application Controllers',
+                                     $this->spagi_i18n->_('__controllers__index Application Controllers'),
+                                     $this->spagi_i18n->_('__controllers__index Application Controllers'),
                                      'Details list'
                                      )
                             ->addBreadcrumb(
@@ -32,7 +33,7 @@ class Controllers extends CI_Controller {
                                      'fa fa-dashboard'
                                      )
                             ->addBreadcrumb(
-                                     'Application Controllers',
+                                     $this->spagi_i18n->_('__controllers__index Application Controllers'),
                                      '',
                                      'fa fa-th'
                                      )
@@ -45,6 +46,7 @@ class Controllers extends CI_Controller {
                             ->addCss('/public/css/form-list-common.css');
         
         $this->spagi_i18n->load('lists-common');
+        
         $this->load->view('outframes/admin_header.php');
         $this->load->view('app/controllers/index.php');
         $this->load->view('outframes/admin_footer.php');
@@ -52,28 +54,31 @@ class Controllers extends CI_Controller {
     
     public function edit($id=0, $show = FALSE) 
     {
+        //Loads the string translator library
+        $this->spagi_i18n->load('controllers/edit');
+        
         $icon = 'fa-edit';
-        $subtitle = 'Edit Record';
-        $text = 'Edit Controller';
+        $subtitle = $this->spagi_i18n->_('__controllers__edit Edit Record');
+        $text = $this->spagi_i18n->_('__controllers__edit Edit Controller');
         if($show) 
         {
             $icon = 'fa-television';
-            $subtitle = 'Show Record';
-            $text = 'Show Controller';
+            $subtitle = $this->spagi_i18n->_('__controllers__edit Show Record');
+            $text = $this->spagi_i18n->_('__controllers__edit Show Controller');
         }
         
         if($id === 'new') 
         {
             $icon = 'fa-file-text-o';
-            $subtitle = 'New Record';
-            $text = 'New Controller';
+            $subtitle = $this->spagi_i18n->_('__controllers__edit New Record');
+            $text = $this->spagi_i18n->_('__controllers__edit New Controller');
         }
                 
         $this->spagi_pagedata->route = $this->route;
         $this->spagi_pagedata->set_page_menu($this->menu, $this->submenu)
                              ->set_page(
-                                     'Application Controller',
-                                     'Application Controller',
+                                     $this->spagi_i18n->_('__controllers__edit Application Controller'),
+                                     $this->spagi_i18n->_('__controllers__edit Application Controller'),
                                      $subtitle,
                                      $show
                                      )
@@ -83,7 +88,7 @@ class Controllers extends CI_Controller {
                                      'fa fa-dashboard'
                                      )
                              ->addBreadcrumb(
-                                     'Application Controllers',
+                                     $this->spagi_i18n->_('__controllers__edit Application Controllers'),
                                      '/app/controllers',
                                      'fa fa-th-large'
                                      )
@@ -217,7 +222,7 @@ class Controllers extends CI_Controller {
         
         if(!$id) 
         {
-            $this->output->set_output(json_encode(array('result'=>'Error','message'=>'No record to delete!')));            
+            $this->output->set_output(json_encode(array('result'=>'Error','message'=>$this->spagi_i18n->_('__controllers__edit No record to delete'))));            
         }
         
         if(is_array($id)) {
@@ -239,11 +244,11 @@ class Controllers extends CI_Controller {
     {
         if(!trim($this->spagi_formhandler->form['name'])) 
         {
-            $this->spagi_formhandler->addError('form-name','This field must not be empty!');
+            $this->spagi_formhandler->addError('form-name',$this->spagi_i18n->_('__controllers__edit This field must not be empty'));
         }
         
         if(!is_numeric($this->spagi_formhandler->form['app_modules_id'])) {
-            $this->spagi_formhandler->addError('form-app_modules_id','You must choose a module!');
+            $this->spagi_formhandler->addError('form-app_modules_id',$this->spagi_i18n->_('__controllers__edit You must choose a module'));
         }
         
         if(count($this->spagi_formhandler->error)) 

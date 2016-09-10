@@ -32,16 +32,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     <input type="number" class="form-control" id="filter-id" name="filter[id]" placeholder="#" min="1">
                                 </div>
                                 <div class="form-group">
-                                    <label class="sr-only" for="filter-name">Name</label>
+                                    <label class="sr-only" for="filter-name"><?php echo($this->spagi_i18n->_('__controllers__index Name'))?></label>
                                     <input type="text" class="form-control" id="filter-name" name="filter[name]" placeholder="Name">
                                 </div>
                                 <div class="form-group" style="min-width: 150px;">
-                                    <label class="sr-only" for="filter-created_by">Created by</label>
+                                    <label class="sr-only" for="filter-created_by"><?php echo($this->spagi_i18n->_('__controllers__index Created By'))?></label>
                                     <select class="form-control select2" style="width:100%;" id="filter-created_by" name="filter[created_by]">
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label class="sr-only" for="filter-created_date">Created date</label>
+                                    <label class="sr-only" for="filter-created_date"><?php echo($this->spagi_i18n->_('__controllers__index Created Date'))?></label>
                                     <div class="input-group">
                                         <div class="input-group-addon">
                                             <i class="fa fa-calendar"></i>
@@ -50,12 +50,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     </div>
                                 </div>
                                 <div class="form-group" style="min-width: 150px;">
-                                    <label class="sr-only" for="filter-updated_by">Updated by</label>
+                                    <label class="sr-only" for="filter-updated_by"><?php echo($this->spagi_i18n->_('__controllers__index Updated By'))?></label>
                                     <select class="form-control select2" style="width:100%;" id="filter-updated_by" name="filter[updated_by]">
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label class="sr-only" for="filter-updated_date">Updated date</label>
+                                    <label class="sr-only" for="filter-updated_date"><?php echo($this->spagi_i18n->_('__controllers__index Updated Date'))?></label>
                                     <div class="input-group">
                                         <div class="input-group-addon">
                                             <i class="fa fa-calendar"></i>
@@ -64,7 +64,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     </div>
                                 </div>
                                 <div class="form-group" style="min-width: 150px;">
-                                    <label class="sr-only" for="filter-status">Status</label>
+                                    <label class="sr-only" for="filter-status"><?php echo($this->spagi_i18n->_('__controllers__index Status'))?></label>
                                     <select class="form-control select2" multiple="multiple" data-placeholder="Status" style="width:100%;" id="filter-status" name="filter[status][]">
                                         <option value="1"><?php echo($this->spagi_i18n->_('__lists__Active'))?></option>
                                         <option value="2"><?php echo($this->spagi_i18n->_('__lists__Inactive'))?></option>
@@ -110,13 +110,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <tr>
                                     <th class="text-center">&nbsp;</th>
                                     <th class="text-center hidden-xs"><a href="javascript:void(0)" id="field-id">#<i class="glyphicon glyphicon-sort-by-attributes pull-right"></i></a></th>
-                                    <th class="text-left"><a href="javascript:void(0)" id="field-name">Name&nbsp;<i class="glyphicon glyphicon-sort pull-right"></i></a></th>
-                                    <th class="text-left"><a href="javascript:void(0)" id="field-app_modules_id">Module&nbsp;<i class="glyphicon glyphicon-sort pull-right"></i></a></th>
-                                    <th class="text-left hidden-sm hidden-xs" nowrap><a href="javascript:void(0)" id="field-created_by">Created By&nbsp;<i class="glyphicon glyphicon-sort pull-right"></i></a></th>
-                                    <th class="text-right hidden-sm hidden-xs"><a href="javascript:void(0)" id="field-created_date">Created Date&nbsp;<i class="glyphicon glyphicon-sort pull-right"></i></a></th>
-                                    <th class="text-left hidden-sm hidden-xs"><a href="javascript:void(0)" id="field-updated_by">Updated By&nbsp;<i class="glyphicon glyphicon-sort pull-right"></i></a></th>
-                                    <th class="text-right hidden-sm hidden-xs"><a href="javascript:void(0)" id="field-updated_date">Updated Date&nbsp;<i class="glyphicon glyphicon-sort pull-right"></i></a></th>
-                                    <th class="text-center hidden-xs"><a href="javascript:void(0)" id="field-status">Status&nbsp;<i class="glyphicon glyphicon-sort pull-right"></i></a></th>
+                                    <th class="text-left"><a href="javascript:void(0)" id="field-name"><?php echo($this->spagi_i18n->_('__controllers__index Name'))?>&nbsp;<i class="glyphicon glyphicon-sort pull-right"></i></a></th>
+                                    <th class="text-left"><a href="javascript:void(0)" id="field-app_modules_id"><?php echo($this->spagi_i18n->_('__controllers__index Module'))?>&nbsp;<i class="glyphicon glyphicon-sort pull-right"></i></a></th>
+                                    <th class="text-left hidden-sm hidden-xs" nowrap><a href="javascript:void(0)" id="field-created_by"><?php echo($this->spagi_i18n->_('__controllers__index Created By'))?>&nbsp;<i class="glyphicon glyphicon-sort pull-right"></i></a></th>
+                                    <th class="text-right hidden-sm hidden-xs"><a href="javascript:void(0)" id="field-created_date"><?php echo($this->spagi_i18n->_('__controllers__index Created Date'))?>&nbsp;<i class="glyphicon glyphicon-sort pull-right"></i></a></th>
+                                    <th class="text-left hidden-sm hidden-xs"><a href="javascript:void(0)" id="field-updated_by"><?php echo($this->spagi_i18n->_('__controllers__index Updated By'))?>&nbsp;<i class="glyphicon glyphicon-sort pull-right"></i></a></th>
+                                    <th class="text-right hidden-sm hidden-xs"><a href="javascript:void(0)" id="field-updated_date"><?php echo($this->spagi_i18n->_('__controllers__index Updated Date'))?>&nbsp;<i class="glyphicon glyphicon-sort pull-right"></i></a></th>
+                                    <th class="text-center hidden-xs"><a href="javascript:void(0)" id="field-status"><?php echo($this->spagi_i18n->_('__controllers__index Status'))?>&nbsp;<i class="glyphicon glyphicon-sort pull-right"></i></a></th>
                                     <th class="text-right">Operations</th>
                                 </tr>
                             </thead>
@@ -129,7 +129,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         <div class="callout callout-danger">
                                             <h4><i class="fa fa-warning"></i>&nbsp;<?php echo($this->spagi_i18n->_('__lists__Error loading your data'))?></h4>
                                             <p><?php echo($this->spagi_i18n->_('__lists__Problem loading'))?></p>
-                                            <button id="table-retry" type="button" class="btn btn-warning"><i class="fa fa-refresh"></i>&nbsp;Retry</button>
+                                            <button id="table-retry" type="button" class="btn btn-warning"><i class="fa fa-refresh"></i>&nbsp;<?php echo($this->spagi_i18n->_('__lists__Retry'))?></button>
                                         </div>
                                     </td>
                                 </tr>    
@@ -160,7 +160,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     </td>
                                 </tr>
                             </tbody>
-                        </table>   
+                        </table>
                     </div>
                     <div class="box-footer clearfix">
                         <div class="row row-narrow-5">

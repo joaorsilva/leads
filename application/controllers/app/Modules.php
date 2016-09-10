@@ -45,6 +45,7 @@ class Modules extends CI_Controller {
                             ->addCss('/public/css/form-list-common.css');
         
         $this->spagi_i18n->load('lists-common');
+        $this->spagi_i18n->load('modules/index');
         $this->load->view('outframes/admin_header.php');
         $this->load->view('app/modules/index.php');
         $this->load->view('outframes/admin_footer.php');
@@ -99,6 +100,7 @@ class Modules extends CI_Controller {
         {
             $this->spagi_pagedata->page['id'] = $id;
         }
+        $this->spagi_i18n->load('modules/edit');
         $this->load->view('outframes/admin_header.php');
         $this->load->view('app/modules/edit.php');
         $this->load->view('outframes/admin_footer.php');        

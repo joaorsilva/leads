@@ -18,5 +18,6 @@
     "__lists__pagination_of": "of",
     "__lists__pagination_records": "records.",
     "__lists__New_record": "New",
-    "__lists__Delete_selected": "Deleted selected"
+    "__lists__Delete_selected": "Deleted selected",
+    "__lists__Retry": "Retry"
 }

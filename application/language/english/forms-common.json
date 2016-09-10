@@ -1,0 +1,21 @@
+{
+    "__forms__ Record Id": "Record Id",
+    "__forms__ Active": "Active",
+    "__forms__ Deleted": "Deleted",
+    "__forms__ Metadata": "Metadata",
+    "__forms__ Created By": "Created By",
+    "__forms__ Created Date": "Created Date",
+    "__forms__ Updated By": "Updated By",
+    "__forms__ Updated Date": "Updated Date",
+    "__forms__ Deleted By": "Deleted By",
+    "__forms__ Deleted Date": "Deleted Date",
+    "__forms__ Cancel": "Cancel",
+    "__forms__ Save": "Save",
+    "__forms__ Delete": "Delete",
+    "__forms__ delete_sure": "Are you shure you want to delete this record?",
+    "__forms__ no_data": "No data found!",
+    "__forms__ no_data_for_request": "No data was found for the requested record.",
+    "__forms__ error": "Error!",
+    "__forms__ error_request": "An error occured while processing your request.",
+    "__forms__ Edit Record": "Edit Record"
+}

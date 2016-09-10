@@ -23,3 +23,8 @@ INNER JOIN `app_modules` as `modules1` ON `modules1`.`id` = `app_controllers`.`a
 ORDER BY `app_controllers`.`id` ASC
  LIMIT 10
 ERROR - 2016-09-10 12:48:51 --> Severity: Warning --> Invalid argument supplied for foreach() /media/sf_Ubuntu/projects/leads/application/models/App_controllers_model.php 124
+ERROR - 2016-09-10 14:56:59 --> Severity: Warning --> array_merge(): Argument #2 is not an array /media/sf_Ubuntu/projects/leads/application/libraries/Spagi_I18n.php 50
+ERROR - 2016-09-10 14:57:58 --> Severity: Warning --> array_merge(): Argument #2 is not an array /media/sf_Ubuntu/projects/leads/application/libraries/Spagi_I18n.php 50
+ERROR - 2016-09-10 15:14:09 --> Severity: Warning --> array_merge(): Argument #2 is not an array /media/sf_Ubuntu/projects/leads/application/libraries/Spagi_I18n.php 50
+ERROR - 2016-09-10 15:16:02 --> Severity: error --> Exception: Translation file '/media/sf_Ubuntu/projects/leads/application/language/english/controllers/edit.json' invalid or malformed! /media/sf_Ubuntu/projects/leads/application/libraries/Spagi_I18n.php 51
+ERROR - 2016-09-10 15:26:56 --> Severity: error --> Exception: SPAGI_I18N: File '/media/sf_Ubuntu/projects/leads/application/language/english/controllers/index.json' invalid or malformed! /media/sf_Ubuntu/projects/leads/application/libraries/Spagi_I18n.php 51

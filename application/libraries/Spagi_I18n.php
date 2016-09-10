@@ -47,6 +47,9 @@ class Spagi_I18n {
         if(file_exists($file)) {
             $content = file_get_contents($file);
             $json = json_decode($content, TRUE);
+            if(!$json) {
+                throw new Exception("SPAGI_I18N: File '" . $file . "' invalid or malformed!");
+            }
             $this->translations = array_merge($this->translations, $json);
         } else {
             throw new Exception('SPAGI_I18N: File "' . $file . '" doesn\'t exist');
