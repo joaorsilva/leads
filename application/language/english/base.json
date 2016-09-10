@@ -1,0 +1,16 @@
+{
+    "__menu__ Dashboard": "Dashboard",
+    "__menu__ Organizations": "Organizations",
+    "__menu__ Users and Permissions": "Users and Permissions",
+    "__menu__ Types": "Types",
+    "__menu__ Users": "Users",
+    "__menu__ Roles": "Roles",
+    "__menu__ Actions": "Actions",
+    "__menu__ Controllers": "Controllers",
+    "__menu__ Modules": "Modules",
+    "__global__ Yes": "Yes",
+    "__global__ No": "No",
+    "__global__ date_format": "m-d-Y",
+    "__global__ time_format": "H:i:s",
+    "__global__ date_time_format": "m-d-Y H:i:s"
+}

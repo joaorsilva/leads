@@ -1,0 +1,20 @@
+{
+    "__lists__Table data filter": "Filtro de dados da tabela",
+    "__lists__Active": "Ativo",
+    "__lists__Inactive": "Inativo",
+    "__lists__Deleted": "Apagado",
+    "__lists__Filter": "Filtrar",
+    "__lists__Clear": "Limpar",
+    "__lists__Rows per page": "Linhas por página",
+    "__lists__Loading...": "Carregando...",
+    "__lists__Error loading your data": "Erro ao carregar os dados!",
+    "__lists__Problem loading": "Houve um erro ao carregar a informação. Tente novamente mais tarde ou recarregue agora.",
+    "__lists__No data found": "Nenhum dado encontrado!",
+    "__lists__No data found criteria": "Não foi encontrado nenhum dado de acordo com o seu critério de busca. Se você não está filtrando dados então não existe nenhuma informação neste momento.",
+    "__lists__Delete": "Apagar",
+    "__lists__delete_record_question": "Você tem a certeza que deseja apagar este registro?",
+    "__lists__pagination_Showing": "Mostrando",
+    "__lists__pagination_to": "até",
+    "__lists__pagination_of": "de",
+    "__lists__pagination_records": "registros."
+}

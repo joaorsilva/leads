@@ -1,0 +1,9 @@
+/* 
+    Created on : 18/06/2016, 17:47:02
+    Author     : joao
+*/
+body { padding-bottom: 70px; }
+.footer-links{text-align: right;margin-top:15px;}
+.navbar-brand{
+    padding: 7px 15px;
+}

@@ -1,0 +1,25 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+
+ERROR - 2016-07-06 18:01:04 --> 404 Page Not Found: app/Modules/delete
+ERROR - 2016-07-06 18:05:06 --> Severity: Parsing Error --> syntax error, unexpected ',' /var/www/sites/leads/application/controllers/app/Modules.php 72
+ERROR - 2016-07-06 18:05:06 --> Severity: Parsing Error --> syntax error, unexpected ',' /var/www/sites/leads/application/controllers/app/Modules.php 72
+ERROR - 2016-07-06 18:13:12 --> 404 Page Not Found: app/Modules/delete
+ERROR - 2016-07-06 18:19:29 --> 404 Page Not Found: app/Modules/delete
+ERROR - 2016-07-06 18:30:19 --> 404 Page Not Found: app/Modules/delete
+ERROR - 2016-07-06 18:34:58 --> 404 Page Not Found: app/Modules/delete
+ERROR - 2016-07-06 18:35:39 --> 404 Page Not Found: app/Modules/delete
+ERROR - 2016-07-06 18:36:30 --> 404 Page Not Found: app/Modules/delete
+ERROR - 2016-07-06 18:47:08 --> Severity: Notice --> Undefined property: Modules::$app_modules_model /var/www/sites/leads/application/controllers/app/Modules.php 182
+ERROR - 2016-07-06 18:47:08 --> Severity: Error --> Call to a member function get() on a non-object /var/www/sites/leads/application/controllers/app/Modules.php 182
+ERROR - 2016-07-06 18:48:06 --> Query error: Column 'name' cannot be null - Invalid query: REPLACE INTO `app_modules` (`id`, `name`, `key`, `active`, `created_by`, `created_date`, `updated_by`, `updated_date`, `deleted_by`, `deleted_date`, `deleted`) VALUES (NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2016-07-06 18:48:06', NULL, '2016-07-06 18:48:06', 1)
+ERROR - 2016-07-06 18:48:25 --> Query error: Column 'name' cannot be null - Invalid query: REPLACE INTO `app_modules` (`id`, `name`, `key`, `active`, `created_by`, `created_date`, `updated_by`, `updated_date`, `deleted_by`, `deleted_date`, `deleted`) VALUES (NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2016-07-06 18:48:25', NULL, '2016-07-06 18:48:25', 1)
+ERROR - 2016-07-06 18:49:42 --> Severity: 4096 --> Object of class stdClass could not be converted to string /var/www/sites/leads/system/database/DB_query_builder.php 1738
+ERROR - 2016-07-06 18:49:42 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '0, `deleted_date`, `deleted`, `updated_date`) VALUES (, '2016-07-06 18:49:42', 1' at line 1 - Invalid query: REPLACE INTO `app_modules` (0, `deleted_date`, `deleted`, `updated_date`) VALUES (, '2016-07-06 18:49:42', 1, '2016-07-06 18:49:42')
+ERROR - 2016-07-06 18:50:44 --> Query error: Duplicate entry '0' for key 'PRIMARY' - Invalid query: UPDATE `app_modules` SET `id` = NULL, `name` = NULL, `key` = NULL, `active` = NULL, `created_by` = NULL, `created_date` = NULL, `updated_by` = NULL, `updated_date` = '2016-07-06 18:50:44', `deleted_by` = NULL, `deleted_date` = '2016-07-06 18:50:44', `deleted` = 1
+ERROR - 2016-07-06 18:51:23 --> Severity: 4096 --> Object of class stdClass could not be converted to string /var/www/sites/leads/system/database/DB_driver.php 1524
+ERROR - 2016-07-06 18:51:23 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '0 = , `deleted_date` = '2016-07-06 18:51:23', `deleted` = 1, `updated_date` = '2' at line 1 - Invalid query: UPDATE `app_modules` SET 0 = , `deleted_date` = '2016-07-06 18:51:23', `deleted` = 1, `updated_date` = '2016-07-06 18:51:23'
+ERROR - 2016-07-06 19:06:48 --> Query error: Duplicate entry '6' for key 'PRIMARY' - Invalid query: UPDATE `app_modules` SET `id` = '6', `name` = 'Modle 2', `key` = 'c65d9e700f641fa9a8e62c8a35516ccf', `active` = '1', `created_by` = 'The System', `created_date` = '2016-06-30 21:13:16', `updated_by` = 'The System', `updated_date` = '2016-07-06 19:06:48', `deleted_by` = NULL, `deleted_date` = '2016-07-06 19:06:48', `deleted` = 1
+ERROR - 2016-07-06 19:09:19 --> Severity: Error --> Call to undefined method CI_DB_mysqli_driver::replade() /var/www/sites/leads/application/models/App_modules_model.php 207
+ERROR - 2016-07-06 19:11:37 --> Query error: Column 'created_by' cannot be null - Invalid query: REPLACE INTO `app_modules` (`id`, `name`, `key`, `active`, `created_by`, `created_date`, `updated_by`, `updated_date`, `deleted_by`, `deleted_date`, `deleted`) VALUES ('6', 'Modle 2', 'c65d9e700f641fa9a8e62c8a35516ccf', '1', NULL, '2016-06-30 21:13:16', NULL, '2016-07-06 19:11:37', NULL, '2016-07-06 19:11:37', 1)
+ERROR - 2016-07-06 19:13:32 --> Query error: Column 'created_by' cannot be null - Invalid query: REPLACE INTO `app_modules` (`id`, `name`, `key`, `active`, `created_by`, `created_date`, `updated_by`, `updated_date`, `deleted_by`, `deleted_date`, `deleted`) VALUES ('6', 'Modle 2', 'c65d9e700f641fa9a8e62c8a35516ccf', '1', NULL, '2016-06-30 21:13:16', NULL, '2016-07-06 19:13:32', NULL, '2016-07-06 19:13:32', 1)
+ERROR - 2016-07-06 19:14:08 --> Severity: Error --> Call to undefined function dump() /var/www/sites/leads/application/controllers/app/Modules.php 183

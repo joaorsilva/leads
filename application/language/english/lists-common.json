@@ -1,0 +1,22 @@
+{
+    "__lists__Table data filter": "Table data filter",
+    "__lists__Active": "Active",
+    "__lists__Inactive": "Inactive",
+    "__lists__Deleted": "Deleted",
+    "__lists__Filter": "Filter",
+    "__lists__Clear": "Clear",
+    "__lists__Rows per page": "Rows per page",
+    "__lists__Loading...": "Loading...",
+    "__lists__Error loading your data": "Error loading your data!",
+    "__lists__Problem loading": "There was a problem loading your data. Please try again later or rety now.",
+    "__lists__No data found": "No data found!",
+    "__lists__No data found criteria": "No data was found using your serach criteria. If you aren't filering data then there is no data in this view at this moment.",
+    "__lists__Delete": "Delete",
+    "__lists__delete_record_question": "Are you shure you want to delete this record?",
+    "__lists__pagination_Showing": "Showing",
+    "__lists__pagination_to": "to",
+    "__lists__pagination_of": "of",
+    "__lists__pagination_records": "records.",
+    "__lists__New_record": "New",
+    "__lists__Delete_selected": "Deleted selected"
+}
