@@ -58,7 +58,7 @@ $autoload['packages'] = array();
 |
 |	$autoload['libraries'] = array('user_agent' => 'ua');
 */
-$autoload['libraries'] = array('database', 'session', 'Spagi_I18n', 'Spagi_Session', 'Spagi_Model', 'JsonResponse', 'Spagi_PageData');
+$autoload['libraries'] = array('database', 'session', 'Spagi_I18n', 'Spagi_Session', 'Spagi_Model', 'JsonResponse', 'Spagi_Security', 'Spagi_PageData');
 
 /*
 | -------------------------------------------------------------------

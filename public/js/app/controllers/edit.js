@@ -1,25 +1,5 @@
 $(document).ready(function(){
-    /**
-     * Loads the users list for the created by filter
-     */
-    $('#form-app_modules_id').select2(/*{
-        ajax: {
-            url: '/app/modules/modules_filter',
-            dataType: 'json',
-            type: 'GET',
-            delay: 100,
-            cache: false,
-            processResults: function (data) {
-                return {
-                    results: data
-                };
-            }
-        },
-        minimumInputLength: 0,
-        tags: "false",
-        placeholder: "",
-        allowClear: true
-    }*/);    
+    $('#form-app_modules_id').select2();
 });
 
 function validate() {

@@ -17,8 +17,7 @@ class Dashboard extends CI_Controller{
     }
     
     public function index() {
-        
-        
+        $this->spagi_security->secure();
         $this->spagi_pagedata->route = $this->route;
         $this->spagi_pagedata->set_page_menu($this->menu, $this->submenu)
                              ->set_page(
@@ -33,7 +32,7 @@ class Dashboard extends CI_Controller{
                                      );
         
         $this->load->view('outframes/admin_header.php');
-        $this->load->view('dashboard/index.php');
+        $this->load->view('app/dashboard/index.php');
         $this->load->view('outframes/admin_footer.php');
     }
 }

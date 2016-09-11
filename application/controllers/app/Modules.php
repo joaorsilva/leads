@@ -19,6 +19,8 @@ class Modules extends CI_Controller {
     
     public function index()
     {
+        //$this->spagi_security->secure();
+        
         $this->spagi_pagedata->route = $this->route;
         $this->spagi_pagedata->set_page_menu($this->menu, $this->submenu)
                             ->set_page(
@@ -53,6 +55,7 @@ class Modules extends CI_Controller {
     
     public function edit($id=0, $show = FALSE) 
     {
+        $this->spagi_security->secure();
         $icon = 'fa-edit';
         $subtitle = 'Edit Record';
         $text = 'Edit Module';
@@ -118,6 +121,7 @@ class Modules extends CI_Controller {
     
     public function get($id) 
     {
+        $this->spagi_security->secure(TRUE);
         $this->load->library('Spagi_FormHandler');
         $this->load->model('App_modules_model');
         $this->spagi_formhandler->request_type = 'form';
@@ -135,6 +139,7 @@ class Modules extends CI_Controller {
     
     public function select_list() 
     {
+        //$this->spagi_security->secure(TRUE);
         $this->load->library('Spagi_FormHandler');
         $this->load->library('Spagi_Pagination');
         $this->load->model('App_modules_model');
@@ -166,6 +171,7 @@ class Modules extends CI_Controller {
     
     public function save() 
     {
+        $this->spagi_security->secure(TRUE);
         $this->load->library('Spagi_FormHandler');
         $this->load->model('App_modules_model');
         $this->spagi_formhandler->request_type = 'form';
@@ -196,6 +202,7 @@ class Modules extends CI_Controller {
     
     public function delete($id=0) 
     {
+        $this->spagi_security->secure(TRUE);
         $this->load->model('App_modules_model');
         $this->output->set_content_type('application/json');
         
@@ -220,7 +227,8 @@ class Modules extends CI_Controller {
     }
     
     public function modules_filter() 
-    {    
+    {
+        $this->spagi_security->secure(TRUE);
         $filter = $this->input->get('q');
         
         $this->load->model('App_modules_model');

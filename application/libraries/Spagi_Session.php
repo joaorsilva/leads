@@ -20,9 +20,11 @@ class Spagi_Session {
     }
     
     public function set($item,$value) {
-        if(isset($this->$item)) {
-            $this->$item = $value;
-            $this->CI->session->set_userdata($item,$this->$item);
-        }
+        $this->$item = $value;
+        $this->CI->session->set_userdata($item,$this->$item);
+    }
+    
+    public function get($item) {
+        return $this->CI->session->userdata($item);
     }
 }

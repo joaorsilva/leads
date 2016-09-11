@@ -12,5 +12,7 @@
     "__global__ No": "No",
     "__global__ date_format": "m-d-Y",
     "__global__ time_format": "H:i:s",
-    "__global__ date_time_format": "m-d-Y H:i:s"
+    "__global__ date_time_format": "m-d-Y H:i:s",
+    "__global__ No user": "Session expired!",
+    "__global__ Session Expired": "Session expired!"
 }

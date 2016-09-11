@@ -1,6 +1,6 @@
 <?php
 /**
- * Description of User_users_model
+ * Description of JsonResponse
  *
  * Copyright (c) 2016 SPAGI Sistemas, ME.
  * Todos os direitos reservados.
@@ -29,5 +29,6 @@ class JsonResponse extends CI_Output {
              ->set_header('Pragma: no-cache')   
              ->set_output(json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
              ->_display();
+        die;
     }
 }

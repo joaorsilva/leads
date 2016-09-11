@@ -19,6 +19,7 @@ class Controllers extends CI_Controller {
 
     public function index()
     {
+        $this->spagi_security->secure();
         $this->spagi_i18n->load('controllers/index');
         $this->spagi_pagedata->route = $this->route;
         $this->spagi_pagedata->set_page_menu($this->menu, $this->submenu)
@@ -54,6 +55,7 @@ class Controllers extends CI_Controller {
     
     public function edit($id=0, $show = FALSE) 
     {
+        $this->spagi_security->secure();
         //Loads the string translator library
         $this->spagi_i18n->load('controllers/edit');
         
@@ -121,6 +123,7 @@ class Controllers extends CI_Controller {
     
     public function get($id) 
     {
+        $this->spagi_security->secure(TRUE);
         $this->load->library('Spagi_FormHandler');
         $this->load->model('App_controllers_model');
         $this->spagi_formhandler->request_type = 'form';
@@ -138,6 +141,7 @@ class Controllers extends CI_Controller {
     
     public function select_list() 
     {
+        $this->spagi_security->secure(TRUE);
         $this->load->library('Spagi_FormHandler');
         $this->load->library('Spagi_Pagination');
         $this->load->model('App_controllers_model');
@@ -168,7 +172,8 @@ class Controllers extends CI_Controller {
     }
     
     public function users_filter() 
-    {    
+    {
+        $this->spagi_security->secure(TRUE);
         $filter = $this->input->get('q');
         
         $this->load->model('User_users_model');
@@ -187,6 +192,7 @@ class Controllers extends CI_Controller {
     
     public function save() 
     {
+        $this->spagi_security->secure(TRUE);
         $this->load->library('Spagi_FormHandler');
         $this->load->model('App_controllers_model');
         $this->spagi_formhandler->request_type = 'form';
@@ -217,6 +223,7 @@ class Controllers extends CI_Controller {
     
     public function delete($id=0) 
     {
+        $this->spagi_security->secure(TRUE);
         $this->load->model('App_controllers_model');
         $this->output->set_content_type('application/json');
         

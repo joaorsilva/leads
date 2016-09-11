@@ -18,7 +18,8 @@ class Users extends CI_Controller {
     }
     
     public function users_filter() 
-    {    
+    {
+        $this->spagi_security->secure(TRUE);
         $filter = $this->input->get('q');
         
         $this->load->model('User_users_model');

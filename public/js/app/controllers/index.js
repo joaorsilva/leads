@@ -1,5 +1,29 @@
 $(document).ready(function(){
-   
+    /**
+     * Loads the users list for the created by filter
+     */
+    $('#filter-app_modules_id').select2({
+        ajax: {
+            url: '/app/modules/modules_filter',
+            dataType: 'json',
+            type: 'GET',
+            delay: 100,
+            cache: false,
+            processResults: function (data) {
+                return {
+                    results: data
+                };
+            }
+        },
+        minimumInputLength: 0,
+        tags: "false",
+        placeholder: "Module",
+        allowClear: true
+    });
+    
+    $('#filter-clear').click(function(e){
+        $('#filter-app_modules_id').val(null).trigger("change");
+    });
 });
 
 function cloneRow(data) {

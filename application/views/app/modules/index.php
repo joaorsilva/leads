@@ -19,7 +19,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <div class="box-header with-border">
                             <h3 class="box-title"><i class="fa fa-filter"></i>&nbsp;<?php echo($this->spagi_i18n->_('__lists__Table data filter'))?></h3>
                             <div class="box-tools pull-right">
-                                <button type="button" class="btn btn-box-tool" data-widget="collapse" >
+                                <button id="filter-collapse" type="button" class="btn btn-box-tool" data-widget="collapse" >
                                     <i class="fa fa-plus"></i>
                                 </button>    
                             </div>

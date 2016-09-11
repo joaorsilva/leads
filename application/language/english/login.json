@@ -1,0 +1,15 @@
+{
+    "__login__ Login": "Login",
+    "__login__ Welcome": "Welcome to Spagi LEAD",
+    "__login__ Sentence": "Login and start a <strong>profitable day!</strong>",
+    "__login__ Email": "Email",
+    "__login__ Password": "Password",
+    "__login__ Remember me": "Remember me",
+    "__login__ Sign In": "Sign In",
+    "__login__ OR": "OR",
+    "__login__ Sign in Facebook": "Sign in using Facebook",
+    "__login__ Sign in Google": "Sign in using Google+",
+    "__login__ Forgot password": "I forgot my password",
+    "__login__ Register": "I want a new account"
+    
+}

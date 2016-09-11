@@ -64,6 +64,10 @@ $(document).ready(function(){
         $('#row-single').removeClass('hidden');
         $('#row-error').addClass('hidden');
         $('#row-no-data').addClass('hidden');
+        if($('#filter-collapse i').hasClass('fa-minus')) {
+            $('#filter-collapse').click();
+        }
+        
         var data = $(this).serialize();
         $.ajax({
             url: $(this).attr('action'),
@@ -185,6 +189,7 @@ $(document).ready(function(){
         $('#filter-updated_date').val("");
         $('#default-filter').val(0);
         $('#form-filter').submit();
+        $('#filter-collapse').click();
     });
     
     /**

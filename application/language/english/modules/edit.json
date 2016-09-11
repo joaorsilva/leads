@@ -1,0 +1,14 @@
+{
+    "__modules__edit Name": "Name",
+    "__modules__edit Module": "Module",
+    "__modules__edit Key": "Key",
+    "__modules__edit Edit Module": "Edit Module",
+    "__modules__edit Show Record": "Show Record",
+    "__modules__edit Show Module": "Show Module",
+    "__modules__edit New Record": "New Record",
+    "__modules__edit New Module": "New Module",
+    "__modules__edit Application Module": "Application Module",
+    "__modules__edit Application Modules": "Application Modules",
+    "__modules__edit No record to delete": "No record to delete!",
+    "__modules__edit This field must not be empty": "This field must not be empty!"
+}

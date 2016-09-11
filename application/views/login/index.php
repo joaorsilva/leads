@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | Log in</title>
+  <title><?php echo($this->spagi_pagedata->page['title'])?> | Spagi LEAD)?></title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
@@ -14,8 +14,18 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="/public/lte/dist/css/AdminLTE.min.css">
+  <!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+  <link rel="stylesheet" href="/public/lte/dist/css/skins/skin-yellow.min.css">
   <!-- iCheck -->
   <link rel="stylesheet" href="/public/lte/plugins/iCheck/square/blue.css">
+  <?php
+    foreach($this->spagi_pagedata->page['css'] as $css) {
+  ?>
+  <link href="<?php echo($css)?>" rel="stylesheet">
+  <?php
+    }
+  ?>
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -24,51 +34,49 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
 </head>
-<body class="hold-transition login-page">
+<body class="hold-transition login-page skin-yellow">
 <div class="login-box">
   <div class="login-logo">
     <a href="../../index2.html">Spagi&nbsp;<b>LEAD</b></a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
-    <p class="login-box-msg">Sign in to start your session</p>
+    <p class="login-box-msg"><?php echo($this->spagi_i18n->_('__login__ Welcome'))?><br/><?php echo($this->spagi_i18n->_('__login__ Sentence'))?></p>
 
-    <form action="../../index2.html" method="post">
+    <form id="form-login" action="/login/login" method="post">
       <div class="form-group has-feedback">
-        <input type="email" class="form-control" placeholder="Email">
+        <input type="email" name="email" class="form-control" placeholder="<?php echo($this->spagi_i18n->_('__login__ Email'))?>">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Password">
+        <input type="password" name="password" class="form-control" placeholder="<?php echo($this->spagi_i18n->_('__login__ Password'))?>">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">
         <div class="col-xs-8">
           <div class="checkbox icheck">
             <label>
-              <input type="checkbox"> Remember Me
+              <input type="checkbox" name="remember-me"> <?php echo($this->spagi_i18n->_('__login__ Remember me'))?>
             </label>
           </div>
         </div>
         <!-- /.col -->
         <div class="col-xs-4">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+          <button type="submit" class="btn btn-primary btn-block btn-flat"><?php echo($this->spagi_i18n->_('__login__ Sign In'))?></button>
         </div>
         <!-- /.col -->
       </div>
     </form>
 
     <div class="social-auth-links text-center">
-      <p>- OR -</p>
-      <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign in using
-        Facebook</a>
-      <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign in using
-        Google+</a>
+      <p>- <?php echo($this->spagi_i18n->_('__login__ OR'))?> -</p>
+      <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> <?php echo($this->spagi_i18n->_('__login__ Sign in Facebook'))?></a>
+      <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> <?php echo($this->spagi_i18n->_('__login__ Sign in Google'))?></a>
     </div>
     <!-- /.social-auth-links -->
 
-    <a href="#">I forgot my password</a><br>
-    <a href="register.html" class="text-center">Register a new membership</a>
+    <a href="/login/forgot"><?php echo($this->spagi_i18n->_('__login__ Forgot password'))?></a><br>
+    <a href="/login/register" class="text-center"><?php echo($this->spagi_i18n->_('__login__ Register'))?></a>
 
   </div>
   <!-- /.login-box-body -->
@@ -81,6 +89,13 @@
 <script src="/public/lte/bootstrap/js/bootstrap.min.js"></script>
 <!-- iCheck -->
 <script src="/public/lte/plugins/iCheck/icheck.min.js"></script>
+<?php
+  foreach($this->spagi_pagedata->page['js'] as $js) {
+?>
+<script src="<?php echo($js)?>"></script>
+<?php
+  }
+?>
 <script>
   $(function () {
     $('input').iCheck({

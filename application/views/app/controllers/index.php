@@ -19,7 +19,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <div class="box-header with-border">
                             <h3 class="box-title"><i class="fa fa-filter"></i>&nbsp;<?php echo($this->spagi_i18n->_('__lists__Table data filter'))?></h3>
                             <div class="box-tools pull-right">
-                                <button type="button" class="btn btn-box-tool" data-widget="collapse" >
+                                <button id="filter-collapse" type="button" class="btn btn-box-tool" data-widget="collapse" >
                                     <i class="fa fa-plus"></i>
                                 </button>    
                             </div>
@@ -34,6 +34,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <div class="form-group">
                                     <label class="sr-only" for="filter-name"><?php echo($this->spagi_i18n->_('__controllers__index Name'))?></label>
                                     <input type="text" class="form-control" id="filter-name" name="filter[name]" placeholder="Name">
+                                </div>
+                                <div class="form-group" style="min-width: 150px;">
+                                    <label class="sr-only" for="filter-app_modules_id"><?php echo($this->spagi_i18n->_('__controllers__index Module'))?></label>
+                                    <select class="form-control select2" style="width:100%;" id="filter-app_modules_id" name="filter[app_modules_id]">
+                                    </select>
                                 </div>
                                 <div class="form-group" style="min-width: 150px;">
                                     <label class="sr-only" for="filter-created_by"><?php echo($this->spagi_i18n->_('__controllers__index Created By'))?></label>
