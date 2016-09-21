@@ -52,3 +52,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'index';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+/**
+ * Api Routes
+ */
+
+/**
+ * App Modules
+ */
+$route['api/app/modules']['get'] = 'api/app/modules/listrows';
+$route['api/app/modules/(:num)']['get'] = 'api/app/modules/record/$1';
+$route['api/app/modules']['post'] = 'api/app/modules/save';
+$route['api/app/modules']['put'] = 'api/app/modules/save';
+$route['api/app/modules/(:num)']['put'] = 'api/app/modules/save';
+$route['api/app/modules']['delete'] = 'api/app/modules/delete';
+$route['api/app/modules/(:num)']['delete'] = 'api/app/modules/delete';
+
+/**
+ * App Controllers
+ */
+$route['api/app/controllers']['get'] = 'api/app/controllers/listrows';
+$route['api/app/controllers/(:num)']['get'] = 'api/app/controllers/record/$1';
+$route['api/app/controllers']['post'] = 'api/app/controllers/save';
+$route['api/app/controllers']['put'] = 'api/app/controllers/save';
+$route['api/app/controllers/(:num)']['put'] = 'api/app/controllers/save';
+$route['api/app/controllers']['delete'] = 'api/app/controllers/delete';
+$route['api/app/controllers/(:num)']['delete'] = 'api/app/controllers/delete';

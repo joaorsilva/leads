@@ -5,13 +5,12 @@ $(document).ready(function() {
      */
     if($('#form-id').val() !== 'new') {
         $.ajax({
-            url: $('#base-url').attr('data-url') + 'get/' + $('#form-id').val(),
+            url: $('#api-url').attr('data-url') + $('#form-id').val(),
             type: 'GET',
             data: null,
             dataType:'json',
             async: true,
             success: function(data) {
-                console.log(data);
                 if(data.rows.length > 0) {
                     $('#record').removeClass('hidden');
                     setRecordData(data.rows[0]);
@@ -49,7 +48,7 @@ $(document).ready(function() {
         var data = $('#record').serialize();
         $.ajax({
             url: $('#record').attr('action'),
-            type: 'POST',
+            type: $('#record').attr('method'),
             data: data,
             dataType:'json',
             async: true,
@@ -77,14 +76,12 @@ $(document).ready(function() {
         $('#data-error').addClass('hidden');
         $.ajax({
             url: $('#btn-delete').attr('data-url') + $('#form-id').val(),
-            type: 'GET',
+            type: 'DELETE',
             data: null,
-            dataType:'json',
+            dataType:'text',
             async: true,
             success: function(data) {
-                if(data.result && data.result === 'ok') {
-                    window.location = $('#base-url').attr('data-url');
-                }
+                window.location = $('#base-url').attr('data-url');
             },
             error: function() {
                 showDataError('data-error');

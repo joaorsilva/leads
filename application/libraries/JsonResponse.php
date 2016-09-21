@@ -22,13 +22,18 @@ class JsonResponse extends CI_Output {
     public function respond($response=array(),$code=200) {
         $last_update = time();
         $this->set_status_header($code)
-             ->set_content_type('application/json', 'utf-8')
              ->set_header('Last-Modified: ' . gmdate('D, d M Y H:i:s', $last_update).' GMT')
              ->set_header('Cache-Control: no-store, no-cache, must-revalidate')
              ->set_header('Cache-Control: post-check=0, pre-check=0')
-             ->set_header('Pragma: no-cache')   
-             ->set_output(json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
-             ->_display();
+             ->set_header('Pragma: no-cache');
+        if($response == null) {
+            $this->set_content_type('text/html', 'utf-8')
+                 ->set_output('');
+        } else {
+            $this->set_content_type('application/json', 'utf-8')
+                 ->set_output(json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+        }    
+        $this->_display();
         die;
     }
 }

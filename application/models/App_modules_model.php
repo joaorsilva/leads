@@ -118,66 +118,68 @@ class App_modules_model extends Spagi_Model {
     
     protected function list_where($filters) 
     {
-        foreach($filters as $key => $value) 
-        {
-            if(!$value)
-                continue;
-            
-            switch($key) 
+        if($filters) {
+            foreach($filters as $key => $value) 
             {
-                case 'id':
-                    $this->db->where($this->_table_name . '.id = ',$value);
-                    break;
-                case 'name':
-                    $this->db->like($this->_table_name . '.name',$value,'both');
-                    break;
-                case 'created_by':
-                    $this->db->where($this->_table_name . '.created_by',$value);
-                    break;
-                case 'created_date':
-                    $dates = explode(' - ', $value);
-                    if(count($dates) == 2) 
-                    {
-                        $this->db->where($this->_table_name . '.created_date >= ',$this->convert_date($dates[0],true) . ' 00:00:00');
-                        $this->db->where($this->_table_name . '.created_date <= ',$this->convert_date($dates[1],true) . ' 23:59:59.99999');
-                    }
-                    break;
-                case 'updated_by':
-                    $this->db->where($this->_table_name . '.updated_by',$value);
-                    break;
-                case 'updated_date':
-                    $dates = explode(' - ', $value);
-                    if(count($dates) == 2) 
-                    {
-                        $this->db->where($this->_table_name . '.updated_date >= ',$this->convert_date($dates[0],true) . ' 00:00:00');
-                        $this->db->where($this->_table_name . '.updated_date <= ',$this->convert_date($dates[1],true) . ' 00:00:00.99999');
-                    }
-                    break;
-                case 'status':
-                    if(is_array($value)) 
-                    {
-                        $this->db->group_start();
-                        $str_where = '';
-                        if(array_search('1', $value) !== FALSE)
+                if(!$value)
+                    continue;
+
+                switch($key) 
+                {
+                    case 'id':
+                        $this->db->where($this->_table_name . '.id = ',$value);
+                        break;
+                    case 'name':
+                        $this->db->like($this->_table_name . '.name',$value,'both');
+                        break;
+                    case 'created_by':
+                        $this->db->where($this->_table_name . '.created_by',$value);
+                        break;
+                    case 'created_date':
+                        $dates = explode(' - ', $value);
+                        if(count($dates) == 2) 
                         {
-                            $str_where .= '(' . $this->_table_name . '.active <> 0 AND ' . $this->_table_name . '.deleted = 0)';
+                            $this->db->where($this->_table_name . '.created_date >= ',$this->convert_date($dates[0],true) . ' 00:00:00');
+                            $this->db->where($this->_table_name . '.created_date <= ',$this->convert_date($dates[1],true) . ' 23:59:59.99999');
                         }
-                        if(array_search('2', $value) !== FALSE) 
+                        break;
+                    case 'updated_by':
+                        $this->db->where($this->_table_name . '.updated_by',$value);
+                        break;
+                    case 'updated_date':
+                        $dates = explode(' - ', $value);
+                        if(count($dates) == 2) 
                         {
-                            if($str_where)
-                                $str_where .= ' OR ';
-                            $str_where .= '(' . $this->_table_name . '.active = 0 AND ' . $this->_table_name . '.deleted = 0)';
+                            $this->db->where($this->_table_name . '.updated_date >= ',$this->convert_date($dates[0],true) . ' 00:00:00');
+                            $this->db->where($this->_table_name . '.updated_date <= ',$this->convert_date($dates[1],true) . ' 00:00:00.99999');
                         }
-                        if(array_search('3', $value) !== FALSE) 
+                        break;
+                    case 'status':
+                        if(is_array($value)) 
                         {
-                            if($str_where)
-                                $str_where .= ' OR ';
-                            $str_where .= '(' . $this->_table_name . '.deleted <> 0)';
+                            $this->db->group_start();
+                            $str_where = '';
+                            if(array_search('1', $value) !== FALSE)
+                            {
+                                $str_where .= '(' . $this->_table_name . '.active <> 0 AND ' . $this->_table_name . '.deleted = 0)';
+                            }
+                            if(array_search('2', $value) !== FALSE) 
+                            {
+                                if($str_where)
+                                    $str_where .= ' OR ';
+                                $str_where .= '(' . $this->_table_name . '.active = 0 AND ' . $this->_table_name . '.deleted = 0)';
+                            }
+                            if(array_search('3', $value) !== FALSE) 
+                            {
+                                if($str_where)
+                                    $str_where .= ' OR ';
+                                $str_where .= '(' . $this->_table_name . '.deleted <> 0)';
+                            }
+                            $this->db->where($str_where);
+                            $this->db->group_end();
                         }
-                        $this->db->where($str_where);
-                        $this->db->group_end();
-                    }
-                    break;
+                        break;
+                }
             }
         }
         return $this->db;

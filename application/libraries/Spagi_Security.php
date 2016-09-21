@@ -35,7 +35,7 @@ class Spagi_Security {
         $this->base_url = $this->CI->config->item('base_url');
     }
     
-    public function secure($json = FALSE) 
+    public function secure($format="html") 
     {
         //Traditional login
         //TODO: Add suport for auth0
@@ -52,16 +52,19 @@ class Spagi_Security {
         }
         
         if($error) {
-            if(!$json) {
-                $this->CI->load->helper('url');
-                redirect('/login/index', 'refresh');
-            } else {
+            if($format==='rest') {
+                $this->CI->jsonresponse->respond(null,403);
+            } else if($format==='json') {
                 $this->CI->jsonresponse->respond(
                     array(
                         'result'=>'error',
-                        'message'=>$error_message,403
-                    )
+                        'message'=>$error_message
+                    ),
+                    403
                 );
+            } else {
+                $this->CI->load->helper('url');
+                redirect('/login/index', 'refresh');                
             }
         }
     }

@@ -88,7 +88,11 @@ class Spagi_Model extends CI_Model {
         
         $record = (object) $data;
         $this->set_booleans($record);
-        $record->updated_date = $updated_date;        
+        $record->updated_date = $updated_date;
+        if(!$record->deleted) {
+            $record->deleted_date = null;
+            $record->deleted_by = null;
+        }
         $record = $this->set_record($record);
         
         return $this->db->replace($this->_table_name,$record);
@@ -218,6 +222,7 @@ class Spagi_Model extends CI_Model {
         } else {
             $arr = $data;
         }
+        
         if(isset($arr['id']) && is_numeric($arr['id'])) 
         {
             $row = $this->get_record($arr['id']);

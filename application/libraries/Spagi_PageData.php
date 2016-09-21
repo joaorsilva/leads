@@ -10,6 +10,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Spagi_PageData {
     
     public $route = '';
+    public $api_route = '';
     public $page_menu = array();
     public $page = array();
     

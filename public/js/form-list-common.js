@@ -293,34 +293,24 @@ $(document).ready(function(){
      */
     $('#delete-many').click(function(e){
         e.preventDefault();
-        var items = new Array();
         if($(".dynamic-checkbox:checked").length) {
             $(".dynamic-checkbox:checked").each(function(index,element){
-                items.push($(this).val());
+                $.ajax({
+                    url: $('#delete-many').attr("href") + '/' + $(this).val(),
+                    type: 'delete',
+                    data: null,
+                    dataType:'json',
+                    async: true,
+                    success: function(data) {                        
+                        $('#form-filter').submit();
+                    },
+                    error: function(data) {
+                        $('#prow-error p').text(data.mesage);
+                        $('#row-error').removeClass('hidden');
+                    }
+                });        
             });
         }
-        
-        data = {id:items};
-        
-        $.ajax({
-            url: $(this).attr("href"),
-            type: 'GET',
-            data: data,
-            dataType:'json',
-            async: true,
-            success: function(data) {
-                if(data.result === "ok") {
-                    $('#form-filter').submit();
-                } else {
-                    $('#prow-error p').text(data.mesage);
-                    $('#row-error').removeClass('hidden');
-                }
-            },
-            error: function(data) {
-                $('#prow-error p').text(data.mesage);
-                $('#row-error').removeClass('hidden');
-            }
-        });        
     });
         
     /**

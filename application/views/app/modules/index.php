@@ -25,7 +25,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             </div>
                         </div>
                         <div class="box-body">
-                            <form id="form-filter" name="filter" method="post" action="<?php echo($this->spagi_pagedata->route)?>select_list">
+                            <form id="form-filter" name="filter" method="get" action="/api/app/modules">
                                 <input type="hidden" id="default-filter" name="default-filter" value="1"/>
                                 <div class="form-group">
                                     <label class="sr-only" for="filter-id">#</label>
@@ -100,7 +100,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             </div>
                             <div class=" pull-right">
                                 <a class="btn btn-success" href="<?php echo($this->spagi_pagedata->route)?>edit/new"><i class="fa fa-file-o"></i>&nbsp;<?php echo($this->spagi_i18n->_('__lists__New_record'))?></a>
-                                <a id="delete-many" class="btn btn-danger hidden" href="<?php echo($this->spagi_pagedata->route)?>delete"><i class="fa fa-trash-o"></i>&nbsp;<?php echo($this->spagi_i18n->_('__lists__Delete_selected'))?></a>                                    
+                                <a id="delete-many" class="btn btn-danger hidden" href="<?php echo($this->spagi_pagedata->api_route)?>delete"><i class="fa fa-trash-o"></i>&nbsp;<?php echo($this->spagi_i18n->_('__lists__Delete_selected'))?></a>                                    
                             </div>
                         </div>
                     </div>
@@ -197,5 +197,4 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </div>
     <span id="base-url" data-url="<?php echo($this->spagi_pagedata->route)?>" class="hidden"></span>
 </section>
-
 

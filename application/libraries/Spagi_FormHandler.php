@@ -35,15 +35,34 @@ class Spagi_FormHandler {
     }
     
     protected function receive_form($data) {
-        $this->form = $this->CI->input->post('form');
+        //PUT verb support
+        if($this->CI->input->method() === 'put') {
+            $putstream = fopen("php://input", "r");
+            $content = '';
+            $put_data = array();
+            if($putstream) {
+                while( $chunk = fread($putstream, 1024) ) {
+                    $content .= $chunk;
+                }
+                fclose ($putstream);
+                if($content) {
+                    parse_str($content,$put_data);
+                    if(isset($put_data['form'])) {
+                        $this->form = $put_data['form'];
+                    }
+                }
+            }
+        } else {
+            $this->form = $this->CI->input->post('form');
+        }
     }
     
     protected function receive_list($data) {
         
         if(!$this->default_filter) {
-            $sort_data = $this->CI->input->post('sort');
-            $filter_data = $this->CI->input->post('filter');
-            $pagination_data = $this->CI->input->post('pagination');
+            $sort_data = $this->CI->input->get('sort');
+            $filter_data = $this->CI->input->get('filter');
+            $pagination_data = $this->CI->input->get('pagination');
         } else {
             $sort_data = $data["sort"];
             $filter_data = $data["filter"];

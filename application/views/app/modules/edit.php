@@ -10,7 +10,7 @@
                         <h4><i class="fa fa-exclamation-triangle"></i><span></span></h4>
                         <p></p>
                     </div>
-                    <form role="form" id="record" name="form-record" action="<?php echo($this->spagi_pagedata->route)?>save/" method="POST" class="hidden">
+                    <form role="form" id="record" name="form-record" action="<?php echo($this->spagi_pagedata->api_route)?>" method="<?php if ($this->spagi_pagedata->page['id'] !== 'new'){ echo('PUT'); }else{ echo('POST'); }?>" class="hidden">
                         <div class="form-group">
                             <label class="control-label" for="form-id">Record Id:</label>
                             <input type="text" class="form-control text-right" id="form-id" name="form[id]" style="max-width: 100px" value="<?php echo($this->spagi_pagedata->page['id'])?>" disabled/>
@@ -96,12 +96,13 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                    <button type="button" id="btn-delete" class="btn btn-outline" data-url="<?php echo($this->spagi_pagedata->route)?>delete/">Yes</button>
+                    <button type="button" id="btn-delete" class="btn btn-outline" data-url="<?php echo($this->spagi_pagedata->api_route)?>delete/">Yes</button>
                 </div>
             </div>
         </div>
     </div>
     <span id="base-url" data-url="<?php echo($this->spagi_pagedata->route)?>" class="hidden"></span>
+    <span id="api-url" data-url="<?php echo($this->spagi_pagedata->api_route)?>" class="hidden"></span>
     <span id="data-none-caption" class="hidden">&nbsp;No data found!</span>
     <span id="data-none-text" class="hidden">No data was found for the requested record.</span>
     <span id="data-error-caption" class="hidden">&nbsp;Error!</span>
