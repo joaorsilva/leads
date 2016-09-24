@@ -35,24 +35,48 @@
  */
 
 import React from 'react';
+import Filter from './Filter.jsx';
 
-class List extends React.Component {
-  render () {
-    return (
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="box">
-                <div class="box-header">
-                    <h3 class="box-title">List of [title to be translated]</h3>
-                </div>    
-                <div class="box-body">
-                    Filter component goes here.
+var List = React.createClass ({
+    getInitialState () {
+        return {structure: []};
+    },
+    loadStructure() {
+        $.ajax({
+            url: this.props.apiUrl + "/structure",
+            method: 'get',
+            dataType: 'json',
+            cache: false,
+            success: function(data) {
+                console.log("Got data");
+                this.setState({structure: data});
+            }.bind(this),
+            error: function(xhr, status, err) {
+                console.log(xhr);
+            }.bind(this)
+        });
+    },
+    componentWillMount() {
+      this.loadStructure();
+    },
+    render () {
+        console.log("List render");
+        return (
+            <div className="row">
+                <div className="col-xs-12">
+                    <div className="box">
+                        <div className="box-header">
+                            <h3 className="box-title">List of [title to be translated]</h3>
+                        </div>    
+                        <div className="box-body">
+                            <Filter apiUrl={this.props.apiUrl} structure={this.state.structure}/>
+                            The table goes here {this.props.apiUrl}
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
         ); 
-  }
-}
-
+    }
+});
 export default List;
+

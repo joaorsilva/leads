@@ -31,10 +31,21 @@
  * @license	http://opensource.org/licenses/MIT	MIT License
  * @link	https://spagiweb.com.br
  * @since	Version 1.0.0
- * @filesource
+ * @filesource  List.jsx
  */
-import React from 'react';
-import {render} from 'react-dom';
-import List from '../jsxcomponents/base/List.jsx';
 
-render(<List apiUrl="/api/app/modules" />, document.getElementById('content'));
+import React from 'react';
+var FilterString = React.createClass({
+    render() {
+        var filterId = "filter-" + this.props.structure.name;
+        var filterName = "filter[" + this.props.structure.name + "]";
+        return (
+            <div className="form-group">
+                <label className="sr-only" for="filter-id">{this.props.structure.caption}</label>
+                <input type="text" className="form-control" id={filterId} name={filterName} placeholder={this.props.structure.caption} />
+            </div>        
+        );
+    }
+});
+
+export default FilterString;

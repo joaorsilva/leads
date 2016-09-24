@@ -61,41 +61,41 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	(0, _reactDom.render)(_react2.default.createElement(_List2.default, null), document.getElementById('content')); /**
-	                                                                                                                 * Spagi Leads
-	                                                                                                                 *
-	                                                                                                                 * An open source leads manager
-	                                                                                                                 *
-	                                                                                                                 * This content is released under the MIT License (MIT)
-	                                                                                                                 *
-	                                                                                                                 * Copyright (c) 2016 - 2016, SPAGI Systems
-	                                                                                                                 *
-	                                                                                                                 * Permission is hereby granted, free of charge, to any person obtaining a copy
-	                                                                                                                 * of this software and associated documentation files (the "Software"), to deal
-	                                                                                                                 * in the Software without restriction, including without limitation the rights
-	                                                                                                                 * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-	                                                                                                                 * copies of the Software, and to permit persons to whom the Software is
-	                                                                                                                 * furnished to do so, subject to the following conditions:
-	                                                                                                                 *
-	                                                                                                                 * The above copyright notice and this permission notice shall be included in
-	                                                                                                                 * all copies or substantial portions of the Software.
-	                                                                                                                 *
-	                                                                                                                 * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-	                                                                                                                 * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-	                                                                                                                 * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-	                                                                                                                 * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-	                                                                                                                 * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-	                                                                                                                 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-	                                                                                                                 * THE SOFTWARE.
-	                                                                                                                 *
-	                                                                                                                 * @package	Spagi Leads
-	                                                                                                                 * @author	SPAGI Systems
-	                                                                                                                 * @copyright	Copyright (c) 2016 - 2016, SPAGI Systems (http://spagiweb.com.br/)
-	                                                                                                                 * @license	http://opensource.org/licenses/MIT	MIT License
-	                                                                                                                 * @link	https://spagiweb.com.br
-	                                                                                                                 * @since	Version 1.0.0
-	                                                                                                                 * @filesource
-	                                                                                                                 */
+	(0, _reactDom.render)(_react2.default.createElement(_List2.default, { apiUrl: '/api/app/modules' }), document.getElementById('content')); /**
+	                                                                                                                                           * Spagi Leads
+	                                                                                                                                           *
+	                                                                                                                                           * An open source leads manager
+	                                                                                                                                           *
+	                                                                                                                                           * This content is released under the MIT License (MIT)
+	                                                                                                                                           *
+	                                                                                                                                           * Copyright (c) 2016 - 2016, SPAGI Systems
+	                                                                                                                                           *
+	                                                                                                                                           * Permission is hereby granted, free of charge, to any person obtaining a copy
+	                                                                                                                                           * of this software and associated documentation files (the "Software"), to deal
+	                                                                                                                                           * in the Software without restriction, including without limitation the rights
+	                                                                                                                                           * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+	                                                                                                                                           * copies of the Software, and to permit persons to whom the Software is
+	                                                                                                                                           * furnished to do so, subject to the following conditions:
+	                                                                                                                                           *
+	                                                                                                                                           * The above copyright notice and this permission notice shall be included in
+	                                                                                                                                           * all copies or substantial portions of the Software.
+	                                                                                                                                           *
+	                                                                                                                                           * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+	                                                                                                                                           * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+	                                                                                                                                           * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+	                                                                                                                                           * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+	                                                                                                                                           * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+	                                                                                                                                           * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+	                                                                                                                                           * THE SOFTWARE.
+	                                                                                                                                           *
+	                                                                                                                                           * @package	Spagi Leads
+	                                                                                                                                           * @author	SPAGI Systems
+	                                                                                                                                           * @copyright	Copyright (c) 2016 - 2016, SPAGI Systems (http://spagiweb.com.br/)
+	                                                                                                                                           * @license	http://opensource.org/licenses/MIT	MIT License
+	                                                                                                                                           * @link	https://spagiweb.com.br
+	                                                                                                                                           * @since	Version 1.0.0
+	                                                                                                                                           * @filesource
+	                                                                                                                                           */
 
 /***/ },
 /* 1 */
@@ -21983,13 +21983,266 @@
   \***************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
 	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _Filter = __webpack_require__(/*! ./Filter.jsx */ 173);
+	
+	var _Filter2 = _interopRequireDefault(_Filter);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	/**
+	 * Spagi Leads
+	 *
+	 * An open source leads manager
+	 *
+	 * This content is released under the MIT License (MIT)
+	 *
+	 * Copyright (c) 2016 - 2016, SPAGI Systems
+	 *
+	 * Permission is hereby granted, free of charge, to any person obtaining a copy
+	 * of this software and associated documentation files (the "Software"), to deal
+	 * in the Software without restriction, including without limitation the rights
+	 * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+	 * copies of the Software, and to permit persons to whom the Software is
+	 * furnished to do so, subject to the following conditions:
+	 *
+	 * The above copyright notice and this permission notice shall be included in
+	 * all copies or substantial portions of the Software.
+	 *
+	 * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+	 * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+	 * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+	 * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+	 * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+	 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+	 * THE SOFTWARE.
+	 *
+	 * @package	Spagi Leads
+	 * @author	SPAGI Systems
+	 * @copyright	Copyright (c) 2016 - 2016, SPAGI Systems (http://spagiweb.com.br/)
+	 * @license	http://opensource.org/licenses/MIT	MIT License
+	 * @link	https://spagiweb.com.br
+	 * @since	Version 1.0.0
+	 * @filesource  List.jsx
+	 */
+	
+	var List = _react2.default.createClass({
+	    displayName: 'List',
+	    getInitialState: function getInitialState() {
+	        return { structure: [] };
+	    },
+	    loadStructure: function loadStructure() {
+	        $.ajax({
+	            url: this.props.apiUrl + "/structure",
+	            method: 'get',
+	            dataType: 'json',
+	            cache: false,
+	            success: function (data) {
+	                console.log("Got data");
+	                this.setState({ structure: data });
+	            }.bind(this),
+	            error: function (xhr, status, err) {
+	                console.log(xhr);
+	            }.bind(this)
+	        });
+	    },
+	    componentWillMount: function componentWillMount() {
+	        this.loadStructure();
+	    },
+	    render: function render() {
+	        console.log("List render");
+	        return _react2.default.createElement(
+	            'div',
+	            { className: 'row' },
+	            _react2.default.createElement(
+	                'div',
+	                { className: 'col-xs-12' },
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'box' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'box-header' },
+	                        _react2.default.createElement(
+	                            'h3',
+	                            { className: 'box-title' },
+	                            'List of [title to be translated]'
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'box-body' },
+	                        _react2.default.createElement(_Filter2.default, { apiUrl: this.props.apiUrl, structure: this.state.structure }),
+	                        'The table goes here ',
+	                        this.props.apiUrl
+	                    )
+	                )
+	            )
+	        );
+	    }
+	});
+	exports.default = List;
+
+/***/ },
+/* 173 */
+/*!*****************************************************!*\
+  !*** ./public/js/src/jsxcomponents/base/Filter.jsx ***!
+  \*****************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _FilterInt = __webpack_require__(/*! ./FilterInt.jsx */ 174);
+	
+	var _FilterInt2 = _interopRequireDefault(_FilterInt);
+	
+	var _FilterString = __webpack_require__(/*! ./FilterString.jsx */ 175);
+	
+	var _FilterString2 = _interopRequireDefault(_FilterString);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Filter = _react2.default.createClass({
+	    displayName: 'Filter',
+	    render: function render() {
+	        console.log("Filter render");
+	        var classMap = {
+	            filterBox: "box box-primary collapsed-box box-solid", //
+	            filterHeader: "box-header with-border",
+	            filterIcon: "fa fa-filter",
+	            filterBoxTools: "box-tools pull-right",
+	            filterBoxClose: "btn btn-box-tool",
+	            filterBoxCloseIcon: "fa fa-plus",
+	            filterButtonsDiv: "form-group pull-right",
+	            filterButtonSubmit: "btn btn-success",
+	            filterButtonSubmitIcons: "fa fa-filter",
+	            filterButtonClear: "btn btn-info",
+	            filterButtonClearIcons: "fa fa-eraser"
+	        };
+	        var fields = this.props.structure.map(function (field) {
+	            if (field.type === "uint" || field.type === "int") {
+	                return _react2.default.createElement(_FilterInt2.default, { structure: field });
+	            } else if (field.type === "string") {
+	                return _react2.default.createElement(_FilterString2.default, { structure: field });
+	            }
+	        });
+	        return _react2.default.createElement(
+	            'div',
+	            { className: classMap.filterBox },
+	            _react2.default.createElement(
+	                'div',
+	                { className: classMap.filterHeader },
+	                _react2.default.createElement(
+	                    'h3',
+	                    { className: 'box-title' },
+	                    _react2.default.createElement('i', { className: classMap.filterIcon }),
+	                    ' [Data filer to be translated]'
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: classMap.filterBoxTools },
+	                    _react2.default.createElement(
+	                        'button',
+	                        { id: 'filter-collapse', type: 'button', className: classMap.filterBoxClose, 'data-widget': 'collapse' },
+	                        _react2.default.createElement('i', { className: classMap.filterBoxCloseIcon })
+	                    )
+	                )
+	            ),
+	            _react2.default.createElement(
+	                'div',
+	                { className: 'box-body' },
+	                _react2.default.createElement(
+	                    'form',
+	                    { id: 'form-filter', name: 'filter', method: 'get', action: this.props.apiUrl },
+	                    fields,
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: classMap.filterButtonsDiv },
+	                        _react2.default.createElement(
+	                            'button',
+	                            { id: 'filter-submit', type: 'submit', className: classMap.filterButtonSubmit },
+	                            _react2.default.createElement('i', { className: classMap.filterButtonSubmitIcons }),
+	                            ' Filter [translate]'
+	                        ),
+	                        ' ',
+	                        _react2.default.createElement(
+	                            'button',
+	                            { id: 'filter-clear', type: 'button', className: classMap.filterButtonClear },
+	                            _react2.default.createElement('i', { className: classMap.filterButtonClearIcons }),
+	                            ' Clear [translate]'
+	                        )
+	                    )
+	                )
+	            )
+	        );
+	    }
+	}); /**
+	     * Spagi Leads
+	     *
+	     * An open source leads manager
+	     *
+	     * This content is released under the MIT License (MIT)
+	     *
+	     * Copyright (c) 2016 - 2016, SPAGI Systems
+	     *
+	     * Permission is hereby granted, free of charge, to any person obtaining a copy
+	     * of this software and associated documentation files (the "Software"), to deal
+	     * in the Software without restriction, including without limitation the rights
+	     * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+	     * copies of the Software, and to permit persons to whom the Software is
+	     * furnished to do so, subject to the following conditions:
+	     *
+	     * The above copyright notice and this permission notice shall be included in
+	     * all copies or substantial portions of the Software.
+	     *
+	     * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+	     * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+	     * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+	     * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+	     * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+	     * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+	     * THE SOFTWARE.
+	     *
+	     * @package	Spagi Leads
+	     * @author	SPAGI Systems
+	     * @copyright	Copyright (c) 2016 - 2016, SPAGI Systems (http://spagiweb.com.br/)
+	     * @license	http://opensource.org/licenses/MIT	MIT License
+	     * @link	https://spagiweb.com.br
+	     * @since	Version 1.0.0
+	     * @filesource  Filter.jsx
+	     */
+	
+	exports.default = Filter;
+
+/***/ },
+/* 174 */
+/*!********************************************************!*\
+  !*** ./public/js/src/jsxcomponents/base/FilterInt.jsx ***!
+  \********************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
 	
 	var _react = __webpack_require__(/*! react */ 1);
 	
@@ -21997,91 +22250,132 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Spagi Leads
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * An open source leads manager
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * This content is released under the MIT License (MIT)
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Copyright (c) 2016 - 2016, SPAGI Systems
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Permission is hereby granted, free of charge, to any person obtaining a copy
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * of this software and associated documentation files (the "Software"), to deal
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * in the Software without restriction, including without limitation the rights
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * copies of the Software, and to permit persons to whom the Software is
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * furnished to do so, subject to the following conditions:
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * The above copyright notice and this permission notice shall be included in
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * all copies or substantial portions of the Software.
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * THE SOFTWARE.
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @package	Spagi Leads
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @author	SPAGI Systems
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @copyright	Copyright (c) 2016 - 2016, SPAGI Systems (http://spagiweb.com.br/)
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @license	http://opensource.org/licenses/MIT	MIT License
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @link	https://spagiweb.com.br
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @since	Version 1.0.0
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @filesource  List.jsx
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
-	
-	var List = function (_React$Component) {
-	    _inherits(List, _React$Component);
-	
-	    function List() {
-	        _classCallCheck(this, List);
-	
-	        return _possibleConstructorReturn(this, (List.__proto__ || Object.getPrototypeOf(List)).apply(this, arguments));
+	var FilterInt = _react2.default.createClass({
+	    displayName: "FilterInt",
+	    render: function render() {
+	        var filterId = "filter-" + this.props.structure.name;
+	        var filterName = "filter[" + this.props.structure.name + "]";
+	        return _react2.default.createElement(
+	            "div",
+	            { className: "form-group" },
+	            _react2.default.createElement(
+	                "label",
+	                { className: "sr-only", "for": "filter-id" },
+	                this.props.structure.caption
+	            ),
+	            _react2.default.createElement("input", { type: "number", className: "form-control", id: filterId, name: filterName, placeholder: this.props.structure.caption, min: "1" })
+	        );
 	    }
+	}); /**
+	     * Spagi Leads
+	     *
+	     * An open source leads manager
+	     *
+	     * This content is released under the MIT License (MIT)
+	     *
+	     * Copyright (c) 2016 - 2016, SPAGI Systems
+	     *
+	     * Permission is hereby granted, free of charge, to any person obtaining a copy
+	     * of this software and associated documentation files (the "Software"), to deal
+	     * in the Software without restriction, including without limitation the rights
+	     * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+	     * copies of the Software, and to permit persons to whom the Software is
+	     * furnished to do so, subject to the following conditions:
+	     *
+	     * The above copyright notice and this permission notice shall be included in
+	     * all copies or substantial portions of the Software.
+	     *
+	     * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+	     * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+	     * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+	     * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+	     * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+	     * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+	     * THE SOFTWARE.
+	     *
+	     * @package	Spagi Leads
+	     * @author	SPAGI Systems
+	     * @copyright	Copyright (c) 2016 - 2016, SPAGI Systems (http://spagiweb.com.br/)
+	     * @license	http://opensource.org/licenses/MIT	MIT License
+	     * @link	https://spagiweb.com.br
+	     * @since	Version 1.0.0
+	     * @filesource  List.jsx
+	     */
 	
-	    _createClass(List, [{
-	        key: "render",
-	        value: function render() {
-	            return _react2.default.createElement(
-	                "div",
-	                { "class": "row" },
-	                _react2.default.createElement(
-	                    "div",
-	                    { "class": "col-xs-12" },
-	                    _react2.default.createElement(
-	                        "div",
-	                        { "class": "box" },
-	                        _react2.default.createElement(
-	                            "div",
-	                            { "class": "box-header" },
-	                            _react2.default.createElement(
-	                                "h3",
-	                                { "class": "box-title" },
-	                                "List of [title to be translated]"
-	                            )
-	                        ),
-	                        _react2.default.createElement(
-	                            "div",
-	                            { "class": "box-body" },
-	                            "Filter component goes here."
-	                        )
-	                    )
-	                )
-	            );
-	        }
-	    }]);
+	exports.default = FilterInt;
+
+/***/ },
+/* 175 */
+/*!***********************************************************!*\
+  !*** ./public/js/src/jsxcomponents/base/FilterString.jsx ***!
+  \***********************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
 	
-	    return List;
-	}(_react2.default.Component);
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
 	
-	exports.default = List;
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var FilterString = _react2.default.createClass({
+	    displayName: "FilterString",
+	    render: function render() {
+	        var filterId = "filter-" + this.props.structure.name;
+	        var filterName = "filter[" + this.props.structure.name + "]";
+	        return _react2.default.createElement(
+	            "div",
+	            { className: "form-group" },
+	            _react2.default.createElement(
+	                "label",
+	                { className: "sr-only", "for": "filter-id" },
+	                this.props.structure.caption
+	            ),
+	            _react2.default.createElement("input", { type: "text", className: "form-control", id: filterId, name: filterName, placeholder: this.props.structure.caption })
+	        );
+	    }
+	}); /**
+	     * Spagi Leads
+	     *
+	     * An open source leads manager
+	     *
+	     * This content is released under the MIT License (MIT)
+	     *
+	     * Copyright (c) 2016 - 2016, SPAGI Systems
+	     *
+	     * Permission is hereby granted, free of charge, to any person obtaining a copy
+	     * of this software and associated documentation files (the "Software"), to deal
+	     * in the Software without restriction, including without limitation the rights
+	     * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+	     * copies of the Software, and to permit persons to whom the Software is
+	     * furnished to do so, subject to the following conditions:
+	     *
+	     * The above copyright notice and this permission notice shall be included in
+	     * all copies or substantial portions of the Software.
+	     *
+	     * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+	     * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+	     * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+	     * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+	     * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+	     * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+	     * THE SOFTWARE.
+	     *
+	     * @package	Spagi Leads
+	     * @author	SPAGI Systems
+	     * @copyright	Copyright (c) 2016 - 2016, SPAGI Systems (http://spagiweb.com.br/)
+	     * @license	http://opensource.org/licenses/MIT	MIT License
+	     * @link	https://spagiweb.com.br
+	     * @since	Version 1.0.0
+	     * @filesource  List.jsx
+	     */
+	
+	exports.default = FilterString;
 
 /***/ }
 /******/ ]);

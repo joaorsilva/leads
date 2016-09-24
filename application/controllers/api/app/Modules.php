@@ -151,6 +151,105 @@ class Modules extends CI_Controller {
         $this->output->set_output('',200);
         $this->output->_display();
     }
+    
+    public function structure() {
+        $structure = array(
+            0=>array(
+                'name'=>'id',
+                'caption'=>'#',
+                'type'=>'uint',
+                'size' => '0',
+                'related'=> FALSE,
+                'required'=>FALSE,
+                'disabled'=>TRUE,
+                'help'=>''
+            ),
+            1=>array(
+                'name'=>'name',
+                'caption'=>'Name', //TODO: Translate
+                'type'=>'string',
+                'size' => '255',
+                'related'=> FALSE,
+                'required'=>TRUE,
+                'disabled'=>FALSE,
+                'help'=>''
+            ),
+            2=>array(
+                'name'=>'key',
+                'caption'=>'Key', //TODO: Translate
+                'type'=>'string',
+                'size' => '255',
+                'related'=> FALSE,
+                'required'=>TRUE,
+                'help'=>''
+            ),
+            3=>array(
+                'name'=>'active',
+                'caption'=>'Active', //TODO: Translate
+                'type'=>'boolean',
+                'size' => '255',
+                'related'=> FALSE,
+                'required'=>FALSE,
+                'help'=>''
+            ),
+            4=>array(
+                'name'=>'created_by',
+                'caption'=>'Created by', //TODO: Translate
+                'type'=>'string',
+                'size' => '255',
+                'related'=> FALSE,
+                'required'=>FALSE,
+                'help'=>''
+            ),
+            5=>array(
+                'name'=>'created_date',
+                'caption'=>'Created date', //TODO: Translate
+                'type'=>'datetime',
+                'size' => '0',
+                'related'=> FALSE,
+                'required'=>FALSE,
+                'help'=>''
+            ),
+            6=>array(
+                'name'=>'updated_by',
+                'caption'=>'Updated by', //TODO: Translate
+                'type'=>'string',
+                'size' => '255',
+                'related'=> FALSE,
+                'required'=>FALSE,
+                'help'=>''
+            ),
+            7=>array(
+                'name'=>'updated_date',
+                'caption'=>'Updated date', //TODO: Translate
+                'type'=>'datetime',
+                'size' => '0',
+                'related'=> FALSE,
+                'required'=>FALSE,
+                'help'=>''
+            ),
+            8=>array(
+                'name'=>'deleted_by',
+                'caption'=>'Deleted by', //TODO: Translate
+                'type'=>'string',
+                'size' => '255',
+                'related'=> FALSE,
+                'required'=>FALSE,
+                'help'=>''
+            ),
+            9=>array(
+                'name'=>'deleted_date',
+                'caption'=>'Deleted date', //TODO: Translate
+                'type'=>'datetime',
+                'size' => '0',
+                'related'=> FALSE,
+                'required'=>FALSE,
+                'help'=>''
+            )
+        );
+        $this->output->set_output(json_encode($structure),200);
+        //$this->output->_display();
+    }
 
     private function validate() 
     {
