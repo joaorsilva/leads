@@ -32,7 +32,7 @@ $(document).ready(function(){
     /**
      * Sort operation
      */
-    $('#list > thead > tr > th > a').click(function(e){
+    $('#list > thead > tr > th > a').click(function(e) {
 
         var field = $(this).attr('id');
         var direction = 'ASC';
@@ -325,7 +325,7 @@ $(document).ready(function(){
     /**
      * Load the list
      */
-    $('#form-filter').submit();            
+    $('#form-filter').submit();     
     
 });
 

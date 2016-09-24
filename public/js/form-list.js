@@ -1,4 +1,3 @@
-<?php
 /**
  * Spagi Leads
  *
@@ -35,41 +34,38 @@
  * @filesource
  */
 
-defined('BASEPATH') OR exit('No direct script access allowed');
+var ListScreen = {
+    
+    init: function () {
+        /**
+         * Checkbox initialization
+         */
+        $('input').iCheck({
+          checkboxClass: 'icheckbox_minimal-yellow',
+          radioClass: 'iradio_minimal',
+          increaseArea: '20%' // optional
+        });
 
-class Controllers extends CI_Controller{
-    
-    public $route = '/api/app/controllers/';
-    public $menu = 'users';
-    public $submenu = 'controllers';
-    
-    public function __construct() 
-    {
-        parent::__construct();
-    }
-    
-    public function listrows() {
-        $this->spagi_security->secure('rest');
-        
-        $pagination = $this->input->get('pagination');
-        $filter = $this->input->get('filter');
-        $sort = $this->input->get('sort');
-        
-    }
+        /**
+         * Date interval filter for created_date
+         */
+        $('#filter-created_date').daterangepicker({
+            ranges: date_ranges,
+            locale: date_locale,
+            startDate: moment().subtract(29, 'days'),
+            endDate: moment()
+        });
 
-    public function record($num=0) {
-        
+        /**
+         * Date interval filter for updated_date
+         */
+        $('#filter-updated_date').daterangepicker({
+            ranges: date_ranges,
+            locale: date_locale,
+            startDate: moment().subtract(29, 'days'),
+            endDate: moment()
+        });        
     }
-    
-    public function create() {
-        
-    }
-    
-    public function update() {
-        
-    }
-    
-    public function delete() {
-        
-    }
-}
+};
+
+
