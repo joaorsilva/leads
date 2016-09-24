@@ -1,4 +1,3 @@
-<?php
 /**
  * Spagi Leads
  *
@@ -32,7 +31,28 @@
  * @license	http://opensource.org/licenses/MIT	MIT License
  * @link	https://spagiweb.com.br
  * @since	Version 1.0.0
- * @filesource
+ * @filesource  List.jsx
  */
-?>
-<section class="content" id="content"></section>
+
+import React from 'react';
+
+class List extends React.Component {
+  render () {
+    return (
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">List of [title to be translated]</h3>
+                </div>    
+                <div class="box-body">
+                    Filter component goes here.
+                </div>
+            </div>
+        </div>
+    </div>
+        ); 
+  }
+}
+
+export default List;

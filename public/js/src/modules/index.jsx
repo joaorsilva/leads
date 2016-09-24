@@ -1,4 +1,3 @@
-<?php
 /**
  * Spagi Leads
  *
@@ -34,5 +33,8 @@
  * @since	Version 1.0.0
  * @filesource
  */
-?>
-<section class="content" id="content"></section>
+import React from 'react';
+import {render} from 'react-dom';
+import List from '../jsxcomponents/base/List.jsx';
+
+render(<List/>, document.getElementById('content'));
