@@ -36,19 +36,21 @@
 
 import React from 'react';
 import Filter from './Filter.jsx';
+import ListRecordCount from './ListRecordCount.jsx';
+import ListTable from './ListTable.jsx';
 
 var List = React.createClass ({
     getInitialState () {
         return {structure: []};
     },
     loadStructure() {
+        this.setState({structure: []});
         $.ajax({
             url: this.props.apiUrl + "/structure",
             method: 'get',
             dataType: 'json',
             cache: false,
             success: function(data) {
-                console.log("Got data");
                 this.setState({structure: data});
             }.bind(this),
             error: function(xhr, status, err) {
@@ -56,11 +58,29 @@ var List = React.createClass ({
             }.bind(this)
         });
     },
-    componentWillMount() {
-      this.loadStructure();
+    componentDidMount() {
+        this.onFilterClear();
+    },
+    onFilterClear() {
+        console.log("Filter clear");
+        this.loadStructure();
     },
     render () {
-        console.log("List render");
+        var onFilterClick = this.onFilterClear.bind(null,this);
+
+        var apiDelete = this.props.apiUrl + "delete";
+        var editUrl = this.props.baseUrl + "edit"
+
+        var classMap = {
+            outDiv: "box-footer clearfix",
+            rowNarrow: "row row-narrow-5",
+            divSelect: "form-group pull-left form-inline",
+            btnSuccess: "btn btn-success",
+            btnSuccessIcon: "fa fa-file-o",
+            btnDelete: "btn btn-danger hidden",
+            btnDeleteIcon: "fa fa-trash-o"
+        };
+
         return (
             <div className="row">
                 <div className="col-xs-12">
@@ -69,8 +89,37 @@ var List = React.createClass ({
                             <h3 className="box-title">List of [title to be translated]</h3>
                         </div>    
                         <div className="box-body">
-                            <Filter apiUrl={this.props.apiUrl} structure={this.state.structure}/>
-                            The table goes here {this.props.apiUrl}
+                            <Filter 
+                                apiUrl={this.props.apiUrl} 
+                                structure={this.state.structure}
+                                onFilterClick={this.onFilterClear}
+                            />
+                            <div className={classMap.outDiv}>
+                                <div className={classMap.rowNarrow}>
+                                    <ListRecordCount />
+                                    <div className="pull-right">
+                                        <a 
+                                            className={classMap.btnSuccess} 
+                                            href={editUrl}
+                                        >
+                                            <i className="classMap.btnSuccessIcon"></i>
+                                            &nbsp;New record [translate]
+                                        </a>
+                                        <a 
+                                            id="delete-many" 
+                                            className={classMap.btnDelete} 
+                                            href={apiDelete}
+                                        >
+                                            <i className={classMap.btnDeleteIcon}></i>
+                                            &nbsp;Delete selected [translate]
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <ListTable
+                                apiUrl={this.props.apiUrl} 
+                                structure={this.state.structure}
+                            />
                         </div>
                     </div>
                 </div>

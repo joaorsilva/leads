@@ -31,34 +31,40 @@
  * @license	http://opensource.org/licenses/MIT	MIT License
  * @link	https://spagiweb.com.br
  * @since	Version 1.0.0
- * @filesource  List.jsx
+ * @filesource  ListRecordCount.jsx
  */
 
 import React from 'react';
 
-var FilterInt = React.createClass({
+var ListRecordCount = React.createClass({    
+    getInitialState () {
+        var items = [10,20,30,40,50,60,70,80,90,100];
+        return {items: items, selected:10};
+    },
+    handleChange(event) {
+        this.setState({selected:event.target.value});
+    },
     render() {
-        var filterId = "filter-" + this.props.structure.name;
-        var filterName = "filter[" + this.props.structure.name + "]";
+
+        var classMap = {
+            divSelect: "form-group pull-left form-inline"
+        };
+
+        var options = this.state.items.map(function(row,i) {
+            return (
+                <option value={row} key={i}>{row}</option>
+            );
+        });
+
         return (
-            <div className="form-group">
-                <label 
-                    className="sr-only" 
-                    htmlFor="filter-id"
-                >
-                    {this.props.structure.caption}
-                </label>
-                <input 
-                    type="number" 
-                    className="form-control" 
-                    id={filterId} 
-                    name={filterName} 
-                    placeholder={this.props.structure.caption} 
-                    min="1"
-                />
-            </div>        
+            <div className={classMap.divSelect}>
+                <label htmlFor="rows_per_page">Rows per page [translate]:</label>&nbsp;
+                <select name="page_size" id="page-size" className="form-control">
+                    {options}
+                </select>
+            </div>
         );
     }
 });
 
-export default FilterInt;
+export default ListRecordCount;

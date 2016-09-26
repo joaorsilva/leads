@@ -37,31 +37,30 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Modules extends CI_Controller {
-
-    public function __construct()
-    {
+class Users extends CI_Controller {
+    
+    public function __construct() {
         parent::__construct();
     }
-    
+
     public function listrows() {
         
         $this->spagi_security->secure('rest');
 
         $this->load->library('Spagi_FormHandler');
         $this->load->library('Spagi_Pagination');
-        $this->load->model('App_modules_model');
+        $this->load->model('User_users_model');
         
         $this->spagi_formhandler->request_type='list';
         $this->spagi_formhandler->receive(__METHOD__);
         
-        $total_rows = $this->App_modules_model->select_count_list(
+        $total_rows = $this->User_users_model->select_count_list(
             $this->spagi_formhandler->filter
         );
         
         $this->spagi_formhandler->pagination['total_rows'] = $total_rows;
         
-        $res = $this->App_modules_model->select_list(
+        $res = $this->User_users_model->select_list(
             $this->spagi_formhandler->pagination,
             $this->spagi_formhandler->filter,
             $this->spagi_formhandler->sort
@@ -75,25 +74,26 @@ class Modules extends CI_Controller {
         
         $this->spagi_formhandler->pagination = $pagination;
         $this->spagi_formhandler->rows = $res;
-        
+
         $code = 200;
         if(!$res) {
             $code = 404;
         }
+
         $this->spagi_formhandler->send(__METHOD__,NULL,$code);
     }
-
+    
     public function record($num=0) {
         $this->spagi_security->secure('rest');
         $this->load->library('Spagi_FormHandler');
-        $this->load->model('App_modules_model');
+        $this->load->model('User_users_model');
         $this->spagi_formhandler->request_type = 'form';
-        $this->spagi_formhandler->receive(__METHOD__,NULL,$code); 
+        $this->spagi_formhandler->receive(__METHOD__);
         
         $res = array();
         if($num && is_numeric($num)) 
         {
-            $res = $this->App_modules_model->get($num);
+            $res = $this->User_users_model->get($num);
         }
         
         $this->spagi_formhandler->rows = $res;
@@ -102,7 +102,7 @@ class Modules extends CI_Controller {
         if(!$res) {
             $code = 404;
         }
-        $this->spagi_formhandler->send(__METHOD__,NULL,$code);       
+        $this->spagi_formhandler->send(__METHOD__,NULL,$code);        
     }
     
     public function save($num=0) {
@@ -110,7 +110,7 @@ class Modules extends CI_Controller {
         $this->spagi_security->secure('rest');
 
         $this->load->library('Spagi_FormHandler');
-        $this->load->model('App_modules_model');
+        $this->load->model('User_users_model');
         $this->spagi_formhandler->request_type = 'form';
         $this->spagi_formhandler->receive(__METHOD__);
         if(isset($this->spagi_formhandler->form["id"]) && is_numeric($this->spagi_formhandler->form["id"]))
@@ -119,21 +119,20 @@ class Modules extends CI_Controller {
             if($this->validate()) 
             {
                 $this->spagi_formhandler->form['key'] = md5($this->spagi_formhandler->form['name']);
-                $record = $this->App_modules_model->get_record($this->spagi_formhandler->form['id']);
+                $record = $this->User_users_model->get_record($this->spagi_formhandler->form['id']);
                 $this->spagi_formhandler->form['created_by'] = $record->created_by;
                 $this->spagi_formhandler->form['created_date'] = $record->created_date;
                 $this->spagi_formhandler->form['updated_by'] = $this->spagi_security->user->id;
-                $res = $this->App_modules_model->update($this->spagi_formhandler->form);
+                $res = $this->User_users_model->update($this->spagi_formhandler->form);
             }
         } 
         else 
         {
             if($this->validate()) 
             {
-                $this->spagi_formhandler->form['key'] = md5($this->spagi_formhandler->form['name']);
                 $this->spagi_formhandler->form['created_by'] = $this->spagi_security->user->id;
                 $this->spagi_formhandler->form['updated_by'] = $this->spagi_security->user->id;
-                $res = $this->App_modules_model->insert($this->spagi_formhandler->form);
+                $res = $this->User_users_model->insert($this->spagi_formhandler->form);
             }
         }
         
@@ -142,7 +141,7 @@ class Modules extends CI_Controller {
     
     public function delete($num=0) {
         $this->spagi_security->secure('rest');
-        $this->load->model('App_modules_model');
+        $this->load->model('User_users_model');
         $this->output->set_content_type('text/html');
         
         if(!$num) 
@@ -150,19 +149,19 @@ class Modules extends CI_Controller {
             $this->output->set_output('',404);            
         }
         
-        $row = $this->App_modules_model->get_record($num);
+        $row = $this->User_users_model->get_record($num);
         if($row ) {
             $row->updated_by = $this->spagi_security->user->id;
             $row->deleted_by = $this->spagi_security->user->id;
-            $this->App_modules_model->delete($row);
+            $this->User_users_model->delete($row);
         }
 
         $this->output->set_output('',200);
         $this->output->_display();
-    }
+    } 
     
+    //TODO: Remake
     public function structure() {
-        $this->spagi_security->secure('rest');
         $structure = array(
             0=>array(
                 'name'=>'id',
@@ -172,107 +171,101 @@ class Modules extends CI_Controller {
                 'related'=> FALSE,
                 'required'=>FALSE,
                 'disabled'=>TRUE,
-                'help'=>'',
-                'showlist'=>true,
-                'showfilter'=>true,
-                'showedit'=>true
+                'help'=>''
             ),
             1=>array(
-                'name'=>'name',
-                'caption'=>'Name', //TODO: Translate
+                'name'=>'first_name',
+                'caption'=>'First name', //TODO: Translate
+                'type'=>'string',
+                'size' => '64',
+                'related'=> FALSE,
+                'required'=>TRUE,
+                'disabled'=>FALSE,
+                'help'=>''
+            ),
+            2=>array(
+                'name'=>'surename',
+                'caption'=>'Surename', //TODO: Translate
+                'type'=>'string',
+                'size' => '64',
+                'related'=> FALSE,
+                'required'=>TRUE,
+                'disabled'=>FALSE,
+                'help'=>''
+            ),
+            3=>array(
+                'name'=>'email',
+                'caption'=>'Email', //TODO: Translate
                 'type'=>'string',
                 'size' => '255',
                 'related'=> FALSE,
                 'required'=>TRUE,
                 'disabled'=>FALSE,
-                'help'=>'',
-                'showlist'=>true,
-                'showfilter'=>true,
-                'showedit'=>true
+                'help'=>''
             ),
-            2=>array(
-                'name'=>'key',
-                'caption'=>'Key', //TODO: Translate
+            4=>array(
+                'name'=>'email',
+                'caption'=>'Email', //TODO: Translate
                 'type'=>'string',
-                'size' => '255',
+                'size' => '1024',
+                'related'=> FALSE,
+                'required'=>TRUE,
+                'disabled'=>FALSE,
+                'help'=>''
+            ),
+            5=>array(
+                'name'=>'last_login',
+                'caption'=>'Last login', //TODO: Translate
+                'type'=>'datetime',
+                'size' => '',
                 'related'=> FALSE,
                 'required'=>TRUE,
                 'disabled'=>TRUE,
-                'help'=>'',
-                'showlist'=>true,
-                'showfilter'=>true,
-                'showedit'=>true                
+                'help'=>''
             ),
-            3=>array(
-                'name'=>'status',
-                'caption'=>'Status', //TODO: Translate
+            6=>array(
+                'name'=>'last_operation',
+                'caption'=>'Last operation', //TODO: Translate
+                'type'=>'datetime',
+                'size' => '',
+                'related'=> FALSE,
+                'required'=>TRUE,
+                'disabled'=>TRUE,
+                'help'=>''
+            ),
+            7=>array(
+                'name'=>'active',
+                'caption'=>'Active', //TODO: Translate
                 'type'=>'list',
                 'list'=>array(
                     'values'=>array(
-                        array('id'=>1,'name'=>'Inactive [translate]'),
-                        array('id'=>2,'name'=>'Active [translate]'),
-                        array('id'=>3,'name'=>'Deleted [translate]')
-                        ),
-                    'multiple'=>true,
-                    'defaults'=>array(1,2), //Active
+                        0=>'Inactive [translate]',
+                        1=>'Active [translate]',
+                        2=>'Deleted [translate]'
+                        )
                     ),
-                'size' => '255',
-                'related'=>FALSE,
+                'size' => '1',
+                'related'=> FALSE,
                 'required'=>FALSE,
-                'disabled'=>FALSE,
-                'help'=>'',
-                'showlist'=>true,
-                'showfilter'=>true,
-                'showedit'=>false            
+                'help'=>''
             ),
-            4=>array(
-                'name'=>'active',
-                'caption'=>'Active', //TODO: Translate
-                'type'=>'boolean',
-                'size' => '0',
-                'related'=>FALSE,
-                'required'=>FALSE,
-                'disabled'=>FALSE,
-                'help'=>'',
-                'showlist'=>false,
-                'showfilter'=>false,
-                'showedit'=>true            
-            ),
-            5=>array(
-                'name'=>'deleted',
-                'caption'=>'Deleted', //TODO: Translate
-                'type'=>'boolean',
-                'size' => '0',
-                'related'=>FALSE,
-                'required'=>FALSE,
-                'disabled'=>FALSE,
-                'help'=>'',
-                'showlist'=>false,
-                'showfilter'=>false,
-                'showedit'=>true            
-            ),
-            5=>array(
+            8=>array(
                 'name'=>'created_by',
                 'caption'=>'Created by', //TODO: Translate
                 'type'=>'list',
                 'list'=>array(
-                    'url'=>'/api/user/users',
+                    'url'=>'/api/app/users',
                     'filter'=>array(
-                        'status'=>array(1,2), //Active and inactive
-                    ),
-                    'multiple'=>false,
-                    'defaults'=>0
+                        'deleted'=>0,
+                    )
                 ),
-                'size' => '0',
+                'size' => '255',
                 'related'=> TRUE,
                 'required'=>FALSE,
                 'disabled'=>TRUE,
-                'help'=>'',
-                'showlist'=>true,
-                'showfilter'=>true,
-                'showedit'=>true                
+                'help'=>''
             ),
-            6=>array(
+            9=>array(
                 'name'=>'created_date',
                 'caption'=>'Created date', //TODO: Translate
                 'type'=>'datetime',
@@ -280,33 +273,19 @@ class Modules extends CI_Controller {
                 'related'=> FALSE,
                 'required'=>FALSE,
                 'disabled'=>TRUE,
-                'help'=>'',
-                'showlist'=>true,
-                'showfilter'=>true,
-                'showedit'=>true 
+                'help'=>''
             ),
-            7=>array(
+            10=>array(
                 'name'=>'updated_by',
                 'caption'=>'Updated by', //TODO: Translate
-                'type'=>'list',
-                'list'=>array(
-                    'url'=>'/api/user/users',
-                    'filter'=>array(
-                        'status'=>array(1,2), //Active and inactive
-                    ),
-                    'multiple'=>false,
-                    'defaults'=>0
-                ),
-                'size' => '0',
+                'type'=>'string',
+                'size' => '255',
                 'related'=> TRUE,
                 'required'=>FALSE,
                 'disabled'=>TRUE,
-                'help'=>'',
-                'showlist'=>true,
-                'showfilter'=>true,
-                'showedit'=>true 
+                'help'=>''
             ),
-            8=>array(
+            11=>array(
                 'name'=>'updated_date',
                 'caption'=>'Updated date', //TODO: Translate
                 'type'=>'datetime',
@@ -314,33 +293,19 @@ class Modules extends CI_Controller {
                 'related'=> FALSE,
                 'required'=>FALSE,
                 'disabled'=>TRUE,
-                'help'=>'',
-                'showlist'=>true,
-                'showfilter'=>true,
-                'showedit'=>true 
+                'help'=>''
             ),
-            9=>array(
+            12=>array(
                 'name'=>'deleted_by',
                 'caption'=>'Deleted by', //TODO: Translate
-                'type'=>'list',
-                'list'=>array(
-                    'url'=>'/api/user/users',
-                    'filter'=>array(
-                        'status'=>array(1,2), //Active and inactive
-                    ),
-                    'multiple'=>false,
-                    'defaults'=>0
-                ),
-                'size' => '0',
+                'type'=>'string',
+                'size' => '255',
                 'related'=> TRUE,
                 'required'=>FALSE,
                 'disabled'=>TRUE,
-                'help'=>'',
-                'showlist'=>true,
-                'showfilter'=>true,
-                'showedit'=>true 
+                'help'=>''
             ),
-            10=>array(
+            13=>array(
                 'name'=>'deleted_date',
                 'caption'=>'Deleted date', //TODO: Translate
                 'type'=>'datetime',
@@ -348,16 +313,23 @@ class Modules extends CI_Controller {
                 'related'=> FALSE,
                 'required'=>FALSE,
                 'disabled'=>TRUE,
-                'help'=>'',
-                'showlist'=>true,
-                'showfilter'=>true,
-                'showedit'=>true
+                'help'=>''
+            ),
+            14=>array(
+                'name'=>'deleted',
+                'caption'=>'Deleted', //TODO: Translate
+                'type'=>'boolean',
+                'size' => '1',
+                'related'=> FALSE,
+                'required'=>FALSE,
+                'disabled'=>TRUE,
+                'help'=>''
             )
         );
         $this->output->set_output(json_encode($structure),200);
         //$this->output->_display();
     }
-
+    
     private function validate() 
     {
         if(!trim($this->spagi_formhandler->form['name'])) 

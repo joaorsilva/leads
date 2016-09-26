@@ -61,41 +61,41 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	(0, _reactDom.render)(_react2.default.createElement(_List2.default, { apiUrl: '/api/app/modules' }), document.getElementById('content')); /**
-	                                                                                                                                           * Spagi Leads
-	                                                                                                                                           *
-	                                                                                                                                           * An open source leads manager
-	                                                                                                                                           *
-	                                                                                                                                           * This content is released under the MIT License (MIT)
-	                                                                                                                                           *
-	                                                                                                                                           * Copyright (c) 2016 - 2016, SPAGI Systems
-	                                                                                                                                           *
-	                                                                                                                                           * Permission is hereby granted, free of charge, to any person obtaining a copy
-	                                                                                                                                           * of this software and associated documentation files (the "Software"), to deal
-	                                                                                                                                           * in the Software without restriction, including without limitation the rights
-	                                                                                                                                           * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-	                                                                                                                                           * copies of the Software, and to permit persons to whom the Software is
-	                                                                                                                                           * furnished to do so, subject to the following conditions:
-	                                                                                                                                           *
-	                                                                                                                                           * The above copyright notice and this permission notice shall be included in
-	                                                                                                                                           * all copies or substantial portions of the Software.
-	                                                                                                                                           *
-	                                                                                                                                           * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-	                                                                                                                                           * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-	                                                                                                                                           * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-	                                                                                                                                           * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-	                                                                                                                                           * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-	                                                                                                                                           * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-	                                                                                                                                           * THE SOFTWARE.
-	                                                                                                                                           *
-	                                                                                                                                           * @package	Spagi Leads
-	                                                                                                                                           * @author	SPAGI Systems
-	                                                                                                                                           * @copyright	Copyright (c) 2016 - 2016, SPAGI Systems (http://spagiweb.com.br/)
-	                                                                                                                                           * @license	http://opensource.org/licenses/MIT	MIT License
-	                                                                                                                                           * @link	https://spagiweb.com.br
-	                                                                                                                                           * @since	Version 1.0.0
-	                                                                                                                                           * @filesource
-	                                                                                                                                           */
+	(0, _reactDom.render)(_react2.default.createElement(_List2.default, { apiUrl: '/api/app/modules', baseUrl: '/app/modules' }), document.getElementById('content')); /**
+	                                                                                                                                                                    * Spagi Leads
+	                                                                                                                                                                    *
+	                                                                                                                                                                    * An open source leads manager
+	                                                                                                                                                                    *
+	                                                                                                                                                                    * This content is released under the MIT License (MIT)
+	                                                                                                                                                                    *
+	                                                                                                                                                                    * Copyright (c) 2016 - 2016, SPAGI Systems
+	                                                                                                                                                                    *
+	                                                                                                                                                                    * Permission is hereby granted, free of charge, to any person obtaining a copy
+	                                                                                                                                                                    * of this software and associated documentation files (the "Software"), to deal
+	                                                                                                                                                                    * in the Software without restriction, including without limitation the rights
+	                                                                                                                                                                    * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+	                                                                                                                                                                    * copies of the Software, and to permit persons to whom the Software is
+	                                                                                                                                                                    * furnished to do so, subject to the following conditions:
+	                                                                                                                                                                    *
+	                                                                                                                                                                    * The above copyright notice and this permission notice shall be included in
+	                                                                                                                                                                    * all copies or substantial portions of the Software.
+	                                                                                                                                                                    *
+	                                                                                                                                                                    * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+	                                                                                                                                                                    * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+	                                                                                                                                                                    * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+	                                                                                                                                                                    * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+	                                                                                                                                                                    * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+	                                                                                                                                                                    * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+	                                                                                                                                                                    * THE SOFTWARE.
+	                                                                                                                                                                    *
+	                                                                                                                                                                    * @package	Spagi Leads
+	                                                                                                                                                                    * @author	SPAGI Systems
+	                                                                                                                                                                    * @copyright	Copyright (c) 2016 - 2016, SPAGI Systems (http://spagiweb.com.br/)
+	                                                                                                                                                                    * @license	http://opensource.org/licenses/MIT	MIT License
+	                                                                                                                                                                    * @link	https://spagiweb.com.br
+	                                                                                                                                                                    * @since	Version 1.0.0
+	                                                                                                                                                                    * @filesource
+	                                                                                                                                                                    */
 
 /***/ },
 /* 1 */
@@ -21997,6 +21997,14 @@
 	
 	var _Filter2 = _interopRequireDefault(_Filter);
 	
+	var _ListRecordCount = __webpack_require__(/*! ./ListRecordCount.jsx */ 177);
+	
+	var _ListRecordCount2 = _interopRequireDefault(_ListRecordCount);
+	
+	var _ListTable = __webpack_require__(/*! ./ListTable.jsx */ 178);
+	
+	var _ListTable2 = _interopRequireDefault(_ListTable);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	/**
@@ -22041,13 +22049,13 @@
 	        return { structure: [] };
 	    },
 	    loadStructure: function loadStructure() {
+	        this.setState({ structure: [] });
 	        $.ajax({
 	            url: this.props.apiUrl + "/structure",
 	            method: 'get',
 	            dataType: 'json',
 	            cache: false,
 	            success: function (data) {
-	                console.log("Got data");
 	                this.setState({ structure: data });
 	            }.bind(this),
 	            error: function (xhr, status, err) {
@@ -22055,11 +22063,29 @@
 	            }.bind(this)
 	        });
 	    },
-	    componentWillMount: function componentWillMount() {
+	    componentDidMount: function componentDidMount() {
+	        this.onFilterClear();
+	    },
+	    onFilterClear: function onFilterClear() {
+	        console.log("Filter clear");
 	        this.loadStructure();
 	    },
 	    render: function render() {
-	        console.log("List render");
+	        var onFilterClick = this.onFilterClear.bind(null, this);
+	
+	        var apiDelete = this.props.apiUrl + "delete";
+	        var editUrl = this.props.baseUrl + "edit";
+	
+	        var classMap = {
+	            outDiv: "box-footer clearfix",
+	            rowNarrow: "row row-narrow-5",
+	            divSelect: "form-group pull-left form-inline",
+	            btnSuccess: "btn btn-success",
+	            btnSuccessIcon: "fa fa-file-o",
+	            btnDelete: "btn btn-danger hidden",
+	            btnDeleteIcon: "fa fa-trash-o"
+	        };
+	
 	        return _react2.default.createElement(
 	            'div',
 	            { className: 'row' },
@@ -22081,9 +22107,47 @@
 	                    _react2.default.createElement(
 	                        'div',
 	                        { className: 'box-body' },
-	                        _react2.default.createElement(_Filter2.default, { apiUrl: this.props.apiUrl, structure: this.state.structure }),
-	                        'The table goes here ',
-	                        this.props.apiUrl
+	                        _react2.default.createElement(_Filter2.default, {
+	                            apiUrl: this.props.apiUrl,
+	                            structure: this.state.structure,
+	                            onFilterClick: this.onFilterClear
+	                        }),
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: classMap.outDiv },
+	                            _react2.default.createElement(
+	                                'div',
+	                                { className: classMap.rowNarrow },
+	                                _react2.default.createElement(_ListRecordCount2.default, null),
+	                                _react2.default.createElement(
+	                                    'div',
+	                                    { className: 'pull-right' },
+	                                    _react2.default.createElement(
+	                                        'a',
+	                                        {
+	                                            className: classMap.btnSuccess,
+	                                            href: editUrl
+	                                        },
+	                                        _react2.default.createElement('i', { className: 'classMap.btnSuccessIcon' }),
+	                                        ' New record [translate]'
+	                                    ),
+	                                    _react2.default.createElement(
+	                                        'a',
+	                                        {
+	                                            id: 'delete-many',
+	                                            className: classMap.btnDelete,
+	                                            href: apiDelete
+	                                        },
+	                                        _react2.default.createElement('i', { className: classMap.btnDeleteIcon }),
+	                                        ' Delete selected [translate]'
+	                                    )
+	                                )
+	                            )
+	                        ),
+	                        _react2.default.createElement(_ListTable2.default, {
+	                            apiUrl: this.props.apiUrl,
+	                            structure: this.state.structure
+	                        })
 	                    )
 	                )
 	            )
@@ -22117,12 +22181,55 @@
 	
 	var _FilterString2 = _interopRequireDefault(_FilterString);
 	
+	var _FilterList = __webpack_require__(/*! ./FilterList.jsx */ 176);
+	
+	var _FilterList2 = _interopRequireDefault(_FilterList);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	/**
+	 * Spagi Leads
+	 *
+	 * An open source leads manager
+	 *
+	 * This content is released under the MIT License (MIT)
+	 *
+	 * Copyright (c) 2016 - 2016, SPAGI Systems
+	 *
+	 * Permission is hereby granted, free of charge, to any person obtaining a copy
+	 * of this software and associated documentation files (the "Software"), to deal
+	 * in the Software without restriction, including without limitation the rights
+	 * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+	 * copies of the Software, and to permit persons to whom the Software is
+	 * furnished to do so, subject to the following conditions:
+	 *
+	 * The above copyright notice and this permission notice shall be included in
+	 * all copies or substantial portions of the Software.
+	 *
+	 * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+	 * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+	 * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+	 * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+	 * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+	 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+	 * THE SOFTWARE.
+	 *
+	 * @package	Spagi Leads
+	 * @author	SPAGI Systems
+	 * @copyright	Copyright (c) 2016 - 2016, SPAGI Systems (http://spagiweb.com.br/)
+	 * @license	http://opensource.org/licenses/MIT	MIT License
+	 * @link	https://spagiweb.com.br
+	 * @since	Version 1.0.0
+	 * @filesource  Filter.jsx
+	 */
 	
 	var Filter = _react2.default.createClass({
 	    displayName: 'Filter',
+	    handleClear: function handleClear(event) {
+	        event.preventDefault();
+	        this.props.onFilterClick();
+	    },
 	    render: function render() {
-	        console.log("Filter render");
 	        var classMap = {
 	            filterBox: "box box-primary collapsed-box box-solid", //
 	            filterHeader: "box-header with-border",
@@ -22136,11 +22243,15 @@
 	            filterButtonClear: "btn btn-info",
 	            filterButtonClearIcons: "fa fa-eraser"
 	        };
-	        var fields = this.props.structure.map(function (field) {
-	            if (field.type === "uint" || field.type === "int") {
-	                return _react2.default.createElement(_FilterInt2.default, { structure: field });
-	            } else if (field.type === "string") {
-	                return _react2.default.createElement(_FilterString2.default, { structure: field });
+	        var fields = this.props.structure.map(function (field, i) {
+	            if (field.showfilter === true) {
+	                if (field.type === "uint" || field.type === "int") {
+	                    return _react2.default.createElement(_FilterInt2.default, { structure: field, id: field.name, key: i });
+	                } else if (field.type === "string") {
+	                    return _react2.default.createElement(_FilterString2.default, { structure: field, id: field.name, key: i });
+	                } else if (field.type === "list") {
+	                    return _react2.default.createElement(_FilterList2.default, { structure: field, id: field.name, key: i });
+	                }
 	            }
 	        });
 	        return _react2.default.createElement(
@@ -22184,7 +22295,7 @@
 	                        ' ',
 	                        _react2.default.createElement(
 	                            'button',
-	                            { id: 'filter-clear', type: 'button', className: classMap.filterButtonClear },
+	                            { id: 'filter-clear', type: 'button', onClick: this.handleClear, className: classMap.filterButtonClear },
 	                            _react2.default.createElement('i', { className: classMap.filterButtonClearIcons }),
 	                            ' Clear [translate]'
 	                        )
@@ -22193,41 +22304,7 @@
 	            )
 	        );
 	    }
-	}); /**
-	     * Spagi Leads
-	     *
-	     * An open source leads manager
-	     *
-	     * This content is released under the MIT License (MIT)
-	     *
-	     * Copyright (c) 2016 - 2016, SPAGI Systems
-	     *
-	     * Permission is hereby granted, free of charge, to any person obtaining a copy
-	     * of this software and associated documentation files (the "Software"), to deal
-	     * in the Software without restriction, including without limitation the rights
-	     * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-	     * copies of the Software, and to permit persons to whom the Software is
-	     * furnished to do so, subject to the following conditions:
-	     *
-	     * The above copyright notice and this permission notice shall be included in
-	     * all copies or substantial portions of the Software.
-	     *
-	     * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-	     * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-	     * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-	     * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-	     * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-	     * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-	     * THE SOFTWARE.
-	     *
-	     * @package	Spagi Leads
-	     * @author	SPAGI Systems
-	     * @copyright	Copyright (c) 2016 - 2016, SPAGI Systems (http://spagiweb.com.br/)
-	     * @license	http://opensource.org/licenses/MIT	MIT License
-	     * @link	https://spagiweb.com.br
-	     * @since	Version 1.0.0
-	     * @filesource  Filter.jsx
-	     */
+	});
 	
 	exports.default = Filter;
 
@@ -22260,10 +22337,20 @@
 	            { className: "form-group" },
 	            _react2.default.createElement(
 	                "label",
-	                { className: "sr-only", "for": "filter-id" },
+	                {
+	                    className: "sr-only",
+	                    htmlFor: "filter-id"
+	                },
 	                this.props.structure.caption
 	            ),
-	            _react2.default.createElement("input", { type: "number", className: "form-control", id: filterId, name: filterName, placeholder: this.props.structure.caption, min: "1" })
+	            _react2.default.createElement("input", {
+	                type: "number",
+	                className: "form-control",
+	                id: filterId,
+	                name: filterName,
+	                placeholder: this.props.structure.caption,
+	                min: "1"
+	            })
 	        );
 	    }
 	}); /**
@@ -22333,10 +22420,19 @@
 	            { className: "form-group" },
 	            _react2.default.createElement(
 	                "label",
-	                { className: "sr-only", "for": "filter-id" },
+	                {
+	                    className: "sr-only",
+	                    htmlFor: "filter-id"
+	                },
 	                this.props.structure.caption
 	            ),
-	            _react2.default.createElement("input", { type: "text", className: "form-control", id: filterId, name: filterName, placeholder: this.props.structure.caption })
+	            _react2.default.createElement("input", {
+	                type: "text",
+	                className: "form-control",
+	                id: filterId,
+	                name: filterName,
+	                placeholder: this.props.structure.caption
+	            })
 	        );
 	    }
 	}); /**
@@ -22372,10 +22468,497 @@
 	     * @license	http://opensource.org/licenses/MIT	MIT License
 	     * @link	https://spagiweb.com.br
 	     * @since	Version 1.0.0
-	     * @filesource  List.jsx
+	     * @filesource  FilterString.jsx
 	     */
 	
 	exports.default = FilterString;
+
+/***/ },
+/* 176 */
+/*!*********************************************************!*\
+  !*** ./public/js/src/jsxcomponents/base/FilterList.jsx ***!
+  \*********************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; }; /**
+	                                                                                                                                                                                                                                                   * Spagi Leads
+	                                                                                                                                                                                                                                                   *
+	                                                                                                                                                                                                                                                   * An open source leads manager
+	                                                                                                                                                                                                                                                   *
+	                                                                                                                                                                                                                                                   * This content is released under the MIT License (MIT)
+	                                                                                                                                                                                                                                                   *
+	                                                                                                                                                                                                                                                   * Copyright (c) 2016 - 2016, SPAGI Systems
+	                                                                                                                                                                                                                                                   *
+	                                                                                                                                                                                                                                                   * Permission is hereby granted, free of charge, to any person obtaining a copy
+	                                                                                                                                                                                                                                                   * of this software and associated documentation files (the "Software"), to deal
+	                                                                                                                                                                                                                                                   * in the Software without restriction, including without limitation the rights
+	                                                                                                                                                                                                                                                   * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+	                                                                                                                                                                                                                                                   * copies of the Software, and to permit persons to whom the Software is
+	                                                                                                                                                                                                                                                   * furnished to do so, subject to the following conditions:
+	                                                                                                                                                                                                                                                   *
+	                                                                                                                                                                                                                                                   * The above copyright notice and this permission notice shall be included in
+	                                                                                                                                                                                                                                                   * all copies or substantial portions of the Software.
+	                                                                                                                                                                                                                                                   *
+	                                                                                                                                                                                                                                                   * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+	                                                                                                                                                                                                                                                   * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+	                                                                                                                                                                                                                                                   * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+	                                                                                                                                                                                                                                                   * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+	                                                                                                                                                                                                                                                   * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+	                                                                                                                                                                                                                                                   * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+	                                                                                                                                                                                                                                                   * THE SOFTWARE.
+	                                                                                                                                                                                                                                                   *
+	                                                                                                                                                                                                                                                   * @package	Spagi Leads
+	                                                                                                                                                                                                                                                   * @author	SPAGI Systems
+	                                                                                                                                                                                                                                                   * @copyright	Copyright (c) 2016 - 2016, SPAGI Systems (http://spagiweb.com.br/)
+	                                                                                                                                                                                                                                                   * @license	http://opensource.org/licenses/MIT	MIT License
+	                                                                                                                                                                                                                                                   * @link	https://spagiweb.com.br
+	                                                                                                                                                                                                                                                   * @since	Version 1.0.0
+	                                                                                                                                                                                                                                                   * @filesource  FilterList.jsx
+	                                                                                                                                                                                                                                                   */
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var FilterList = _react2.default.createClass({
+	    displayName: "FilterList",
+	    getInitialState: function getInitialState() {
+	        var selected = 0;
+	        if (this.props.structure.list.multiple === true) {
+	            selected = [];
+	        }
+	        return { data: [], selected: selected };
+	    },
+	    loadData: function loadData() {
+	        if (this.props.structure.related === true) {
+	            var url = this.props.structure.list.url;
+	            var params = "";
+	            if (this.props.structure.list.filter) {
+	                for (var k in this.props.structure.list.filter) {
+	                    if (_typeof(this.props.structure.list.filter[k]) === "object") {
+	                        for (var kk in this.props.structure.list.filter[k]) {
+	                            params += "filter[" + k + "][" + kk + "]=" + this.props.structure.list.filter[k][kk] + "&";
+	                        }
+	                    } else {
+	                        params += "filter[" + k + "]=" + this.props.structure.list.filter[k] + "&";
+	                    }
+	                }
+	            }
+	            if (params) {
+	                params = "?" + params;
+	                params = params.replace(/&+$/, '');
+	            }
+	
+	            $.ajax({
+	                url: url + params,
+	                method: 'get',
+	                dataType: 'json',
+	                cache: false,
+	                success: function (data) {
+	                    var options;
+	                    var selected;
+	                    if (Array.isArray(data)) {
+	                        options = data;
+	                        options.push({ id: 0, name: "" });
+	
+	                        selected = this.props.structure.list.defaults;
+	                    } else {
+	                        options = [{ id: 0, name: "Error loading data from server. [translate]" }];
+	                        selected = 0;
+	                    }
+	                    options.sort(function (a, b) {
+	                        if (a.name < b.name) return -1;
+	                        if (a.name > b.name) return 1;
+	                        return 0;
+	                    });
+	                    this.setState({ data: data, selected: selected });
+	                }.bind(this),
+	                error: function (xhr, status, err) {
+	                    var errString = "Error (" + xhr.status + " - " + xhr.statusText + "). [translate]";
+	                    var options = [{ id: 0, name: errString }];
+	                    var selected = 0;
+	                    this.setState({ data: options, selected: selected });
+	                }.bind(this)
+	            });
+	        } else {
+	            this.props.structure.list.values.sort(function (a, b) {
+	                if (a.name < b.name) return -1;
+	                if (a.name > b.name) return 1;
+	                return 0;
+	            });
+	            this.setState({ data: this.props.structure.list.values, selected: this.props.structure.list.defaults });
+	        }
+	    },
+	    componentDidMount: function componentDidMount() {
+	        this.loadData(this.props.structure.list.values);
+	    },
+	    handleChange: function handleChange(event) {
+	        var items;
+	        if (this.props.structure.list.multiple) {
+	            items = [];
+	            var options = event.target.options;
+	            for (var i = 0, l = options.length; i < l; i++) {
+	                if (options[i].selected) {
+	                    items.push(options[i].value);
+	                }
+	            }
+	        } else {
+	            items = event.target.value;
+	        }
+	        this.setState({ selected: items });
+	    },
+	    render: function render() {
+	        var classMap = {
+	            filterSelect: "form-control select2",
+	            filterSelectStyle: { width: '100%' }
+	        };
+	
+	        var options = this.state.data.map(function (row, i) {
+	            return _react2.default.createElement(
+	                "option",
+	                { value: row.id, key: i },
+	                row.name
+	            );
+	        });
+	
+	        var filterId = "filter-" + this.props.structure.name;
+	        var filterName = "filter[" + this.props.structure.name + "]";
+	        return _react2.default.createElement(
+	            "div",
+	            { className: "form-group" },
+	            _react2.default.createElement(
+	                "label",
+	                {
+	                    className: "sr-only",
+	                    htmlFor: filterId
+	                },
+	                this.props.structure.caption
+	            ),
+	            _react2.default.createElement(
+	                "select",
+	                {
+	                    className: classMap.filterSelect,
+	                    onChange: this.handleChange,
+	                    multiple: this.props.structure.list.multiple,
+	                    style: classMap.filterSelectStyle,
+	                    id: filterId,
+	                    name: filterName,
+	                    value: this.state.selected
+	                },
+	                options
+	            )
+	        );
+	    }
+	});
+	
+	exports.default = FilterList;
+
+/***/ },
+/* 177 */
+/*!**************************************************************!*\
+  !*** ./public/js/src/jsxcomponents/base/ListRecordCount.jsx ***!
+  \**************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var ListRecordCount = _react2.default.createClass({
+	    displayName: "ListRecordCount",
+	    getInitialState: function getInitialState() {
+	        var items = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
+	        return { items: items, selected: 10 };
+	    },
+	    handleChange: function handleChange(event) {
+	        this.setState({ selected: event.target.value });
+	    },
+	    render: function render() {
+	
+	        var classMap = {
+	            divSelect: "form-group pull-left form-inline"
+	        };
+	
+	        var options = this.state.items.map(function (row, i) {
+	            return _react2.default.createElement(
+	                "option",
+	                { value: row, key: i },
+	                row
+	            );
+	        });
+	
+	        return _react2.default.createElement(
+	            "div",
+	            { className: classMap.divSelect },
+	            _react2.default.createElement(
+	                "label",
+	                { htmlFor: "rows_per_page" },
+	                "Rows per page [translate]:"
+	            ),
+	            " ",
+	            _react2.default.createElement(
+	                "select",
+	                { name: "page_size", id: "page-size", className: "form-control" },
+	                options
+	            )
+	        );
+	    }
+	}); /**
+	     * Spagi Leads
+	     *
+	     * An open source leads manager
+	     *
+	     * This content is released under the MIT License (MIT)
+	     *
+	     * Copyright (c) 2016 - 2016, SPAGI Systems
+	     *
+	     * Permission is hereby granted, free of charge, to any person obtaining a copy
+	     * of this software and associated documentation files (the "Software"), to deal
+	     * in the Software without restriction, including without limitation the rights
+	     * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+	     * copies of the Software, and to permit persons to whom the Software is
+	     * furnished to do so, subject to the following conditions:
+	     *
+	     * The above copyright notice and this permission notice shall be included in
+	     * all copies or substantial portions of the Software.
+	     *
+	     * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+	     * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+	     * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+	     * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+	     * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+	     * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+	     * THE SOFTWARE.
+	     *
+	     * @package	Spagi Leads
+	     * @author	SPAGI Systems
+	     * @copyright	Copyright (c) 2016 - 2016, SPAGI Systems (http://spagiweb.com.br/)
+	     * @license	http://opensource.org/licenses/MIT	MIT License
+	     * @link	https://spagiweb.com.br
+	     * @since	Version 1.0.0
+	     * @filesource  ListRecordCount.jsx
+	     */
+	
+	exports.default = ListRecordCount;
+
+/***/ },
+/* 178 */
+/*!********************************************************!*\
+  !*** ./public/js/src/jsxcomponents/base/ListTable.jsx ***!
+  \********************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var ListTable = _react2.default.createClass({
+	    displayName: "ListTable",
+	    getInitialState: function getInitialState() {
+	        return {
+	            showLoader: "hidden",
+	            showError: "hidden",
+	            showNodata: "hidden",
+	            columnCount: 1,
+	            columnSorted: { name: "id", dir: "asc" }
+	        };
+	    },
+	    handleSort: function handleSort(event) {
+	        event.preventDefault();
+	    },
+	    getColumnAlign: function getColumnAlign(column) {
+	        console.log(column.type);
+	        if (column.type === "boolean") {
+	            return "text-center";
+	        } else if (column.type === "date" || column.type === "datetime" || column.type === "int" || column.type === "uint" || column.type === "double") {
+	            return "text-right";
+	        }
+	        return "text-left";
+	    },
+	    render: function render() {
+	        var classMap = {
+	            tableClasses: "table table-responsive table-bordered table-hover",
+	            loaderIconClasses: "fa fa-spinner fa-spin",
+	            loaderProblemIconClasses: "fa fa-warning",
+	            loaderButtonRetryClasses: "btn btn-warning",
+	            loaderButtonRetryIconClasses: "fa fa-refresh",
+	            loaderCallOutClasses: "callout callout-danger",
+	            nodataCallOutClassses: "callout callout-warning",
+	            nodataCallOutIconClassses: "fa fa-exclamation-circle",
+	            tableColumnClasses: "hidden-xs", //TODO: Bing this data from structure
+	            tableColumnSortedClasses: "glyphicon glyphicon-sort pull-right"
+	        };
+	
+	        var sortClickFunction = this.handleSort;
+	        var thisObject = this;
+	        var columns = this.props.structure.map(function (col, i) {
+	            if (col.showlist === true) {
+	                var fieldName = "field-" + col.name;
+	                var colClasses = thisObject.getColumnAlign(col) + " " + classMap.tableColumnClasses;
+	                return _react2.default.createElement(
+	                    "th",
+	                    { className: colClasses, key: i },
+	                    _react2.default.createElement(
+	                        "a",
+	                        { href: "#", onClick: sortClickFunction, id: fieldName },
+	                        col.caption,
+	                        " ",
+	                        _react2.default.createElement("i", { className: classMap.tableColumnSortedClasses })
+	                    )
+	                );
+	            }
+	        });
+	
+	        return _react2.default.createElement(
+	            "div",
+	            { className: "table-responsive" },
+	            _react2.default.createElement(
+	                "table",
+	                { id: "list", className: classMap.tableClasses },
+	                _react2.default.createElement(
+	                    "thead",
+	                    null,
+	                    _react2.default.createElement(
+	                        "tr",
+	                        null,
+	                        _react2.default.createElement(
+	                            "th",
+	                            { className: "text-center" },
+	                            " "
+	                        ),
+	                        columns
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    "tbody",
+	                    null,
+	                    _react2.default.createElement(
+	                        "tr",
+	                        { id: "row-single", className: this.state.showLoader },
+	                        _react2.default.createElement(
+	                            "td",
+	                            { colSpan: this.state.columnCount, className: "text-center" },
+	                            _react2.default.createElement("i", { className: classMap.loaderIconClasses }),
+	                            " Loading... [translate]"
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        "tr",
+	                        { id: "row-error", className: this.state.showError },
+	                        _react2.default.createElement(
+	                            "td",
+	                            { colSpan: "{this.state.columnCount}", className: "text-center" },
+	                            _react2.default.createElement(
+	                                "div",
+	                                { className: classMap.loaderCallOutClasses },
+	                                _react2.default.createElement(
+	                                    "h4",
+	                                    null,
+	                                    _react2.default.createElement("i", { className: classMap.loaderProblemIconClasses }),
+	                                    " Error loading your data. [translate] "
+	                                ),
+	                                _react2.default.createElement(
+	                                    "p",
+	                                    null,
+	                                    "Problem loading [translate]"
+	                                ),
+	                                _react2.default.createElement(
+	                                    "button",
+	                                    { id: "table-retry", type: "button", className: classMap.leaderRetryClasses },
+	                                    _react2.default.createElement("i", { className: classMap.loaderButtonRetryIconClasses }),
+	                                    " Retry"
+	                                )
+	                            )
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        "tr",
+	                        { id: "row-no-data", className: this.state.showNodata },
+	                        _react2.default.createElement(
+	                            "td",
+	                            { colSpan: "{this.state.columnCount}", className: "text-center" },
+	                            _react2.default.createElement(
+	                                "div",
+	                                { className: classMap.nodataCallOutClassses },
+	                                _react2.default.createElement(
+	                                    "h4",
+	                                    null,
+	                                    _react2.default.createElement("i", { className: classMap.nodataCallOutIconClassses }),
+	                                    " No data found! [translate]"
+	                                ),
+	                                _react2.default.createElement(
+	                                    "p",
+	                                    null,
+	                                    "No data found using that criteria. [translate]"
+	                                )
+	                            )
+	                        )
+	                    )
+	                )
+	            )
+	        );
+	    }
+	}); /**
+	     * Spagi Leads
+	     *
+	     * An open source leads manager
+	     *
+	     * This content is released under the MIT License (MIT)
+	     *
+	     * Copyright (c) 2016 - 2016, SPAGI Systems
+	     *
+	     * Permission is hereby granted, free of charge, to any person obtaining a copy
+	     * of this software and associated documentation files (the "Software"), to deal
+	     * in the Software without restriction, including without limitation the rights
+	     * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+	     * copies of the Software, and to permit persons to whom the Software is
+	     * furnished to do so, subject to the following conditions:
+	     *
+	     * The above copyright notice and this permission notice shall be included in
+	     * all copies or substantial portions of the Software.
+	     *
+	     * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+	     * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+	     * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+	     * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+	     * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+	     * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+	     * THE SOFTWARE.
+	     *
+	     * @package	Spagi Leads
+	     * @author	SPAGI Systems
+	     * @copyright	Copyright (c) 2016 - 2016, SPAGI Systems (http://spagiweb.com.br/)
+	     * @license	http://opensource.org/licenses/MIT	MIT License
+	     * @link	https://spagiweb.com.br
+	     * @since	Version 1.0.0
+	     * @filesource  ListTable.jsx
+	     */
+	
+	exports.default = ListTable;
 
 /***/ }
 /******/ ]);

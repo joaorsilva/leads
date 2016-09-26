@@ -37,10 +37,14 @@
 import React from 'react';
 import FilterInt from './FilterInt.jsx';
 import FilterString from './FilterString.jsx';
+import FilterList from './FilterList.jsx';
 
 var Filter = React.createClass ({
+    handleClear(event) {        
+        event.preventDefault();
+        this.props.onFilterClick();
+    },
     render() {
-        console.log("Filter render");
         var classMap = {
             filterBox: "box box-primary collapsed-box box-solid", //
             filterHeader: "box-header with-border",
@@ -54,15 +58,21 @@ var Filter = React.createClass ({
             filterButtonClear: "btn btn-info",
             filterButtonClearIcons: "fa fa-eraser"
         };
-        var fields = this.props.structure.map(function(field) {
-            if(field.type === "uint" || field.type === "int") {
-                return (
-                    <FilterInt structure={field} />
-                );            
-            } else if (field.type === "string") {
-                return (
-                    <FilterString structure={field} />
-                );            
+        var fields = this.props.structure.map(function(field,i) {
+            if(field.showfilter === true) {
+                if(field.type === "uint" || field.type === "int") {
+                    return (
+                        <FilterInt structure={field} id={field.name} key={i}/>
+                    );            
+                } else if (field.type === "string") {
+                    return (
+                        <FilterString structure={field} id={field.name} key={i}/>
+                    );            
+                } else if(field.type === "list") {
+                    return (
+                        <FilterList structure={field} id={field.name} key={i} />
+                    );            
+                }
             }
         });
         return (
@@ -80,9 +90,8 @@ var Filter = React.createClass ({
                         {fields}
                         <div className={classMap.filterButtonsDiv}>
                             <button id="filter-submit" type="submit" className={classMap.filterButtonSubmit}><i className={classMap.filterButtonSubmitIcons}></i>&nbsp;Filter [translate]</button>&nbsp;
-                            <button id="filter-clear" type="button" className={classMap.filterButtonClear}><i className={classMap.filterButtonClearIcons}></i>&nbsp;Clear [translate]</button>
+                            <button id="filter-clear" type="button" onClick={this.handleClear} className={classMap.filterButtonClear}><i className={classMap.filterButtonClearIcons}></i>&nbsp;Clear [translate]</button>
                         </div>
-
                     </form>
                 </div>
             </div>

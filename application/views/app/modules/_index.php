@@ -98,7 +98,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     <option value="100">100</option>
                                 </select>
                             </div>
-                            <div class=" pull-right">
+                            <div class="pull-right">
                                 <a class="btn btn-success" href="<?php echo($this->spagi_pagedata->route)?>edit/new"><i class="fa fa-file-o"></i>&nbsp;<?php echo($this->spagi_i18n->_('__lists__New_record'))?></a>
                                 <a id="delete-many" class="btn btn-danger hidden" href="<?php echo($this->spagi_pagedata->api_route)?>delete"><i class="fa fa-trash-o"></i>&nbsp;<?php echo($this->spagi_i18n->_('__lists__Delete_selected'))?></a>                                    
                             </div>

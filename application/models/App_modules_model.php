@@ -66,8 +66,12 @@ class App_modules_model extends Spagi_Model {
             ->join('user_users as user1','user1.id = ' . $this->_table_name .'.created_by','LEFT')
             ->join('user_users as user2','user2.id = ' . $this->_table_name .'.updated_by','LEFT');
         
-        $this->list_where($filters);
-        $this->list_sort($order);
+        if($filters) {
+            $this->list_where($filters);
+        }    
+        if($order) {
+            $this->list_sort($order);
+        }    
         $this->db->limit($paging["page_size"], $paging["page"] * $paging["page_size"]);
         $query = $this->db->get();
         $result = $query->result();
@@ -96,6 +100,7 @@ class App_modules_model extends Spagi_Model {
         return 0;
     }    
     
+    //TODO: Make concat first_name and last_name filter
     public function select_modules_filter($filter) {
         $this->db->select('id, name');
         $this->db->from($this->_table_name);

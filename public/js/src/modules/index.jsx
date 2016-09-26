@@ -37,4 +37,4 @@ import React from 'react';
 import {render} from 'react-dom';
 import List from '../jsxcomponents/base/List.jsx';
 
-render(<List apiUrl="/api/app/modules" />, document.getElementById('content'));
+render(<List apiUrl="/api/app/modules" baseUrl="/app/modules"/>, document.getElementById('content'));

@@ -78,3 +78,14 @@ $route['api/app/controllers']['put'] = 'api/app/controllers/save';
 $route['api/app/controllers/(:num)']['put'] = 'api/app/controllers/save';
 $route['api/app/controllers']['delete'] = 'api/app/controllers/delete';
 $route['api/app/controllers/(:num)']['delete'] = 'api/app/controllers/delete';
+
+/**
+ * User users
+ */
+$route['api/user/users']['get'] = 'api/user/users/listrows';
+$route['api/user/users/(:num)']['get'] = 'api/user/users/record/$1';
+$route['api/user/users']['post'] = 'api/user/users/save';
+$route['api/user/users']['put'] = 'api/user/users/save';
+$route['api/user/users/(:num)']['put'] = 'api/user/users/save';
+$route['api/user/users']['delete'] = 'api/user/users/delete';
+$route['api/user/users/(:num)']['delete'] = 'api/user/users/delete';
