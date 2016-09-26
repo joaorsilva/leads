@@ -45,8 +45,7 @@ No notes yet.
 *******
 License
 *******
-
-Please see the `license
+This software is Licensed under MIT Licence, for more details please see the `license
 agreement <https://opensource.org/licenses/MIT>`_.
 
 *********
