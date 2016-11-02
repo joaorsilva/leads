@@ -1,38 +1,10 @@
 <?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 /**
- * Spagi Leads
- *
- * An open source leads manager
- *
- * This content is released under the MIT License (MIT)
- *
- * Copyright (c) 2016 - 2016, SPAGI Systems
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- * @package	Spagi Leads
- * @author	SPAGI Systems
- * @copyright	Copyright (c) 2016 - 2016, SPAGI Systems (http://spagiweb.com.br/)
- * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	https://spagiweb.com.br
- * @since	Version 1.0.0
- * @filesource
+ * Description of views/app/modules/index
+ * Copyright (c) 2016 SPAGI Sistemas, ME.
+ * Todos os direitos reservados.
+ * @author João Lopes Ribeiro da Silva <joao.r.silva@gmail.com>
  */
 ?>
 <section class="content">
@@ -101,7 +73,7 @@
                                 </div>
                                 <div class="form-group pull-right">
                                     <button id="filter-submit" type="submit" class="btn btn-success"><i class="fa fa-filter"></i>&nbsp;<?php echo($this->spagi_i18n->_('__lists__Filter'))?></button>
-                                    <a id="filter-clear" href="javascript:void(0);" class="btn btn-info"><i class="fa fa-eraser"></i>&nbsp;<?php echo($this->spagi_i18n->_('__lists__Clear'))?></a>
+                                    <button id="filter-clear" type="button" class="btn btn-info"><i class="fa fa-eraser"></i>&nbsp;<?php echo($this->spagi_i18n->_('__lists__Clear'))?></button>
                                 </div>
                                 <!-- Pagination data -->
                                 <input type="hidden" name="pagination[page]" id="pagination-page" value="0"/>
@@ -126,7 +98,7 @@
                                     <option value="100">100</option>
                                 </select>
                             </div>
-                            <div class=" pull-right">
+                            <div class="pull-right">
                                 <a class="btn btn-success" href="<?php echo($this->spagi_pagedata->route)?>edit/new"><i class="fa fa-file-o"></i>&nbsp;<?php echo($this->spagi_i18n->_('__lists__New_record'))?></a>
                                 <a id="delete-many" class="btn btn-danger hidden" href="<?php echo($this->spagi_pagedata->api_route)?>delete"><i class="fa fa-trash-o"></i>&nbsp;<?php echo($this->spagi_i18n->_('__lists__Delete_selected'))?></a>                                    
                             </div>

@@ -1,6 +1,6 @@
 <?php
 /**
- * CodeIgniter
+ * Spagi Leads
  *
  * An open source leads manager
  *
@@ -74,8 +74,8 @@ class Modules extends CI_Controller {
                             ->addJs('https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js')
                             ->addJs('/public/lte/plugins/daterangepicker/daterangepicker.js')
                             ->addJs('/public/js/languages/english/date-options.js')
-                            ->addJs('/public/js/form-list-common.js')
-                            ->addJs('/public/js/app/modules/index.js')
+                            ->addJs('/public/js/dist/modules_list.bundle.js')
+                            //->addJs('/public/js/app/modules/index.js')
                             ->addCss('/public/css/form-list-common.css');
         
         $this->spagi_i18n->load('lists-common');

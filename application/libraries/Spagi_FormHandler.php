@@ -70,7 +70,11 @@ class Spagi_FormHandler {
         }
         
         if(!isset($sort_data['field']) || !isset($sort_data['direction']) || !$sort_data['field'] || !$sort_data['direction']) {
-            $this->sort = $data['sort'];
+            if(isset($data['sort'])) {
+                $this->sort = $data['sort'];
+            } else {
+                $this->sort = NULL;
+            }
         }  
         if(!$this->sort) {
             $this->sort = array();
@@ -91,7 +95,7 @@ class Spagi_FormHandler {
         }
     }
 
-    public function send($method,$data=null) {
+    public function send($method,$data=null,$code=200) {
         
         if($this->request_type === 'list') {
             $data = array(
@@ -120,6 +124,8 @@ class Spagi_FormHandler {
         }
         $this->CI->output->set_status_header($code);
         $this->CI->output->set_output(json_encode($data),$code);
+        $this->CI->output->set_status_header($code);
+        $this->CI->output->set_output(json_encode($this->rows));
     }
     
     public function clear($method) {
