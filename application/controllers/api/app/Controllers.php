@@ -1,6 +1,6 @@
 <?php
 /**
- * CodeIgniter
+ * Spagi Leads
  *
  * An open source leads manager
  *
@@ -51,25 +51,130 @@ class Controllers extends CI_Controller{
     public function listrows() {
         $this->spagi_security->secure('rest');
         
-        $pagination = $this->input->get('pagination');
-        $filter = $this->input->get('filter');
-        $sort = $this->input->get('sort');
+        $this->load->library('Spagi_FormHandler');
+        $this->load->library('Spagi_Pagination');
+        $this->load->model('App_controllers_model');
         
+        $this->spagi_formhandler->request_type='list';
+        $this->spagi_formhandler->receive(__METHOD__);
+        
+        $total_rows = $this->App_controllers_model->select_count_list(
+            $this->spagi_formhandler->filter
+        );
+        
+        $this->spagi_formhandler->pagination['total_rows'] = $total_rows;
+        
+        $res = $this->App_controllers_model->select_list(
+            $this->spagi_formhandler->pagination,
+            $this->spagi_formhandler->filter,
+            $this->spagi_formhandler->sort
+        );
+        
+        $pagination = $this->spagi_pagination->calculate(
+            $this->spagi_formhandler->pagination['page'] * $this->spagi_formhandler->pagination['page_size'],
+            $this->spagi_formhandler->pagination['page_size'],
+            $this->spagi_formhandler->pagination['total_rows']
+        );
+        
+        $this->spagi_formhandler->pagination = $pagination;
+        $this->spagi_formhandler->rows = $res;
+        $this->spagi_formhandler->send(__METHOD__);
     }
 
     public function record($num=0) {
+        $this->spagi_security->secure('rest');
+        $this->load->library('Spagi_FormHandler');
+        $this->load->model('App_controllers_model');
+        $this->spagi_formhandler->request_type = 'form';
+        $this->spagi_formhandler->receive(__METHOD__);
+        
+        $res = array();
+        if($num && is_numeric($num)) 
+        {
+            $res = $this->App_controllers_model->get($num);
+        }
+        
+        $this->spagi_formhandler->rows = $res;
+        $this->spagi_formhandler->send(__METHOD__);        
+    }
+    
+    public function save($num=0) {
+        $this->spagi_security->secure('rest');
+
+        $this->load->library('Spagi_FormHandler');
+        $this->load->model('App_controllers_model');
+        $this->spagi_formhandler->request_type = 'form';
+        $this->spagi_formhandler->receive(__METHOD__);
+        if(isset($this->spagi_formhandler->form["id"]) && is_numeric($this->spagi_formhandler->form["id"]))
+        {
+            
+            if($this->validate()) 
+            {
+                $this->spagi_formhandler->form['key'] = md5($this->spagi_formhandler->form['name']);
+                $record = $this->App_controllers_model->get_record($this->spagi_formhandler->form['id']);
+                $this->spagi_formhandler->form['created_by'] = $record->created_by;
+                $this->spagi_formhandler->form['created_date'] = $record->created_date;
+                $this->spagi_formhandler->form['updated_by'] = $this->spagi_security->user->id;
+                $res = $this->App_controllers_model->update($this->spagi_formhandler->form);
+            }
+        } 
+        else 
+        {
+            if($this->validate()) 
+            {
+                $this->spagi_formhandler->form['key'] = md5($this->spagi_formhandler->form['name']);
+                $this->spagi_formhandler->form['created_by'] = $this->spagi_security->user->id;
+                $this->spagi_formhandler->form['updated_by'] = $this->spagi_security->user->id;
+                $res = $this->App_controllers_model->insert($this->spagi_formhandler->form);
+            }
+        }
+        $this->spagi_formhandler->send(__METHOD__);
         
     }
     
-    public function create() {
+    public function delete($num=0) {
+        $this->spagi_security->secure('rest');
+        $this->load->model('App_controllers_model');
+        $this->output->set_content_type('text/html');
         
+        if(!$num) 
+        {
+            $this->output->set_status_header(404);
+            $this->output->set_output(''); 
+            $this->output->_display();
+            return;
+        }
+        
+        $row = $this->App_controllers_model->get_record($num);
+        if($row ) {
+            $row->updated_by = $this->spagi_security->user->id;
+            $row->deleted_by = $this->spagi_security->user->id;
+            $this->App_controllers_model->delete($row);
+        }
+
+        $this->output->set_status_header(200);
+        $this->output->set_output('',200);
+        $this->output->_display();        
     }
     
-    public function update() {
+    private function validate() 
+    {
+        if(!trim($this->spagi_formhandler->form['name'])) 
+        {
+            $this->spagi_formhandler->addError('form-name','This field must not be empty!');
+        }
         
+        if(!trim($this->spagi_formhandler->form['app_modules_id']))
+        {
+            $this->spagi_formhandler->addError('form-app_modules_id','A module must be chosen!');
+        }    
+        
+        if(count($this->spagi_formhandler->error)) 
+        {
+            return FALSE;
+        }
+        
+        return TRUE;
     }
     
-    public function delete() {
-        
-    }
 }

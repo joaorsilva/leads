@@ -19,22 +19,18 @@ $(document).ready(function(){
         tags: "false",
         placeholder: "Module",
         allowClear: true
-    });
-    
-    $('#filter-clear').click(function(e){
-        $('#filter-app_modules_id').val(null).trigger("change");
-    });
+    });    
 });
 
 function cloneRow(data) {
     var originalRow = $('#row-template');
+    console.log("clone row");
     $.each(data,function(index,valueData) {
         var newRow = originalRow.clone(true,true);
         newRow.attr('id',null);
         newRow.removeClass('hidden');
         newRow.addClass('dynamic-row');
         var tds = newRow.find('td');
-        console.log(data);
         $.each(tds, function(index,element){
             switch(index) {
                 case 0: //checkbox
@@ -49,7 +45,7 @@ function cloneRow(data) {
                     $(element).text(valueData.name);
                     break;
                 case 3: //app_controller_name
-                    $(element).text(valueData.app_controller_name);
+                    $(element).text(valueData.app_module_name);
                     break;
                 case 4: //created_by
                     $(element).text(valueData.created_by);

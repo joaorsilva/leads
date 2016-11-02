@@ -1,6 +1,6 @@
 <?php
 /**
- * CodeIgniter
+ * Spagi Leads
  *
  * An open source leads manager
  *
@@ -37,31 +37,34 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Modules extends CI_Controller {
+class Actions extends CI_Controller{
+    
+    public $route = '/api/app/actions/';
+    public $menu = 'users';
+    public $submenu = 'actions';
 
-    public function __construct()
+    public function __construct() 
     {
         parent::__construct();
     }
     
     public function listrows() {
-        
         $this->spagi_security->secure('rest');
-
+        
         $this->load->library('Spagi_FormHandler');
         $this->load->library('Spagi_Pagination');
-        $this->load->model('App_modules_model');
+        $this->load->model('App_actions_model');
         
         $this->spagi_formhandler->request_type='list';
         $this->spagi_formhandler->receive(__METHOD__);
         
-        $total_rows = $this->App_modules_model->select_count_list(
+        $total_rows = $this->App_actions_model->select_count_list(
             $this->spagi_formhandler->filter
         );
         
         $this->spagi_formhandler->pagination['total_rows'] = $total_rows;
         
-        $res = $this->App_modules_model->select_list(
+        $res = $this->App_actions_model->select_list(
             $this->spagi_formhandler->pagination,
             $this->spagi_formhandler->filter,
             $this->spagi_formhandler->sort
@@ -76,20 +79,19 @@ class Modules extends CI_Controller {
         $this->spagi_formhandler->pagination = $pagination;
         $this->spagi_formhandler->rows = $res;
         $this->spagi_formhandler->send(__METHOD__);
-        
     }
 
     public function record($num=0) {
         $this->spagi_security->secure('rest');
         $this->load->library('Spagi_FormHandler');
-        $this->load->model('App_modules_model');
+        $this->load->model('App_actions_model');
         $this->spagi_formhandler->request_type = 'form';
         $this->spagi_formhandler->receive(__METHOD__);
         
         $res = array();
         if($num && is_numeric($num)) 
         {
-            $res = $this->App_modules_model->get($num);
+            $res = $this->App_actions_model->get($num);
         }
         
         $this->spagi_formhandler->rows = $res;
@@ -97,11 +99,10 @@ class Modules extends CI_Controller {
     }
     
     public function save($num=0) {
-        
         $this->spagi_security->secure('rest');
 
         $this->load->library('Spagi_FormHandler');
-        $this->load->model('App_modules_model');
+        $this->load->model('App_actions_model');
         $this->spagi_formhandler->request_type = 'form';
         $this->spagi_formhandler->receive(__METHOD__);
         if(isset($this->spagi_formhandler->form["id"]) && is_numeric($this->spagi_formhandler->form["id"]))
@@ -110,11 +111,11 @@ class Modules extends CI_Controller {
             if($this->validate()) 
             {
                 $this->spagi_formhandler->form['key'] = md5($this->spagi_formhandler->form['name']);
-                $record = $this->App_modules_model->get_record($this->spagi_formhandler->form['id']);
+                $record = $this->App_actions_model->get_record($this->spagi_formhandler->form['id']);
                 $this->spagi_formhandler->form['created_by'] = $record->created_by;
                 $this->spagi_formhandler->form['created_date'] = $record->created_date;
                 $this->spagi_formhandler->form['updated_by'] = $this->spagi_security->user->id;
-                $res = $this->App_modules_model->update($this->spagi_formhandler->form);
+                $res = $this->App_actions_model->update($this->spagi_formhandler->form);
             }
         } 
         else 
@@ -124,16 +125,16 @@ class Modules extends CI_Controller {
                 $this->spagi_formhandler->form['key'] = md5($this->spagi_formhandler->form['name']);
                 $this->spagi_formhandler->form['created_by'] = $this->spagi_security->user->id;
                 $this->spagi_formhandler->form['updated_by'] = $this->spagi_security->user->id;
-                $res = $this->App_modules_model->insert($this->spagi_formhandler->form);
+                $res = $this->App_actions_model->insert($this->spagi_formhandler->form);
             }
         }
-        
         $this->spagi_formhandler->send(__METHOD__);
+        
     }
     
     public function delete($num=0) {
         $this->spagi_security->secure('rest');
-        $this->load->model('App_modules_model');
+        $this->load->model('App_controllers_model');
         $this->output->set_content_type('text/html');
         
         if(!$num) 
@@ -144,24 +145,30 @@ class Modules extends CI_Controller {
             return;
         }
         
-        $row = $this->App_modules_model->get_record($num);
+        $row = $this->App_actions_model->get_record($num);
         if($row ) {
             $row->updated_by = $this->spagi_security->user->id;
             $row->deleted_by = $this->spagi_security->user->id;
-            $this->App_modules_model->delete($row);
+            $this->App_actions_model->delete($row);
         }
 
         $this->output->set_status_header(200);
         $this->output->set_output('',200);
-        $this->output->_display();        
+        $this->output->_display();
+        
     }
-
+    
     private function validate() 
     {
         if(!trim($this->spagi_formhandler->form['name'])) 
         {
             $this->spagi_formhandler->addError('form-name','This field must not be empty!');
         }
+        
+        if(!trim($this->spagi_formhandler->form['app_modules_id']))
+        {
+            $this->spagi_formhandler->addError('form-app_modules_id','A module must be chosen!');
+        }    
         
         if(count($this->spagi_formhandler->error)) 
         {

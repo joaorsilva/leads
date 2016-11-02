@@ -63,7 +63,7 @@ class App_controllers_model extends Spagi_Model {
     
     public function select_list($paging,$filters=array(),$order=array('id','ASC')) 
     {
-        $this->db->select($this->_table_name.'.*, modules1.name as app_controller_name, CONCAT(`user1`.first_name,\' \',`user1`.surename) as created_by, CONCAT(`user2`.first_name,\' \',`user2`.surename) as updated_by')
+        $this->db->select($this->_table_name.'.*, modules1.name as app_module_name, CONCAT(`user1`.first_name,\' \',`user1`.surename) as created_by, CONCAT(`user2`.first_name,\' \',`user2`.surename) as updated_by')
             ->from($this->_table_name)
             ->join('user_users as user1','user1.id = ' . $this->_table_name .'.created_by','LEFT')
             ->join('user_users as user2','user2.id = ' . $this->_table_name .'.updated_by','LEFT')

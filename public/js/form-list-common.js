@@ -32,7 +32,7 @@ $(document).ready(function(){
     /**
      * Sort operation
      */
-    $('#list > thead > tr > th > a').click(function(e){
+    $('#list > thead > tr > th > a').click(function(e) {
 
         var field = $(this).attr('id');
         var direction = 'ASC';
@@ -59,6 +59,7 @@ $(document).ready(function(){
      */
     $('#form-filter').submit(function(e) {
         e.preventDefault();
+        console.log("filter-submit")
         $('.dynamic-row').remove();
         $('#row-single').find('td').html('<i class="fa fa-spinner fa-spin"></i>&nbsp;Loading...')
         $('#row-single').removeClass('hidden');
@@ -180,15 +181,15 @@ $(document).ready(function(){
      * Clears the filter to it's default
      */
     $('#filter-clear').click(function(e){
-        e.preventDefault;
+        e.preventDefault();
         $(this).closest('form')[0].reset();
-        $('#filter-created_by').val(null).trigger("change");
-        $('#filter-updated_by').val(null).trigger("change");
-        $('#filter-status').val([1,2]).trigger("change");
+        $('select').val(null);
+        $('#filter-status').val([1,2]);
         $('#filter-created_date').val("");
         $('#filter-updated_date').val("");
         $('#default-filter').val(0);
-        $('#form-filter').submit();
+        $('select').trigger("change");
+        $('#filter-status').trigger("change");
         $('#filter-collapse').click();
     });
     
@@ -325,7 +326,7 @@ $(document).ready(function(){
     /**
      * Load the list
      */
-    $('#form-filter').submit();            
+    $('#form-filter').submit();     
     
 });
 

@@ -113,7 +113,13 @@ class Spagi_FormHandler {
             );
 
         $this->CI->output->set_content_type('application/json');
-        $this->CI->output->set_output(json_encode($data));
+        $code = 200;
+        if(!$data || !$data['rows'])
+        {
+            $code = 404;
+        }
+        $this->CI->output->set_status_header($code);
+        $this->CI->output->set_output(json_encode($data),$code);
     }
     
     public function clear($method) {

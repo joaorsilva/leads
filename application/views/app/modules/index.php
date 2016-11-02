@@ -73,7 +73,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 </div>
                                 <div class="form-group pull-right">
                                     <button id="filter-submit" type="submit" class="btn btn-success"><i class="fa fa-filter"></i>&nbsp;<?php echo($this->spagi_i18n->_('__lists__Filter'))?></button>
-                                    <button id="filter-clear" type="button" class="btn btn-info"><i class="fa fa-eraser"></i>&nbsp;<?php echo($this->spagi_i18n->_('__lists__Clear'))?></button>
+                                    <a id="filter-clear" href="javascript:void(0);" class="btn btn-info"><i class="fa fa-eraser"></i>&nbsp;<?php echo($this->spagi_i18n->_('__lists__Clear'))?></a>
                                 </div>
                                 <!-- Pagination data -->
                                 <input type="hidden" name="pagination[page]" id="pagination-page" value="0"/>
