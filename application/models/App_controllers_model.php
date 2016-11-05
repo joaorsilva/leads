@@ -98,12 +98,15 @@ class App_controllers_model extends Spagi_Model {
         return 0;
     }
     
-    public function select_controllers_filter($filter) {
+    public function select_controllers_filter($filter,$module_id=0) {
         $this->db->select('id, name');
         $this->db->from($this->_table_name);
         $this->db->where('deleted = ', 0);
         if($filter) {
             $this->db->like('name',$filter,'both');
+        }
+        if($module_id) {
+            $this->db->where('app_modules_id = ', $module_id);
         }
         $query = $this->db->get();
         return $query->result();
@@ -137,6 +140,9 @@ class App_controllers_model extends Spagi_Model {
                         break;
                     case 'app_modules_id':
                         $this->db->where($this->_table_name . '.app_modules_id',$value);
+                        break;
+                    case 'app_controllers_id':
+                        $this->db->where($this->_table_name . '.app_controllers_id',$value);
                         break;
                     case 'created_by':
                         $this->db->where($this->_table_name . '.created_by',$value);

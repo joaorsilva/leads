@@ -59,7 +59,6 @@ $(document).ready(function(){
      */
     $('#form-filter').submit(function(e) {
         e.preventDefault();
-        console.log("filter-submit")
         $('.dynamic-row').remove();
         $('#row-single').find('td').html('<i class="fa fa-spinner fa-spin"></i>&nbsp;Loading...')
         $('#row-single').removeClass('hidden');
@@ -257,7 +256,7 @@ $(document).ready(function(){
     $('.btn-delete').click(function(e){
         e.preventDefault();
         var url = $('#btn-delete').attr('data-url');
-        $('#btn-delete').attr('data-url',url + $(this).attr('data-id'));
+        $('#btn-delete').attr('data-record',$(this).attr('data-id'));
     });
     
     /**
@@ -266,7 +265,7 @@ $(document).ready(function(){
     $('#btn-delete').click(function(e){
         e.preventDefault();
         $('#row-error').addClass('hidden');               
-        var url = $('#btn-delete').attr('data-url');
+        var url = $('#btn-delete').attr('data-url') + $('#btn-delete').attr('data-record');
         $.ajax({
             url: url,
             type: 'GET',

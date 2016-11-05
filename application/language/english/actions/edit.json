@@ -1,0 +1,16 @@
+{
+    "__actions__edit Name": "Name",
+    "__actions__edit Module": "Module",
+    "__actions__edit Controller": "Controller",
+    "__actions__edit Key": "Key",
+    "__actions__edit Edit Action": "Edit Action",
+    "__actions__edit Show Record": "Show Record",
+    "__actions__edit Show Action": "Show Action",
+    "__actions__edit New Record": "New Record",
+    "__actions__edit New Action": "New Action",
+    "__actions__edit Application Action": "Application Action",
+    "__actions__edit Application Actions": "Application Actions",
+    "__actions__edit No record to delete": "No record to delete!",
+    "__actions__edit This field must not be empty": "This field must not be empty!",
+    "__actions__edit You must choose a module": "You must choose a module!"
+}

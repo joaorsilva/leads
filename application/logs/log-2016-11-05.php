@@ -1,0 +1,10 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+
+ERROR - 2016-11-05 08:09:58 --> 404 Page Not Found: Faviconico/index
+ERROR - 2016-11-05 09:00:45 --> Query error: Column 'created_by' cannot be null - Invalid query: REPLACE INTO `app_actions` (`id`, `app_modules_id`, `app_controllers_id`, `name`, `key`, `active`, `created_by`, `created_date`, `updated_by`, `updated_date`, `deleted_by`, `deleted_date`, `deleted`) VALUES ('4', '3', '2', 'Shit', 'b33d503946c246a3ce20feae232628b7', 1, NULL, '11-05-2016 08:44:24', NULL, '2016-11-05 09:00:45', NULL, '2016-11-05 09:00:45', 1)
+ERROR - 2016-11-05 09:02:35 --> Query error: Column 'created_by' cannot be null - Invalid query: REPLACE INTO `app_actions` (`id`, `app_modules_id`, `app_controllers_id`, `name`, `key`, `active`, `created_by`, `created_date`, `updated_by`, `updated_date`, `deleted_by`, `deleted_date`, `deleted`) VALUES ('4', '3', '1', 'Shit', 'b33d503946c246a3ce20feae232628b7', 1, NULL, '11-30--0001 00:00:00', NULL, '2016-11-05 09:02:35', NULL, '2016-11-05 09:02:35', 1)
+ERROR - 2016-11-05 09:02:50 --> Query error: Column 'created_by' cannot be null - Invalid query: REPLACE INTO `app_actions` (`id`, `app_modules_id`, `app_controllers_id`, `name`, `key`, `active`, `created_by`, `created_date`, `updated_by`, `updated_date`, `deleted_by`, `deleted_date`, `deleted`) VALUES ('4', '3', '1', 'Shit', 'b33d503946c246a3ce20feae232628b7', 1, NULL, '11-30--0001 00:00:00', NULL, '2016-11-05 09:02:50', NULL, '2016-11-05 09:02:50', 1)
+ERROR - 2016-11-05 11:13:04 --> Severity: Notice --> Undefined variable: old_record /media/sf_Ubuntu/projects/leads/application/libraries/Spagi_Model.php 101
+ERROR - 2016-11-05 11:13:04 --> Severity: Notice --> Trying to get property of non-object /media/sf_Ubuntu/projects/leads/application/libraries/Spagi_Model.php 101
+ERROR - 2016-11-05 11:13:04 --> Severity: Notice --> Undefined variable: old_record /media/sf_Ubuntu/projects/leads/application/libraries/Spagi_Model.php 102
+ERROR - 2016-11-05 11:13:04 --> Severity: Notice --> Trying to get property of non-object /media/sf_Ubuntu/projects/leads/application/libraries/Spagi_Model.php 102

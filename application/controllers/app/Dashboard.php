@@ -29,7 +29,8 @@ class Dashboard extends CI_Controller{
                                      'Dashboard',
                                      '',
                                      'fa fa-dashboard'
-                                     );
+                                     )
+                            ->addJs('/public/lte/dist/js/pages/dashboard.js');
         
         $this->load->view('outframes/admin_header.php');
         $this->load->view('app/dashboard/index.php');

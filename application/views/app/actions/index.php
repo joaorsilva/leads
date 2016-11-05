@@ -25,23 +25,33 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             </div>
                         </div>
                         <div class="box-body">
-                            <form id="form-filter" name="filter" method="get" action="/api/app/modules">
+                            <form id="form-filter" name="filter" method="get" action="<?php echo($this->spagi_pagedata->api_route)?>">
                                 <input type="hidden" id="default-filter" name="default-filter" value="1"/>
                                 <div class="form-group">
                                     <label class="sr-only" for="filter-id">#</label>
                                     <input type="number" class="form-control" id="filter-id" name="filter[id]" placeholder="#" min="1">
                                 </div>
                                 <div class="form-group">
-                                    <label class="sr-only" for="filter-name">Name</label>
+                                    <label class="sr-only" for="filter-name"><?php echo($this->spagi_i18n->_('__actions__index Name'))?></label>
                                     <input type="text" class="form-control" id="filter-name" name="filter[name]" placeholder="Name">
                                 </div>
                                 <div class="form-group" style="min-width: 150px;">
-                                    <label class="sr-only" for="filter-created_by">Created by</label>
+                                    <label class="sr-only" for="filter-app_modules_id"><?php echo($this->spagi_i18n->_('__actions__index Module'))?></label>
+                                    <select class="form-control select2" style="width:100%;" id="filter-app_modules_id" name="filter[app_modules_id]">
+                                    </select>
+                                </div>
+                                <div class="form-group" style="min-width: 150px;">
+                                    <label class="sr-only" for="filter-app_controllers_id"><?php echo($this->spagi_i18n->_('__actions__index Controller'))?></label>
+                                    <select class="form-control select2" style="width:100%;" id="filter-app_controllers_id" name="filter[app_controllers_id]">
+                                    </select>
+                                </div>
+                                <div class="form-group" style="min-width: 150px;">
+                                    <label class="sr-only" for="filter-created_by"><?php echo($this->spagi_i18n->_('__actions__index Created By'))?></label>
                                     <select class="form-control select2" style="width:100%;" id="filter-created_by" name="filter[created_by]">
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label class="sr-only" for="filter-created_date">Created date</label>
+                                    <label class="sr-only" for="filter-created_date"><?php echo($this->spagi_i18n->_('__actions__index Created Date'))?></label>
                                     <div class="input-group">
                                         <div class="input-group-addon">
                                             <i class="fa fa-calendar"></i>
@@ -50,12 +60,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     </div>
                                 </div>
                                 <div class="form-group" style="min-width: 150px;">
-                                    <label class="sr-only" for="filter-updated_by">Updated by</label>
+                                    <label class="sr-only" for="filter-updated_by"><?php echo($this->spagi_i18n->_('__actions__index Updated By'))?></label>
                                     <select class="form-control select2" style="width:100%;" id="filter-updated_by" name="filter[updated_by]">
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label class="sr-only" for="filter-updated_date">Updated date</label>
+                                    <label class="sr-only" for="filter-updated_date"><?php echo($this->spagi_i18n->_('__actions__index Updated Date'))?></label>
                                     <div class="input-group">
                                         <div class="input-group-addon">
                                             <i class="fa fa-calendar"></i>
@@ -64,7 +74,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     </div>
                                 </div>
                                 <div class="form-group" style="min-width: 150px;">
-                                    <label class="sr-only" for="filter-status">Status</label>
+                                    <label class="sr-only" for="filter-status"><?php echo($this->spagi_i18n->_('__actions__index Status'))?></label>
                                     <select class="form-control select2" multiple="multiple" data-placeholder="Status" style="width:100%;" id="filter-status" name="filter[status][]">
                                         <option value="1"><?php echo($this->spagi_i18n->_('__lists__Active'))?></option>
                                         <option value="2"><?php echo($this->spagi_i18n->_('__lists__Inactive'))?></option>
@@ -73,7 +83,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 </div>
                                 <div class="form-group pull-right">
                                     <button id="filter-submit" type="submit" class="btn btn-success"><i class="fa fa-filter"></i>&nbsp;<?php echo($this->spagi_i18n->_('__lists__Filter'))?></button>
-                                    <button id="filter-clear" type="button" class="btn btn-info"><i class="fa fa-eraser"></i>&nbsp;<?php echo($this->spagi_i18n->_('__lists__Clear'))?></button>
+                                    <a id="filter-clear" href="javascript:void(0);" class="btn btn-info"><i class="fa fa-eraser"></i>&nbsp;<?php echo($this->spagi_i18n->_('__lists__Clear'))?></a>
                                 </div>
                                 <!-- Pagination data -->
                                 <input type="hidden" name="pagination[page]" id="pagination-page" value="0"/>
@@ -98,9 +108,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     <option value="100">100</option>
                                 </select>
                             </div>
-                            <div class="pull-right">
+                            <div class=" pull-right">
                                 <a class="btn btn-success" href="<?php echo($this->spagi_pagedata->route)?>edit/new"><i class="fa fa-file-o"></i>&nbsp;<?php echo($this->spagi_i18n->_('__lists__New_record'))?></a>
-                                <a id="delete-many" class="btn btn-danger hidden" href="<?php echo($this->spagi_pagedata->api_route)?>delete"><i class="fa fa-trash-o"></i>&nbsp;<?php echo($this->spagi_i18n->_('__lists__Delete_selected'))?></a>                                    
+                                <a id="delete-many" class="btn btn-danger hidden" href="<?php echo($this->spagi_pagedata->route)?>delete"><i class="fa fa-trash-o"></i>&nbsp;<?php echo($this->spagi_i18n->_('__lists__Delete_selected'))?></a>                                    
                             </div>
                         </div>
                     </div>
@@ -110,30 +120,32 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <tr>
                                     <th class="text-center">&nbsp;</th>
                                     <th class="text-center hidden-xs"><a href="javascript:void(0)" id="field-id">#<i class="glyphicon glyphicon-sort-by-attributes pull-right"></i></a></th>
-                                    <th class="text-left"><a href="javascript:void(0)" id="field-name">Name&nbsp;<i class="glyphicon glyphicon-sort pull-right"></i></a></th>
-                                    <th class="text-left hidden-sm hidden-xs" nowrap><a href="javascript:void(0)" id="field-created_by">Created By&nbsp;<i class="glyphicon glyphicon-sort pull-right"></i></a></th>
-                                    <th class="text-right hidden-sm hidden-xs"><a href="javascript:void(0)" id="field-created_date">Created Date&nbsp;<i class="glyphicon glyphicon-sort pull-right"></i></a></th>
-                                    <th class="text-left hidden-sm hidden-xs"><a href="javascript:void(0)" id="field-updated_by">Updated By&nbsp;<i class="glyphicon glyphicon-sort pull-right"></i></a></th>
-                                    <th class="text-right hidden-sm hidden-xs"><a href="javascript:void(0)" id="field-updated_date">Updated Date&nbsp;<i class="glyphicon glyphicon-sort pull-right"></i></a></th>
-                                    <th class="text-center hidden-xs"><a href="javascript:void(0)" id="field-status">Status&nbsp;<i class="glyphicon glyphicon-sort pull-right"></i></a></th>
+                                    <th class="text-left"><a href="javascript:void(0)" id="field-name"><?php echo($this->spagi_i18n->_('__actions__index Name'))?>&nbsp;<i class="glyphicon glyphicon-sort pull-right"></i></a></th>
+                                    <th class="text-left"><a href="javascript:void(0)" id="field-app_modules_id"><?php echo($this->spagi_i18n->_('__actions__index Module'))?>&nbsp;<i class="glyphicon glyphicon-sort pull-right"></i></a></th>
+                                    <th class="text-left"><a href="javascript:void(0)" id="field-app_controllers_id"><?php echo($this->spagi_i18n->_('__actions__index Controller'))?>&nbsp;<i class="glyphicon glyphicon-sort pull-right"></i></a></th>
+                                    <th class="text-left hidden-sm hidden-xs" nowrap><a href="javascript:void(0)" id="field-created_by"><?php echo($this->spagi_i18n->_('__actions__index Created By'))?>&nbsp;<i class="glyphicon glyphicon-sort pull-right"></i></a></th>
+                                    <th class="text-right hidden-sm hidden-xs"><a href="javascript:void(0)" id="field-created_date"><?php echo($this->spagi_i18n->_('__actions__index Created Date'))?>&nbsp;<i class="glyphicon glyphicon-sort pull-right"></i></a></th>
+                                    <th class="text-left hidden-sm hidden-xs"><a href="javascript:void(0)" id="field-updated_by"><?php echo($this->spagi_i18n->_('__actions__index Updated By'))?>&nbsp;<i class="glyphicon glyphicon-sort pull-right"></i></a></th>
+                                    <th class="text-right hidden-sm hidden-xs"><a href="javascript:void(0)" id="field-updated_date"><?php echo($this->spagi_i18n->_('__actions__index Updated Date'))?>&nbsp;<i class="glyphicon glyphicon-sort pull-right"></i></a></th>
+                                    <th class="text-center hidden-xs"><a href="javascript:void(0)" id="field-status"><?php echo($this->spagi_i18n->_('__actions__index Status'))?>&nbsp;<i class="glyphicon glyphicon-sort pull-right"></i></a></th>
                                     <th class="text-right">Operations</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr id="row-single" class="hidden">
-                                    <td colspan="9" class="text-center"><i class="fa fa-spinner fa-spin"></i>&nbsp;<?php echo($this->spagi_i18n->_('__lists__Loading...'))?></td>
+                                    <td colspan="11" class="text-center"><i class="fa fa-spinner fa-spin"></i>&nbsp;<?php echo($this->spagi_i18n->_('__lists__Loading...'))?></td>
                                 </tr>    
                                 <tr id="row-error" class="hidden">
-                                    <td colspan="9" class="text-center">
+                                    <td colspan="11" class="text-center">
                                         <div class="callout callout-danger">
                                             <h4><i class="fa fa-warning"></i>&nbsp;<?php echo($this->spagi_i18n->_('__lists__Error loading your data'))?></h4>
                                             <p><?php echo($this->spagi_i18n->_('__lists__Problem loading'))?></p>
-                                            <button id="table-retry" type="button" class="btn btn-warning"><i class="fa fa-refresh"></i>&nbsp;Retry</button>
+                                            <button id="table-retry" type="button" class="btn btn-warning"><i class="fa fa-refresh"></i>&nbsp;<?php echo($this->spagi_i18n->_('__lists__Retry'))?></button>
                                         </div>
                                     </td>
                                 </tr>    
                                 <tr id="row-no-data" class="hidden">
-                                    <td colspan="9" class="text-center">
+                                    <td colspan="10" class="text-center">
                                         <div class="callout callout-warning">
                                             <h4><i class="fa fa-exclamation-circle"></i>&nbsp;<?php echo($this->spagi_i18n->_('__lists__No data found'))?></h4>
                                             <p><?php echo($this->spagi_i18n->_('__lists__No data found criteria'))?></p>
@@ -143,6 +155,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <tr id="row-template" class="hidden">
                                     <td class="text-center table-row"><input type="checkbox" class="dynamic-checkbox" name="selected[0]" value="0"/></td>
                                     <td class="text-center table-row hidden-xs"></td>
+                                    <td class="text-left table-row"></td>
+                                    <td class="text-left table-row"></td>
                                     <td class="text-left table-row"></td>
                                     <td class="text-left table-row hidden-sm hidden-xs"></td>
                                     <td class="text-right table-row hidden-sm hidden-xs"></td>
@@ -158,7 +172,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     </td>
                                 </tr>
                             </tbody>
-                        </table>   
+                        </table>
                     </div>
                     <div class="box-footer clearfix">
                         <div class="row row-narrow-5">
@@ -190,11 +204,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                    <button type="button" id="btn-delete" class="btn btn-outline" data-dismiss="modal" data-url="<?php echo($this->spagi_pagedata->route)?>delete/">Yes</button>
+                    <button type="button" id="btn-delete" class="btn btn-outline" data-dismiss="modal" data-url="<?php echo($this->spagi_pagedata->route)?>delete/" data-record="">Yes</button>
                 </div>
             </div>
         </div>
     </div>
     <span id="base-url" data-url="<?php echo($this->spagi_pagedata->route)?>" class="hidden"></span>
 </section>
+
+
+
+
 
