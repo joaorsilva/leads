@@ -53,6 +53,7 @@ $route['default_controller'] = 'index';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
+$route['profiler']['get'] = 'profiler/index/index';
 /**
  * Api Routes
  */
@@ -64,9 +65,9 @@ $route['api/app/modules']['get'] = 'api/app/modules/listrows';
 $route['api/app/modules/(:num)']['get'] = 'api/app/modules/record/$1';
 $route['api/app/modules']['post'] = 'api/app/modules/save';
 $route['api/app/modules']['put'] = 'api/app/modules/save';
-$route['api/app/modules/(:num)']['put'] = 'api/app/modules/save';
-$route['api/app/modules']['delete'] = 'api/app/modules/delete';
-$route['api/app/modules/(:num)']['delete'] = 'api/app/modules/delete';
+$route['api/app/modules/(:num)']['put'] = 'api/app/modules/save/$1';
+//$route['api/app/modules']['delete'] = 'api/app/modules/delete';
+$route['api/app/modules/(:num)']['delete'] = 'api/app/modules/delete/$1';
 
 /**
  * App Controllers
