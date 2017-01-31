@@ -18,7 +18,7 @@ class Index extends CI_Controller {
     
     public function index()
     {
-        
+        $this->jsonresponse->respond(array('result'=>'ok','message'=>''),200);
     }
 
     public function index2()
