@@ -32,7 +32,7 @@ Nodejs version 6.6.0 or newer is recommended.
 
 It wasn't teste in older version of node.
 
-React version 15.3.2 or newer is recomended.
+React version 15.3.2 or newer is recommended.
 
 It wasn't teste in older version of React.
 

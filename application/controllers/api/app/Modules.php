@@ -107,6 +107,7 @@ class Modules extends CI_Controller {
     
     public function save($num=0) {
         
+        $id = 0;
         $this->spagi_security->secure('rest');
 
         $this->load->library('Spagi_FormHandler');
@@ -115,8 +116,7 @@ class Modules extends CI_Controller {
         $this->spagi_formhandler->receive(__METHOD__);
         if(isset($this->spagi_formhandler->form["id"]) && is_numeric($this->spagi_formhandler->form["id"]))
         {
-            
-            if($this->validate()) 
+            if($this->validate($this->spagi_formhandler->form["id"])) 
             {
                 $this->spagi_formhandler->form['key'] = md5($this->spagi_formhandler->form['name']);
                 $record = $this->App_modules_model->get_record($this->spagi_formhandler->form['id']);
@@ -124,6 +124,12 @@ class Modules extends CI_Controller {
                 $this->spagi_formhandler->form['created_date'] = $record->created_date;
                 $this->spagi_formhandler->form['updated_by'] = $this->spagi_security->user->id;
                 $res = $this->App_modules_model->update($this->spagi_formhandler->form);
+                if(!$res) {
+                    $this->spagi_formhandler->send(__METHOD__,NULL,409);
+                    return;
+                }
+                $id = $this->spagi_formhandler->form["id"];
+                
             }
         } 
         else 
@@ -134,235 +140,65 @@ class Modules extends CI_Controller {
                 $this->spagi_formhandler->form['created_by'] = $this->spagi_security->user->id;
                 $this->spagi_formhandler->form['updated_by'] = $this->spagi_security->user->id;
                 $res = $this->App_modules_model->insert($this->spagi_formhandler->form);
+                if(!$res) {
+                    $this->spagi_formhandler->send(__METHOD__,NULL,409);
+                    return;
+                }
+                $id = $res;
             }
+        }
+        
+        if($id) 
+        {
+            $this->spagi_formhandler->rows = array($this->App_modules_model->get_record($id));
         }
         
         $this->spagi_formhandler->send(__METHOD__);
     }
     
-    public function delete($num=0) {
+    public function delete($num=0) 
+    {
+        $id = 0;
         $this->spagi_security->secure('rest');
+        $this->load->library('Spagi_FormHandler');
         $this->load->model('App_modules_model');
-        $this->output->set_content_type('text/html');
+        $this->spagi_formhandler->request_type = 'delete';
+        $this->spagi_formhandler->receive(__METHOD__);
         
-        if(!$num) 
+        if($num) 
+        {        
+            $row = $this->App_modules_model->get_record($num);
+            if($row) {
+                $row->updated_by = $this->spagi_security->user->id;
+                $row->deleted_by = $this->spagi_security->user->id;
+                $this->App_modules_model->delete($row);
+                $id = $row->id;
+            }
+        }
+        
+        $this->spagi_formhandler->rows = array();
+        
+        if($id) 
         {
-            $this->output->set_output('',404);            
+            $this->spagi_formhandler->rows = array($this->App_modules_model->get_record($id));
         }
         
-        $row = $this->App_modules_model->get_record($num);
-        if($row ) {
-            $row->updated_by = $this->spagi_security->user->id;
-            $row->deleted_by = $this->spagi_security->user->id;
-            $this->App_modules_model->delete($row);
-        }
-
-        $this->output->set_output('',200);
-        $this->output->_display();
+        $this->spagi_formhandler->send(__METHOD__);
     }
     
-    public function structure() {
-        $this->spagi_security->secure('rest');
-        $structure = array(
-            0=>array(
-                'name'=>'id',
-                'caption'=>'#',
-                'type'=>'uint',
-                'size' => '0',
-                'related'=> FALSE,
-                'required'=>FALSE,
-                'disabled'=>TRUE,
-                'help'=>'',
-                'showlist'=>true,
-                'showfilter'=>true,
-                'showedit'=>true
-            ),
-            1=>array(
-                'name'=>'name',
-                'caption'=>'Name', //TODO: Translate
-                'type'=>'string',
-                'size' => '255',
-                'related'=> FALSE,
-                'required'=>TRUE,
-                'disabled'=>FALSE,
-                'help'=>'',
-                'showlist'=>true,
-                'showfilter'=>true,
-                'showedit'=>true
-            ),
-            2=>array(
-                'name'=>'key',
-                'caption'=>'Key', //TODO: Translate
-                'type'=>'string',
-                'size' => '255',
-                'related'=> FALSE,
-                'required'=>TRUE,
-                'disabled'=>TRUE,
-                'help'=>'',
-                'showlist'=>true,
-                'showfilter'=>true,
-                'showedit'=>true                
-            ),
-            3=>array(
-                'name'=>'status',
-                'caption'=>'Status', //TODO: Translate
-                'type'=>'list',
-                'list'=>array(
-                    'values'=>array(
-                        array('id'=>1,'name'=>'Inactive [translate]'),
-                        array('id'=>2,'name'=>'Active [translate]'),
-                        array('id'=>3,'name'=>'Deleted [translate]')
-                        ),
-                    'multiple'=>true,
-                    'defaults'=>array(1,2), //Active
-                    ),
-                'size' => '255',
-                'related'=>FALSE,
-                'required'=>FALSE,
-                'disabled'=>FALSE,
-                'help'=>'',
-                'showlist'=>true,
-                'showfilter'=>true,
-                'showedit'=>false            
-            ),
-            4=>array(
-                'name'=>'active',
-                'caption'=>'Active', //TODO: Translate
-                'type'=>'boolean',
-                'size' => '0',
-                'related'=>FALSE,
-                'required'=>FALSE,
-                'disabled'=>FALSE,
-                'help'=>'',
-                'showlist'=>false,
-                'showfilter'=>false,
-                'showedit'=>true            
-            ),
-            5=>array(
-                'name'=>'deleted',
-                'caption'=>'Deleted', //TODO: Translate
-                'type'=>'boolean',
-                'size' => '0',
-                'related'=>FALSE,
-                'required'=>FALSE,
-                'disabled'=>FALSE,
-                'help'=>'',
-                'showlist'=>false,
-                'showfilter'=>false,
-                'showedit'=>true            
-            ),
-            5=>array(
-                'name'=>'created_by',
-                'caption'=>'Created by', //TODO: Translate
-                'type'=>'list',
-                'list'=>array(
-                    'url'=>'/api/user/users',
-                    'filter'=>array(
-                        'status'=>array(1,2), //Active and inactive
-                    ),
-                    'multiple'=>false,
-                    'defaults'=>0
-                ),
-                'size' => '0',
-                'related'=> TRUE,
-                'required'=>FALSE,
-                'disabled'=>TRUE,
-                'help'=>'',
-                'showlist'=>true,
-                'showfilter'=>true,
-                'showedit'=>true                
-            ),
-            6=>array(
-                'name'=>'created_date',
-                'caption'=>'Created date', //TODO: Translate
-                'type'=>'datetime',
-                'size' => '0',
-                'related'=> FALSE,
-                'required'=>FALSE,
-                'disabled'=>TRUE,
-                'help'=>'',
-                'showlist'=>true,
-                'showfilter'=>true,
-                'showedit'=>true 
-            ),
-            7=>array(
-                'name'=>'updated_by',
-                'caption'=>'Updated by', //TODO: Translate
-                'type'=>'list',
-                'list'=>array(
-                    'url'=>'/api/user/users',
-                    'filter'=>array(
-                        'status'=>array(1,2), //Active and inactive
-                    ),
-                    'multiple'=>false,
-                    'defaults'=>0
-                ),
-                'size' => '0',
-                'related'=> TRUE,
-                'required'=>FALSE,
-                'disabled'=>TRUE,
-                'help'=>'',
-                'showlist'=>true,
-                'showfilter'=>true,
-                'showedit'=>true 
-            ),
-            8=>array(
-                'name'=>'updated_date',
-                'caption'=>'Updated date', //TODO: Translate
-                'type'=>'datetime',
-                'size' => '0',
-                'related'=> FALSE,
-                'required'=>FALSE,
-                'disabled'=>TRUE,
-                'help'=>'',
-                'showlist'=>true,
-                'showfilter'=>true,
-                'showedit'=>true 
-            ),
-            9=>array(
-                'name'=>'deleted_by',
-                'caption'=>'Deleted by', //TODO: Translate
-                'type'=>'list',
-                'list'=>array(
-                    'url'=>'/api/user/users',
-                    'filter'=>array(
-                        'status'=>array(1,2), //Active and inactive
-                    ),
-                    'multiple'=>false,
-                    'defaults'=>0
-                ),
-                'size' => '0',
-                'related'=> TRUE,
-                'required'=>FALSE,
-                'disabled'=>TRUE,
-                'help'=>'',
-                'showlist'=>true,
-                'showfilter'=>true,
-                'showedit'=>true 
-            ),
-            10=>array(
-                'name'=>'deleted_date',
-                'caption'=>'Deleted date', //TODO: Translate
-                'type'=>'datetime',
-                'size' => '0',
-                'related'=> FALSE,
-                'required'=>FALSE,
-                'disabled'=>TRUE,
-                'help'=>'',
-                'showlist'=>true,
-                'showfilter'=>true,
-                'showedit'=>true
-            )
-        );
-        $this->output->set_output(json_encode($structure),200);
-        //$this->output->_display();
-    }
-
-    private function validate() 
+    private function validate($id=0) 
     {
         if(!trim($this->spagi_formhandler->form['name'])) 
         {
             $this->spagi_formhandler->addError('form-name','This field must not be empty!');
+        }
+        
+        $rows = $this->App_modules_model->query("id","name='" . $this->spagi_formhandler->form['name'] . "' AND deleted=0");
+        if(isset($rows[0])) {
+            if($rows[0]->id !== $id) {
+                $this->spagi_formhandler->addError('form-name','The name must be unique!');
+                return FALSE;
+            }
         }
         
         if(count($this->spagi_formhandler->error)) 

@@ -59,12 +59,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     define('SPAGIPROFILERDETAILS', SPAGIPROFILERBASE . 'profiles/requests/' );
     define('SPAGIPROFILERTEMP', SPAGIPROFILERBASE . 'profiles/temp/' );
     define('SPAGIPROFILERHOOKSFILE', SPAGIPROFILERCONF . 'hooks.php' );
+    define('SPAGICONTROLLER_INDEX',SPAGIPROFILERCONTROLLERS . 'index.php');
     
 /*
  * Load the Profiler Class
  */    
     
     require_once SPAGIPROFILERCORE . 'SpagiProfilerCore.php';
+    require_once SPAGIPROFILERCORE . 'ProfilerLibrary.php';
     
     if(!function_exists('get_sp_instance'))
     {

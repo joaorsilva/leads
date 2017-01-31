@@ -12,18 +12,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |	https://codeigniter.com/user_guide/general/profiling.html
 |
 */
-$config['config']               = FALSE;
-$config['queries']              = FALSE;
-$config['benchmarks']           = FALSE;
-$config['controller_info']      = FALSE;
-$config['get']                  = FALSE;
-$config['http_headers']         = FALSE;
-$config['memory_usage']         = FALSE;
-$config['post']                 = FALSE;
-$config['queries']              = FALSE;
-$config['uri_string']           = FALSE;
-$config['session_data']         = FALSE;
-$config['query_toggle_count']   = FALSE;
+$config['config']               = TRUE;
+$config['queries']              = TRUE;
+$config['benchmarks']           = TRUE;
+$config['controller_info']      = TRUE;
+$config['get']                  = TRUE;
+$config['http_headers']         = TRUE;
+$config['memory_usage']         = TRUE;
+$config['post']                 = TRUE;
+$config['queries']              = TRUE;
+$config['uri_string']           = TRUE;
+$config['session_data']         = TRUE;
+$config['query_toggle_count']   = TRUE;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,7 +37,7 @@ $config['query_toggle_count']   = FALSE;
 | it adds an extra layer of code running besides your request.
 |
 */
-$config['profiler_enabled'] = FALSE;
+$config['profiler_enabled'] = TRUE;
 
 /*
 |--------------------------------------------------------------------------

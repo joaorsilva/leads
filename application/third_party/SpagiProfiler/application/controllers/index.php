@@ -16,8 +16,7 @@ class Index extends CI_Controller{
         parent::__construct();
     }
     
-    public function Index() {
-        
+    public function index() {
         $request = $this->input->get('request');
         if(!$request) {
             $data['data']=array();

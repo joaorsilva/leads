@@ -1,0 +1,155 @@
+#!/usr/bin/env php
+<?php
+/* 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+define ("BASEPATH", "");
+
+require_once __DIR__ . '/Unittest.php';
+
+main();
+
+function main()
+{
+    echo("Unit Testing" . PHP_EOL);
+
+    $files_param = "";
+    $help = FALSE;
+    $error = FALSE;
+    
+    $short_opts = 
+        "t::" .
+        "h" .
+        "v" .
+        "d";
+    $long_opts = array(
+        "test::",
+        "help",
+        "verbose",
+        "debug"
+    );
+    
+    $args = getopt($short_opts, $long_opts);
+    if(count($args) < 1) 
+    {
+        $error = TRUE;
+        Unittest::print_message(Unittest::MESSAGE_ERROR,"No parameters!");
+    }
+    
+    foreach($args as $key => $value) 
+    {
+        switch($key) 
+        {
+            case "t":
+            case "test":
+                $files_param = $value;
+                break;
+            case "d":
+            case "debug":
+                Unittest::$debug = TRUE;
+                break;
+            case "v":
+            case "verbose":
+                Unittest::$verbose = TRUE;
+                break;
+            case "h":
+            case "help":
+            default:
+                $help = TRUE;
+                break;
+        }
+    }
+    
+    if(!$files_param) 
+    {
+        $error = TRUE;
+        Unittest::print_message(Unittest::MESSAGE_ERROR,"No tests to process!");
+    }
+    
+    if($error)
+    {
+        print_help();
+        exit(1);
+    }
+    
+    if($help) 
+    {
+        print_help();
+        exit(0);
+    }
+    
+    run($files_param);
+    
+}
+
+function run($files) 
+{
+    $temps = explode(",", $files);
+    foreach($temps as $temp)
+    {
+        $curr_dir = getcwd();
+        $path = $curr_dir . "/" . $temp;
+        
+        if(!file_exists($path)) {
+            Unittest::print_message(Unittest::MESSAGE_ERROR,"File '" . $path . "' doesn't exists!");
+            exit(1);
+        }
+        
+        include_once $path;
+        
+        $class= str_replace(".php","",basename($path));
+        if(!class_exists($class)) {
+            Unittest::print_message(Unittest::MESSAGE_ERROR,"File '" . $path . "' doesn't contain class '" . $class . "'!");
+            exit(1);
+        }
+        
+        if(!method_exists($class,"init")) {
+            Unittest::print_message(Unittest::MESSAGE_ERROR,"Method init of class '" . $class . "' doesn't exists!");
+            exit(1);
+        }
+        
+        $res = $class::init();
+        if(!$res) {
+            exit(1);
+        }
+    }
+    
+    $conf_base = __DIR__ . "/../../application/config";
+    if(!file_exists($conf_base)) 
+    {
+        Unittest::print_message(Unittest::MESSAGE_ERROR,"Configuration path '" . $conf_base . "' doesn't exists!");
+        exit(1);        
+    }
+    
+    $env = "development";
+    $file = "config.php";
+    
+    $res = Unittest::load_config(realpath($conf_base), $env, $file);
+    if(!$res) 
+    {
+        exit(1);
+    }
+    
+    $res = Unittest::run();
+    Unittest::print_message(Unittest::MESSAGE_INFO,"Sumary:" . PHP_EOL . "\tClasses: " . count(Unittest::$total_modules) . PHP_EOL . "\tMethods: " . count(Unittest::$total_methods) . PHP_EOL . "\tAsserts: " . Unittest::$total_asserts);
+    Unittest::print_message(Unittest::MESSAGE_INFO,"Unit test terminated ... ", FALSE);
+    if(!$res) {
+        Unittest::print_message(Unittest::MESSAGE_ERROR);
+        exit(1);
+    }
+    Unittest::print_message(Unittest::MESSAGE_SUCCESS);
+}
+
+function print_help() 
+{
+    echo("Usage:\tutest -[options]" . PHP_EOL);
+    echo("\tutest -t \"file1.php file2.php, etc...\"" . PHP_EOL);
+    echo("Options:". PHP_EOL);
+    echo(" -t\t--test\tUnit test file to be run. Can handle multiple files comma separated.". PHP_EOL);
+    echo(" -l\t--tests-list\tUnit test file to be run. Can handle multiple files comma separated.". PHP_EOL);
+    echo(" -h\t--help\tPrint this help.". PHP_EOL);
+    echo(PHP_EOL);
+}

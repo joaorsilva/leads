@@ -47,15 +47,11 @@ class App_modules_model extends Spagi_Model {
         
         $query = $this->db->get();
         $result = $query->result();
-        foreach($result as $row) {
-            $row = $this->convertDates($row);
-        }
         return $result;
     }
     
     public function get_record($id) {
         $result = parent::get_record($id);
-        $result = $this->convertDates($result);
         return $result;
     }
     
@@ -75,9 +71,6 @@ class App_modules_model extends Spagi_Model {
         $this->db->limit($paging["page_size"], $paging["page"] * $paging["page_size"]);
         $query = $this->db->get();
         $result = $query->result();
-        foreach($result as $row) {
-            $row = $this->convertDates($row);
-        }
         return $result;
     }
     
@@ -112,15 +105,18 @@ class App_modules_model extends Spagi_Model {
         return $query->result();
     }
     
-    protected function convertDates($object){
-        if($object) {
-            $object->updated_date = $this->convert_date_time($object->updated_date);
-            $object->created_date = $this->convert_date_time($object->created_date);
-            $object->deleted_date = $this->convert_date_time($object->deleted_date);            
-        }
-        return $object;
+    public function query($fields="*",$where="") 
+    {
+        $this->db->select($fields);
+        $this->db->from($this->_table_name);
+        if($where)
+        {    
+            $this->db->where($where);
+        }  
+        $query = $this->db->get();
+        return $query->result();
     }
-    
+        
     protected function list_where($filters) 
     {
         if($filters) {

@@ -67,7 +67,7 @@ class Spagi_Model extends CI_Model {
 
         $res = $this->db->insert($this->_table_name,$record);
         $this->id = $this->db->insert_id();        
-        return $res;
+        return $this->id;
     }
     
     /**
@@ -119,6 +119,12 @@ class Spagi_Model extends CI_Model {
         $record->deleted = 1;
         
         return $this->update($record);
+    }
+    
+    public function hard_delete($id) 
+    {
+        $this->db->where('id', $id);
+        return $this->db->delete($this->_table_name);
     }
     
     public function convert_date_time($date_time,$to_database=false) {

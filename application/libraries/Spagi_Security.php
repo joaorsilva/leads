@@ -87,7 +87,7 @@ class Spagi_Security {
             $this->CI->jsonresponse->respond(
                 array(
                     'result'=>'error',
-                    'message'=>$this->CI->spagi_i18n->_('__global__ No username')
+                    'message'=>$this->CI->spagi_i18n->_('__global__ No password')
                 )
             );
         }

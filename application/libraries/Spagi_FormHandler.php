@@ -31,12 +31,14 @@ class Spagi_FormHandler {
             $data = $this->receive_list($data);
         } else if($this->request_type === 'form') {
             $data = $this->receive_form($data);
+        } else if ($this->request_type === 'delete') {
+            $data = $this->receive_form($data);
         }
     }
     
     protected function receive_form($data) {
         //PUT verb support
-        if($this->CI->input->method() === 'put') {
+        if($this->CI->input->method() === 'put' || $this->CI->input->method() === 'delete') {
             $putstream = fopen("php://input", "r");
             $content = '';
             $put_data = array();
@@ -97,6 +99,8 @@ class Spagi_FormHandler {
 
     public function send($method,$data=null,$code=200) {
         
+        $data = "";
+        
         if($this->request_type === 'list') {
             $data = array(
                 'pagination'    => $this->pagination,
@@ -105,7 +109,7 @@ class Spagi_FormHandler {
                 'rows'          => $this->rows,
                 'error'         => $this->error
             );
-        } else if($this->request_type === 'form') {
+        } else if($this->request_type === 'form' || $this->request_type === 'delete') {
             $data = array(
                 'rows'          => $this->rows,
                 'error'         => $this->error
@@ -118,7 +122,7 @@ class Spagi_FormHandler {
 
         $this->CI->output->set_content_type('application/json');
         $this->CI->output->set_status_header($code);
-        $this->CI->output->set_output(json_encode($this->rows));
+        $this->CI->output->set_output(json_encode($data));
     }
     
     public function clear($method) {
