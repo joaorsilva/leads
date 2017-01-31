@@ -12,7 +12,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 
-/*$hook['post_controller_constructor'][] = array(
+$hook['post_controller_constructor'][] = array(
     'class'    => 'ValidateUser',
     'function' => 'validate',
     'filename' => 'ValidateUser.php',
@@ -51,5 +51,5 @@ $hook['post_system'][] = array(
     'function' => 'post_system',
     'filename' => 'SpagiProfiler.php',
     'filepath' => 'hooks'
-);*/
+);
 
