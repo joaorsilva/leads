@@ -259,7 +259,7 @@ class ProfilerLibrary {
         $row_count = 0;
         $result_set = array();
         while($currentDate >= $startDate) {
-            $index_name = PROFILER_PATH . 'indexes/idx_' . $currentDate->format('Ymd') . '.json';            
+            $index_name = APPPATH . 'indexes/idx_' . $currentDate->format('Ymd') . '.json';            
             $request_rows = self::load_index($index_name);
             if(!$request_rows) {
                 $currentDate = $currentDate->sub(new DateInterval("P1D"));
@@ -367,9 +367,9 @@ class ProfilerLibrary {
     
     private static function check_profiler_log() 
     {
-        self::create_directory(PROFILER_PATH . 'temp/');
-        self::create_directory(PROFILER_PATH . 'requests/');
-        self::create_directory(PROFILER_PATH . 'indexes/');
+        self::create_directory(APPPATH . 'temp/');
+        self::create_directory(APPPATH . 'requests/');
+        self::create_directory(APPPATH . 'indexes/');
     }
 
     private static function create_directory($dir) {
