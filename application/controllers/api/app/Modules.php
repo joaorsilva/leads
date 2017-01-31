@@ -180,19 +180,12 @@ class Modules extends CI_Controller {
         
         if($id) 
         {
-<<<<<<< HEAD
             $this->spagi_formhandler->rows = array($this->App_modules_model->get_record($id));
-=======
             $this->output->set_status_header(404);
             $this->output->set_output(''); 
             $this->output->_display();
             return;
->>>>>>> origin/master
-        }
-        
-<<<<<<< HEAD
         $this->spagi_formhandler->send(__METHOD__);
-=======
         $row = $this->App_modules_model->get_record($num);
         if($row ) {
             $row->updated_by = $this->spagi_security->user->id;
@@ -203,7 +196,6 @@ class Modules extends CI_Controller {
         $this->output->set_status_header(200);
         $this->output->set_output('',200);
         $this->output->_display();        
->>>>>>> origin/master
     }
     
     private function validate($id=0) 
