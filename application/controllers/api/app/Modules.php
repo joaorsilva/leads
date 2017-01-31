@@ -185,17 +185,7 @@ class Modules extends CI_Controller {
             $this->output->set_output(''); 
             $this->output->_display();
             return;
-        $this->spagi_formhandler->send(__METHOD__);
-        $row = $this->App_modules_model->get_record($num);
-        if($row ) {
-            $row->updated_by = $this->spagi_security->user->id;
-            $row->deleted_by = $this->spagi_security->user->id;
-            $this->App_modules_model->delete($row);
-        }
-
-        $this->output->set_status_header(200);
-        $this->output->set_output('',200);
-        $this->output->_display();        
+        }        
     }
     
     private function validate($id=0) 
