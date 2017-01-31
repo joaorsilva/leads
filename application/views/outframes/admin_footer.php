@@ -239,7 +239,7 @@
 <!-- AdminLTE App -->
 <script src="/public/lte/dist/js/app.min.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<!--<script src="/public/lte/dist/js/pages/dashboard.js"></script>-->
+<!--script src="/public/lte/dist/js/pages/dashboard.js"></script> -->
 <!-- iCheck checkboxes and Radiobuttons -->
 <script src="/public/lte/plugins/iCheck/icheck.min.js"></script>
 <?php

@@ -93,8 +93,8 @@ class Spagi_Model extends CI_Model {
             $record->deleted_date = null;
             $record->deleted_by = null;
         }
-        $record = $this->set_record($record);
         
+        $record = $this->set_record($record);
         return $this->db->replace($this->_table_name,$record);
     }
     
@@ -117,7 +117,6 @@ class Spagi_Model extends CI_Model {
         $record = (object) $data;
         $record->deleted_date = $updated_date;
         $record->deleted = 1;
-        
         return $this->update($record);
     }
     
@@ -136,8 +135,6 @@ class Spagi_Model extends CI_Model {
             if(!$temp) {
                 if(strpos($date,"/")!==false) {
                     $date = str_replace("/", "-", $date);
-                } else {
-                    $date = str_replace("-", "/", $date);
                 }
                 $temp = DateTime::createFromFormat($this->_date_time_format, $date);
                 if(!$temp){
@@ -231,7 +228,7 @@ class Spagi_Model extends CI_Model {
         
         if(isset($arr['id']) && is_numeric($arr['id'])) 
         {
-            $row = $this->get_record($arr['id']);
+            $row = self::get_record($arr['id']);
             if($row) 
             {
                 foreach($arr as $field => $value) 

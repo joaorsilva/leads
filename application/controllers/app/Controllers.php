@@ -9,6 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Controllers extends CI_Controller {
     
     public $route = '/app/controllers/';
+    public $api_route = '/api/app/controllers/';
     public $menu = 'users';
     public $submenu = 'controllers';
     
@@ -22,6 +23,7 @@ class Controllers extends CI_Controller {
         $this->spagi_security->secure();
         $this->spagi_i18n->load('controllers/index');
         $this->spagi_pagedata->route = $this->route;
+        $this->spagi_pagedata->api_route = $this->api_route;
         $this->spagi_pagedata->set_page_menu($this->menu, $this->submenu)
                             ->set_page(
                                      $this->spagi_i18n->_('__controllers__index Application Controllers'),
@@ -54,33 +56,32 @@ class Controllers extends CI_Controller {
     }
     
     public function edit($id=0, $show = FALSE) 
-    {
+    {   
         $this->spagi_security->secure();
-        //Loads the string translator library
-        $this->spagi_i18n->load('controllers/edit');
-        
+        $this->spagi_pagedata->route = $this->route;
+        $this->spagi_pagedata->api_route = $this->api_route;
         $icon = 'fa-edit';
-        $subtitle = $this->spagi_i18n->_('__controllers__edit Edit Record');
-        $text = $this->spagi_i18n->_('__controllers__edit Edit Controller');
+        $subtitle = 'Edit Record';
+        $text = 'Edit Controller';
         if($show) 
         {
             $icon = 'fa-television';
-            $subtitle = $this->spagi_i18n->_('__controllers__edit Show Record');
-            $text = $this->spagi_i18n->_('__controllers__edit Show Controller');
+            $subtitle = 'Show Record';
+            $text = 'Show Controller';
         }
         
         if($id === 'new') 
         {
             $icon = 'fa-file-text-o';
-            $subtitle = $this->spagi_i18n->_('__controllers__edit New Record');
-            $text = $this->spagi_i18n->_('__controllers__edit New Controller');
+            $subtitle = 'New Record';
+            $text = 'New Controller';            
         }
                 
         $this->spagi_pagedata->route = $this->route;
         $this->spagi_pagedata->set_page_menu($this->menu, $this->submenu)
                              ->set_page(
-                                     $this->spagi_i18n->_('__controllers__edit Application Controller'),
-                                     $this->spagi_i18n->_('__controllers__edit Application Controller'),
+                                     'Application Controller',
+                                     'Application Controller',
                                      $subtitle,
                                      $show
                                      )
@@ -90,7 +91,7 @@ class Controllers extends CI_Controller {
                                      'fa fa-dashboard'
                                      )
                              ->addBreadcrumb(
-                                     $this->spagi_i18n->_('__controllers__edit Application Controllers'),
+                                     'Application Controller',
                                      '/app/controllers',
                                      'fa fa-th-large'
                                      )
@@ -106,6 +107,9 @@ class Controllers extends CI_Controller {
         {
             $this->spagi_pagedata->page['id'] = $id;
         }
+        
+        $this->spagi_i18n->load('forms-common');
+        $this->spagi_i18n->load('controllers/edit');
         $this->load->view('outframes/admin_header.php');
         $this->load->view('app/controllers/edit.php');
         $this->load->view('outframes/admin_footer.php');        
@@ -240,13 +244,33 @@ class Controllers extends CI_Controller {
         
         foreach($ids as $id) {
             $row = $this->App_controllers_model->get($id);
-            if($row) {
-                $this->App_controllers_model->delete($row);
+            if(isset($row[0])) {
+                $this->App_controllers_model->delete($row[0]);
             }
         }
         $this->output->set_output(json_encode(array('result'=>'ok','message'=>'')));
     }
     
+    public function controllers_filter() 
+    {
+        $this->spagi_security->secure(TRUE);
+        $filter = $this->input->get('q');
+        $module_id = $this->input->get('app_modules_id');
+        
+        $this->load->model('App_controllers_model');
+        $res = $this->App_controllers_model->select_controllers_filter($filter,$module_id);
+        $rows = array();
+        
+        foreach($res as $row) 
+        {
+            $item['id'] = $row->id;
+            $item['text'] = $row->name;
+            $rows[] = $item;
+        }
+        $this->output->set_content_type('application/json');
+        $this->output->set_output(json_encode($rows));
+    }
+
     private function validate() 
     {
         if(!trim($this->spagi_formhandler->form['name'])) 

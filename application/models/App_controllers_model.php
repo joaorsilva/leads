@@ -63,7 +63,7 @@ class App_controllers_model extends Spagi_Model {
     
     public function select_list($paging,$filters=array(),$order=array('id','ASC')) 
     {
-        $this->db->select($this->_table_name.'.*, modules1.name as app_controller_name, CONCAT(`user1`.first_name,\' \',`user1`.surename) as created_by, CONCAT(`user2`.first_name,\' \',`user2`.surename) as updated_by')
+        $this->db->select($this->_table_name.'.*, modules1.name as app_module_name, CONCAT(`user1`.first_name,\' \',`user1`.surename) as created_by, CONCAT(`user2`.first_name,\' \',`user2`.surename) as updated_by')
             ->from($this->_table_name)
             ->join('user_users as user1','user1.id = ' . $this->_table_name .'.created_by','LEFT')
             ->join('user_users as user2','user2.id = ' . $this->_table_name .'.updated_by','LEFT')
@@ -98,12 +98,15 @@ class App_controllers_model extends Spagi_Model {
         return 0;
     }
     
-    public function select_controllers_filter($filter) {
+    public function select_controllers_filter($filter,$module_id=0) {
         $this->db->select('id, name');
         $this->db->from($this->_table_name);
         $this->db->where('deleted = ', 0);
         if($filter) {
             $this->db->like('name',$filter,'both');
+        }
+        if($module_id) {
+            $this->db->where('app_modules_id = ', $module_id);
         }
         $query = $this->db->get();
         return $query->result();
@@ -137,6 +140,9 @@ class App_controllers_model extends Spagi_Model {
                         break;
                     case 'app_modules_id':
                         $this->db->where($this->_table_name . '.app_modules_id',$value);
+                        break;
+                    case 'app_controllers_id':
+                        $this->db->where($this->_table_name . '.app_controllers_id',$value);
                         break;
                     case 'created_by':
                         $this->db->where($this->_table_name . '.created_by',$value);

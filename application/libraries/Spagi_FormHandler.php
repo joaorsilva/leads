@@ -121,6 +121,11 @@ class Spagi_FormHandler {
             );
 
         $this->CI->output->set_content_type('application/json');
+        $code = 200;
+        if($this->request_type === 'list' && (!$data || !$data['rows']))
+        {
+            $code = 404;
+        }
         $this->CI->output->set_status_header($code);
         $this->CI->output->set_output(json_encode($data));
     }

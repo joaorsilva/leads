@@ -4,6 +4,7 @@ $(document).ready(function() {
      * Get requested record if not new
      */
     if($('#form-id').val() !== 'new') {
+        console.log($('#api-url').attr('data-url') + $('#form-id').val());
         $.ajax({
             url: $('#api-url').attr('data-url') + $('#form-id').val(),
             type: 'GET',

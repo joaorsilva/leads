@@ -180,15 +180,15 @@ $(document).ready(function(){
      * Clears the filter to it's default
      */
     $('#filter-clear').click(function(e){
-        e.preventDefault;
+        e.preventDefault();
         $(this).closest('form')[0].reset();
-        $('#filter-created_by').val(null).trigger("change");
-        $('#filter-updated_by').val(null).trigger("change");
-        $('#filter-status').val([1,2]).trigger("change");
+        $('select').val(null);
+        $('#filter-status').val([1,2]);
         $('#filter-created_date').val("");
         $('#filter-updated_date').val("");
         $('#default-filter').val(0);
-        $('#form-filter').submit();
+        $('select').trigger("change");
+        $('#filter-status').trigger("change");
         $('#filter-collapse').click();
     });
     
@@ -256,7 +256,7 @@ $(document).ready(function(){
     $('.btn-delete').click(function(e){
         e.preventDefault();
         var url = $('#btn-delete').attr('data-url');
-        $('#btn-delete').attr('data-url',url + $(this).attr('data-id'));
+        $('#btn-delete').attr('data-record',$(this).attr('data-id'));
     });
     
     /**
@@ -265,7 +265,7 @@ $(document).ready(function(){
     $('#btn-delete').click(function(e){
         e.preventDefault();
         $('#row-error').addClass('hidden');               
-        var url = $('#btn-delete').attr('data-url');
+        var url = $('#btn-delete').attr('data-url') + $('#btn-delete').attr('data-record');
         $.ajax({
             url: url,
             type: 'GET',

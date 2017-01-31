@@ -347,7 +347,7 @@
                 $class = "active";
             } else {
                 $class = "";
-                $link = '/dashboard';
+                $link = '/app/dashboard';
             }
         ?>
         <li class="<?php echo($class)?>">

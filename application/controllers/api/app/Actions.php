@@ -37,12 +37,12 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Controllers extends CI_Controller{
+class Actions extends CI_Controller{
     
-    public $route = '/api/app/controllers/';
+    public $route = '/api/app/actions/';
     public $menu = 'users';
-    public $submenu = 'controllers';
-    
+    public $submenu = 'actions';
+
     public function __construct() 
     {
         parent::__construct();
@@ -53,18 +53,18 @@ class Controllers extends CI_Controller{
         
         $this->load->library('Spagi_FormHandler');
         $this->load->library('Spagi_Pagination');
-        $this->load->model('App_controllers_model');
+        $this->load->model('App_actions_model');
         
         $this->spagi_formhandler->request_type='list';
         $this->spagi_formhandler->receive(__METHOD__);
         
-        $total_rows = $this->App_controllers_model->select_count_list(
+        $total_rows = $this->App_actions_model->select_count_list(
             $this->spagi_formhandler->filter
         );
         
         $this->spagi_formhandler->pagination['total_rows'] = $total_rows;
         
-        $res = $this->App_controllers_model->select_list(
+        $res = $this->App_actions_model->select_list(
             $this->spagi_formhandler->pagination,
             $this->spagi_formhandler->filter,
             $this->spagi_formhandler->sort
@@ -84,14 +84,14 @@ class Controllers extends CI_Controller{
     public function record($num=0) {
         $this->spagi_security->secure('rest');
         $this->load->library('Spagi_FormHandler');
-        $this->load->model('App_controllers_model');
+        $this->load->model('App_actions_model');
         $this->spagi_formhandler->request_type = 'form';
         $this->spagi_formhandler->receive(__METHOD__);
         
         $res = array();
         if($num && is_numeric($num)) 
         {
-            $res = $this->App_controllers_model->get($num);
+            $res = $this->App_actions_model->get($num);
         }
         
         $this->spagi_formhandler->rows = $res;
@@ -102,7 +102,7 @@ class Controllers extends CI_Controller{
         $this->spagi_security->secure('rest');
 
         $this->load->library('Spagi_FormHandler');
-        $this->load->model('App_controllers_model');
+        $this->load->model('App_actions_model');
         $this->spagi_formhandler->request_type = 'form';
         $this->spagi_formhandler->receive(__METHOD__);
         if(isset($this->spagi_formhandler->form["id"]) && is_numeric($this->spagi_formhandler->form["id"]))
@@ -111,11 +111,11 @@ class Controllers extends CI_Controller{
             if($this->validate()) 
             {
                 $this->spagi_formhandler->form['key'] = md5($this->spagi_formhandler->form['name']);
-                $record = $this->App_controllers_model->get_record($this->spagi_formhandler->form['id']);
+                $record = $this->App_actions_model->get_record($this->spagi_formhandler->form['id']);
                 $this->spagi_formhandler->form['created_by'] = $record->created_by;
                 $this->spagi_formhandler->form['created_date'] = $record->created_date;
                 $this->spagi_formhandler->form['updated_by'] = $this->spagi_security->user->id;
-                $res = $this->App_controllers_model->update($this->spagi_formhandler->form);
+                $res = $this->App_actions_model->update($this->spagi_formhandler->form);
             }
         } 
         else 
@@ -125,7 +125,7 @@ class Controllers extends CI_Controller{
                 $this->spagi_formhandler->form['key'] = md5($this->spagi_formhandler->form['name']);
                 $this->spagi_formhandler->form['created_by'] = $this->spagi_security->user->id;
                 $this->spagi_formhandler->form['updated_by'] = $this->spagi_security->user->id;
-                $res = $this->App_controllers_model->insert($this->spagi_formhandler->form);
+                $res = $this->App_actions_model->insert($this->spagi_formhandler->form);
             }
         }
         $this->spagi_formhandler->send(__METHOD__);
@@ -145,16 +145,17 @@ class Controllers extends CI_Controller{
             return;
         }
         
-        $row = $this->App_controllers_model->get_record($num);
+        $row = $this->App_actions_model->get_record($num);
         if($row ) {
             $row->updated_by = $this->spagi_security->user->id;
             $row->deleted_by = $this->spagi_security->user->id;
-            $this->App_controllers_model->delete($row);
+            $this->App_actions_model->delete($row);
         }
 
         $this->output->set_status_header(200);
         $this->output->set_output('',200);
-        $this->output->_display();        
+        $this->output->_display();
+        
     }
     
     private function validate() 
@@ -176,5 +177,4 @@ class Controllers extends CI_Controller{
         
         return TRUE;
     }
-    
 }

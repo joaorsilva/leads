@@ -16,17 +16,22 @@
                             <input type="text" class="form-control text-right" id="form-id" name="form[id]" style="max-width: 100px" value="<?php echo($this->spagi_pagedata->page['id'])?>" disabled/>
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="form-name"><?php echo($this->spagi_i18n->_('__controllers__edit Name'))?>:</label>
+                            <label class="control-label" for="form-name"><?php echo($this->spagi_i18n->_('__actions__edit Name'))?>:</label>
                             <input type="text" class="form-control" id="form-name" name="form[name]" style="max-width: 500px" <?php if($this->spagi_pagedata->page['show']) echo("disabled")?> />
                             <span id="form-name-error" class="help-block"></span>
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="filter-app_modules_id"><?php echo($this->spagi_i18n->_('__controllers__edit Module'))?>: </label>
+                            <label class="control-label" for="form-app_modules_id"><?php echo($this->spagi_i18n->_('__actions__edit Module'))?>: </label>
                             <select class="form-control select2" style="width:100%" id="form-app_modules_id" name="form[app_modules_id]">
                             </select>
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="form-key"><?php echo($this->spagi_i18n->_('__controllers__edit Key'))?>:</label>
+                            <label class="control-label" for="form-app_controllers_id"><?php echo($this->spagi_i18n->_('__actions__edit Controller'))?>: </label>
+                            <select class="form-control select2" style="width:100%" id="form-app_controllers_id" name="form[app_controllers_id]">
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="form-key"><?php echo($this->spagi_i18n->_('__actions__edit Key'))?>:</label>
                             <input type="text" class="form-control" id="form-key" name="form[key]" style="max-width: 300px" disabled/>
                         </div>
                         <div class="form-group">

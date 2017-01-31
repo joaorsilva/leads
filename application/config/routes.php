@@ -81,6 +81,17 @@ $route['api/app/controllers']['delete'] = 'api/app/controllers/delete';
 $route['api/app/controllers/(:num)']['delete'] = 'api/app/controllers/delete';
 
 /**
+ * App Actions
+ */
+$route['api/app/actions']['get'] = 'api/app/actions/listrows';
+$route['api/app/actions/(:num)']['get'] = 'api/app/actions/record/$1';
+$route['api/app/actions']['post'] = 'api/app/actions/save';
+$route['api/app/actions']['put'] = 'api/app/actions/save';
+$route['api/app/actions/(:num)']['put'] = 'api/app/actions/save';
+$route['api/app/actions']['delete'] = 'api/app/actions/delete';
+$route['api/app/actions/(:num)']['delete'] = 'api/app/actions/delete';
+
+/**
  * User users
  */
 $route['api/user/users']['get'] = 'api/user/users/listrows';
@@ -90,3 +101,4 @@ $route['api/user/users']['put'] = 'api/user/users/save';
 $route['api/user/users/(:num)']['put'] = 'api/user/users/save';
 $route['api/user/users']['delete'] = 'api/user/users/delete';
 $route['api/user/users/(:num)']['delete'] = 'api/user/users/delete';
+
