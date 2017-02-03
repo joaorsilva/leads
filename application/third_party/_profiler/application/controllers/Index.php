@@ -28,7 +28,6 @@ class Index extends CI_Controller{
         } else {
             $data['data'] = ProfilerLibrary::get_request($request);
             $this->load->view('_profiler/request',$data);
-        }    
+        }
     }
-    
 }

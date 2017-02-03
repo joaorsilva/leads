@@ -147,3 +147,74 @@ ERROR - 2017-01-31 11:11:40 --> 404 Page Not Found: profiler/Index/index
 ERROR - 2017-01-31 11:11:42 --> 404 Page Not Found: profiler/Index/index
 ERROR - 2017-01-31 11:11:46 --> 404 Page Not Found: profiler/Index/index
 ERROR - 2017-01-31 11:12:40 --> 404 Page Not Found: profiler/Profiler/index
+ERROR - 2017-01-31 14:01:48 --> Severity: Notice --> Trying to get property of non-object /var/www/sites/leads/application/third_party/SpagiProfiler/core/ProfilerLibrary.php 220
+ERROR - 2017-01-31 14:01:48 --> Severity: Notice --> Trying to get property of non-object /var/www/sites/leads/application/third_party/SpagiProfiler/core/ProfilerLibrary.php 221
+ERROR - 2017-01-31 14:05:31 --> Severity: Notice --> Trying to get property of non-object /var/www/sites/leads/application/third_party/SpagiProfiler/core/ProfilerLibrary.php 166
+ERROR - 2017-01-31 14:05:31 --> Severity: Notice --> Trying to get property of non-object /var/www/sites/leads/application/third_party/SpagiProfiler/core/ProfilerLibrary.php 166
+ERROR - 2017-01-31 14:06:39 --> Severity: Notice --> Trying to get property of non-object /var/www/sites/leads/application/third_party/SpagiProfiler/core/ProfilerLibrary.php 166
+ERROR - 2017-01-31 14:06:39 --> Severity: Notice --> Trying to get property of non-object /var/www/sites/leads/application/third_party/SpagiProfiler/core/ProfilerLibrary.php 166
+ERROR - 2017-01-31 14:06:41 --> Severity: Notice --> Trying to get property of non-object /var/www/sites/leads/application/third_party/SpagiProfiler/core/ProfilerLibrary.php 166
+ERROR - 2017-01-31 14:06:41 --> Severity: Notice --> Trying to get property of non-object /var/www/sites/leads/application/third_party/SpagiProfiler/core/ProfilerLibrary.php 166
+ERROR - 2017-01-31 14:06:42 --> Severity: Notice --> Trying to get property of non-object /var/www/sites/leads/application/third_party/SpagiProfiler/core/ProfilerLibrary.php 166
+ERROR - 2017-01-31 14:06:42 --> Severity: Notice --> Trying to get property of non-object /var/www/sites/leads/application/third_party/SpagiProfiler/core/ProfilerLibrary.php 166
+ERROR - 2017-01-31 14:27:28 --> Severity: Warning --> Invalid argument supplied for foreach() /var/www/sites/leads/application/views/_profiler/request.php 235
+ERROR - 2017-01-31 14:28:56 --> Severity: Notice --> Undefined index: buffer /var/www/sites/leads/application/views/_profiler/request.php 237
+ERROR - 2017-01-31 14:32:18 --> Severity: Warning --> Creating default object from empty value /var/www/sites/leads/application/third_party/SpagiProfiler/core/ProfilerLibrary.php 157
+ERROR - 2017-01-31 14:32:20 --> Severity: Notice --> Undefined index: buffer /var/www/sites/leads/application/views/_profiler/request.php 237
+ERROR - 2017-01-31 14:32:20 --> Severity: Warning --> Creating default object from empty value /var/www/sites/leads/application/third_party/SpagiProfiler/core/ProfilerLibrary.php 157
+ERROR - 2017-01-31 14:32:46 --> Severity: Warning --> Creating default object from empty value /var/www/sites/leads/application/third_party/SpagiProfiler/core/ProfilerLibrary.php 157
+ERROR - 2017-01-31 14:45:00 --> Severity: Warning --> Creating default object from empty value /var/www/sites/leads/application/third_party/SpagiProfiler/core/ProfilerLibrary.php 157
+ERROR - 2017-01-31 14:45:02 --> Severity: Warning --> Creating default object from empty value /var/www/sites/leads/application/third_party/SpagiProfiler/core/ProfilerLibrary.php 157
+ERROR - 2017-01-31 14:46:57 --> Severity: Warning --> Creating default object from empty value /var/www/sites/leads/application/third_party/SpagiProfiler/core/ProfilerLibrary.php 158
+ERROR - 2017-01-31 16:20:23 --> Severity: Notice --> Undefined index: request /var/www/sites/leads/application/views/_profiler/request.php 66
+ERROR - 2017-01-31 16:20:23 --> Severity: Notice --> Undefined index: request /var/www/sites/leads/application/views/_profiler/request.php 70
+ERROR - 2017-01-31 16:20:23 --> Severity: Notice --> Undefined index: request /var/www/sites/leads/application/views/_profiler/request.php 74
+ERROR - 2017-01-31 16:20:23 --> Severity: Notice --> Undefined index: request /var/www/sites/leads/application/views/_profiler/request.php 78
+ERROR - 2017-01-31 16:20:23 --> Severity: Notice --> Undefined index: request /var/www/sites/leads/application/views/_profiler/request.php 82
+ERROR - 2017-01-31 16:20:23 --> Severity: Notice --> Undefined index: request /var/www/sites/leads/application/views/_profiler/request.php 86
+ERROR - 2017-01-31 16:20:23 --> Severity: Notice --> Undefined index: request /var/www/sites/leads/application/views/_profiler/request.php 90
+ERROR - 2017-01-31 16:20:23 --> Severity: Notice --> Undefined index: request /var/www/sites/leads/application/views/_profiler/request.php 94
+ERROR - 2017-01-31 16:20:23 --> Severity: Notice --> Undefined index: request /var/www/sites/leads/application/views/_profiler/request.php 98
+ERROR - 2017-01-31 16:20:23 --> Severity: Notice --> Undefined index: request /var/www/sites/leads/application/views/_profiler/request.php 109
+ERROR - 2017-01-31 16:20:23 --> Severity: Warning --> Invalid argument supplied for foreach() /var/www/sites/leads/application/views/_profiler/request.php 109
+ERROR - 2017-01-31 16:20:23 --> Severity: Notice --> Undefined index: request /var/www/sites/leads/application/views/_profiler/request.php 130
+ERROR - 2017-01-31 16:20:23 --> Severity: Warning --> Invalid argument supplied for foreach() /var/www/sites/leads/application/views/_profiler/request.php 130
+ERROR - 2017-01-31 16:20:23 --> Severity: Notice --> Undefined index: request /var/www/sites/leads/application/views/_profiler/request.php 140
+ERROR - 2017-01-31 16:20:23 --> Severity: Warning --> Invalid argument supplied for foreach() /var/www/sites/leads/application/views/_profiler/request.php 140
+ERROR - 2017-01-31 16:20:23 --> Severity: Notice --> Undefined index: request /var/www/sites/leads/application/views/_profiler/request.php 150
+ERROR - 2017-01-31 16:20:23 --> Severity: Warning --> Invalid argument supplied for foreach() /var/www/sites/leads/application/views/_profiler/request.php 150
+ERROR - 2017-01-31 16:20:23 --> Severity: Notice --> Undefined index: request /var/www/sites/leads/application/views/_profiler/request.php 160
+ERROR - 2017-01-31 16:20:23 --> Severity: Warning --> Invalid argument supplied for foreach() /var/www/sites/leads/application/views/_profiler/request.php 160
+ERROR - 2017-01-31 16:20:23 --> Severity: Notice --> Undefined index: request /var/www/sites/leads/application/views/_profiler/request.php 175
+ERROR - 2017-01-31 16:20:23 --> Severity: Warning --> Invalid argument supplied for foreach() /var/www/sites/leads/application/views/_profiler/request.php 175
+ERROR - 2017-01-31 16:20:23 --> Severity: Notice --> Undefined index: response /var/www/sites/leads/application/views/_profiler/request.php 203
+ERROR - 2017-01-31 16:20:23 --> Severity: Notice --> Undefined index: response /var/www/sites/leads/application/views/_profiler/request.php 207
+ERROR - 2017-01-31 16:20:23 --> Severity: Notice --> Undefined index: response /var/www/sites/leads/application/views/_profiler/request.php 218
+ERROR - 2017-01-31 16:20:23 --> Severity: Warning --> Invalid argument supplied for foreach() /var/www/sites/leads/application/views/_profiler/request.php 218
+ERROR - 2017-01-31 16:20:23 --> Severity: Notice --> Undefined index: response /var/www/sites/leads/application/views/_profiler/request.php 237
+ERROR - 2017-01-31 16:20:27 --> Severity: Notice --> Undefined index: request /var/www/sites/leads/application/views/_profiler/request.php 66
+ERROR - 2017-01-31 16:20:27 --> Severity: Notice --> Undefined index: request /var/www/sites/leads/application/views/_profiler/request.php 70
+ERROR - 2017-01-31 16:20:27 --> Severity: Notice --> Undefined index: request /var/www/sites/leads/application/views/_profiler/request.php 74
+ERROR - 2017-01-31 16:20:27 --> Severity: Notice --> Undefined index: request /var/www/sites/leads/application/views/_profiler/request.php 78
+ERROR - 2017-01-31 16:20:27 --> Severity: Notice --> Undefined index: request /var/www/sites/leads/application/views/_profiler/request.php 82
+ERROR - 2017-01-31 16:20:27 --> Severity: Notice --> Undefined index: request /var/www/sites/leads/application/views/_profiler/request.php 86
+ERROR - 2017-01-31 16:20:27 --> Severity: Notice --> Undefined index: request /var/www/sites/leads/application/views/_profiler/request.php 90
+ERROR - 2017-01-31 16:20:27 --> Severity: Notice --> Undefined index: request /var/www/sites/leads/application/views/_profiler/request.php 94
+ERROR - 2017-01-31 16:20:27 --> Severity: Notice --> Undefined index: request /var/www/sites/leads/application/views/_profiler/request.php 98
+ERROR - 2017-01-31 16:20:27 --> Severity: Notice --> Undefined index: request /var/www/sites/leads/application/views/_profiler/request.php 109
+ERROR - 2017-01-31 16:20:27 --> Severity: Warning --> Invalid argument supplied for foreach() /var/www/sites/leads/application/views/_profiler/request.php 109
+ERROR - 2017-01-31 16:20:27 --> Severity: Notice --> Undefined index: request /var/www/sites/leads/application/views/_profiler/request.php 130
+ERROR - 2017-01-31 16:20:27 --> Severity: Warning --> Invalid argument supplied for foreach() /var/www/sites/leads/application/views/_profiler/request.php 130
+ERROR - 2017-01-31 16:20:27 --> Severity: Notice --> Undefined index: request /var/www/sites/leads/application/views/_profiler/request.php 140
+ERROR - 2017-01-31 16:20:27 --> Severity: Warning --> Invalid argument supplied for foreach() /var/www/sites/leads/application/views/_profiler/request.php 140
+ERROR - 2017-01-31 16:20:27 --> Severity: Notice --> Undefined index: request /var/www/sites/leads/application/views/_profiler/request.php 150
+ERROR - 2017-01-31 16:20:27 --> Severity: Warning --> Invalid argument supplied for foreach() /var/www/sites/leads/application/views/_profiler/request.php 150
+ERROR - 2017-01-31 16:20:27 --> Severity: Notice --> Undefined index: request /var/www/sites/leads/application/views/_profiler/request.php 160
+ERROR - 2017-01-31 16:20:27 --> Severity: Warning --> Invalid argument supplied for foreach() /var/www/sites/leads/application/views/_profiler/request.php 160
+ERROR - 2017-01-31 16:20:27 --> Severity: Notice --> Undefined index: request /var/www/sites/leads/application/views/_profiler/request.php 175
+ERROR - 2017-01-31 16:20:27 --> Severity: Warning --> Invalid argument supplied for foreach() /var/www/sites/leads/application/views/_profiler/request.php 175
+ERROR - 2017-01-31 16:20:27 --> Severity: Notice --> Undefined index: response /var/www/sites/leads/application/views/_profiler/request.php 203
+ERROR - 2017-01-31 16:20:27 --> Severity: Notice --> Undefined index: response /var/www/sites/leads/application/views/_profiler/request.php 207
+ERROR - 2017-01-31 16:20:27 --> Severity: Notice --> Undefined index: response /var/www/sites/leads/application/views/_profiler/request.php 218
+ERROR - 2017-01-31 16:20:27 --> Severity: Warning --> Invalid argument supplied for foreach() /var/www/sites/leads/application/views/_profiler/request.php 218
+ERROR - 2017-01-31 16:20:27 --> Severity: Notice --> Undefined index: response /var/www/sites/leads/application/views/_profiler/request.php 237

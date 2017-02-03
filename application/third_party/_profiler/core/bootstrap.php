@@ -47,14 +47,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /*
  * Spagi Profiler PATHS  
  */
-    define('SPAGIPROFILERBASE', APPPATH . 'third_party/SpagiProfiler/');
-    define('SPAGIPROFILERCORE', APPPATH . 'third_party/SpagiProfiler/core/');
+    define('SPAGIPROFILERBASE', APPPATH . 'third_party/_profiler/');
+    define('SPAGIPROFILERCORE', APPPATH . 'third_party/_profiler/core/');
     define('SPAGIPROFILERASSETS', 'spagiprofiler/assets/' );
     define('SPAGIPROFILERAPP', SPAGIPROFILERBASE . 'application/');
     define('SPAGIPROFILERCONTROLLERS', SPAGIPROFILERAPP . 'controllers/' );
     define('SPAGIPROFILERVIEWS', SPAGIPROFILERAPP . 'views/' );
     define('SPAGIPROFILERLIB', SPAGIPROFILERAPP . 'libraries/' );
     define('SPAGIPROFILERCONF', SPAGIPROFILERAPP . 'config/' );
+    define('SPAGIPROFILE',SPAGIPROFILERBASE . 'profiles/');
     define('SPAGIPROFILERDATAINDEX', SPAGIPROFILERBASE . 'profiles/indexes/' );
     define('SPAGIPROFILERDETAILS', SPAGIPROFILERBASE . 'profiles/requests/' );
     define('SPAGIPROFILERTEMP', SPAGIPROFILERBASE . 'profiles/temp/' );

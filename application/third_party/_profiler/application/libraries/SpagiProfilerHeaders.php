@@ -51,10 +51,23 @@ class SpagiProfilerHeaders extends ProfilerCollectorAbstract implements Profiler
         parent::__construct();
     }
     
-    public function collect($SP) {
-        //echo('collect');
+    public function headers($SP) {
+        ProfilerLibrary::handle_bootstrap();
     }
-    public function collect2($SP,$CI) {
-        //echo('collect2');
+    
+    public function inputs($SP,$CI) {
+        ProfilerLibrary::handle_post_controller_constructor();
+    }
+    
+    public function controller($SP, $CI) {
+        ProfilerLibrary::handle_post_controller();
+    }
+    
+    public function post($SP, $CI) {
+        ProfilerLibrary::handle_post_system();
+    }
+    
+    public function shutdown() {
+        ProfilerLibrary::handle_shudown();
     }
 }

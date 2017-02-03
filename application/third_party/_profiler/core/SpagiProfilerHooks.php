@@ -180,11 +180,6 @@ class SpagiProfilerHooks {
                 case 'pre_system':
                 case 'pre_controller':
                 case 'pre_shudown':
-                    //debug_print_backtrace();
-                    //var_dump($collector['object']);
-                    //var_dump($collector['method']);
-                    //echo('---------------------------');
-                    //$collector['object']->$collector['method']($SP);
                     $obj = $collector['object'];
                     $method = $collector['method'];
                     $obj->$method($SP);
@@ -192,14 +187,12 @@ class SpagiProfilerHooks {
                 case 'error_handler':
                 case 'exception_handler':
                     $CI = & get_instance();
-                    //$collector['object']->$collector['method']($SP,$CI,$data);
                     $obj = $collector['object'];
                     $method = $collector['method'];
                     $obj->$method($SP,$CI,$data);
                     break;
                 default:
                     $CI = & get_instance();
-                    //$collector['object']->$collector['method']($SP,$CI);
                     $obj = $collector['object'];
                     $method = $collector['method'];
                     $obj->$method($SP,$CI);

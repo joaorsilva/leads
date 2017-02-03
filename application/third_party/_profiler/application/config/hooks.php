@@ -61,22 +61,52 @@ $hooks = array();
 $hooks['pre_ci'] = array(
     array(
         'class' => 'SpagiProfilerHeaders',
-        'method' => 'collect',
+        'method' => 'headers',
         'disabled' => FALSE
         )
 );
-$hooks['pre_system'] = array();
+$hooks['pre_system'] = array(
+    /*array(
+        'class' => 'ProfilerLibrary',
+        'method' => 'handle_pre_system',
+        'disabled' => FALSE
+        ) */   
+);
+
 // Good $CI instance
 $hooks['pre_controller'] = array(
+    /*array(
+        'class' => 'ProfilerLibrary',
+        'method' => 'handle_pre_controller',
+        'disabled' => FALSE
+        )*/
 );
 $hooks['post_controller_constructor'] = array(
     array(
         'class' => 'SpagiProfilerHeaders',
-        'method' => 'collect2',
+        'method' => 'inputs',
+        'disabled' => FALSE
+        )  
+);
+$hooks['post_controller'] = array(
+    array(
+        'class' => 'SpagiProfilerHeaders',
+        'method' => 'controller',
+        'disabled' => FALSE
+        )  
+);
+$hooks['post_system'] = array(
+    array(
+        'class' => 'SpagiProfilerHeaders',
+        'method' => 'post',
         'disabled' => FALSE
         )    
 );
-$hooks['post_controller'] = array();
-$hooks['post_system'] = array();
 // No $CI instance
-$hooks['pre_shudown'] = array();
+$hooks['pre_shudown'] = array(
+    array(
+        'class' => 'SpagiProfilerHeaders',
+        'method' => 'shutdown',
+        'disabled' => FALSE
+        )    
+);

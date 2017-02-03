@@ -55,6 +55,71 @@ class ProfilerLibrary {
     
     public $CI;
     public static $init = FALSE;
+    public static $request = array(
+        "file"=> array(
+            "id"=>null,
+            "name"=>null
+        ),
+        "request"=>array(
+            "raw"=> null,
+            "time"=>null,
+            "uri"=>null,
+            "port"=>null,
+            "host"=>null,
+            "remote_ip"=>null,
+            "remote_host"=>null,
+            "ci_uri"=>null,
+            "method"=>null,
+            "content_type"=>null,
+            "headers"=>null,
+            "globals"=> array(
+                "request"=>null,
+                "vars"=> null,
+                "get"=> null,
+                "post"=>null,
+                "cookeis"=>null,
+                "files"=>null,
+                "environment"=>null
+            ),
+            "ci_input"=> array(
+                "raw"=>null,
+                "post"=>null,
+                "get"=>null,
+                "put"=>null,
+                "server"=>null
+            )
+        ),
+        "response"=> array(
+            "header"=>null,
+            "code"=>null,
+            "raw_content"=>null,
+            "content_type"=>null
+        ),
+        "config"=>array(
+            "ci"=>null,
+            "php"=>null,
+            "profiler"=>null
+        ),
+        "session"=> null,
+        "execution"=>array(
+            "times"=>array(
+                "start"=>null,
+                "end"=>null,
+                "total"=>null
+            ),
+            "memory"=> array(
+                "total"=>null,
+                "peak"=>null
+            ),
+            "controller"=>null,
+            "action"=>null,
+            "stack"=>null
+        ),
+        "database"=>array(),
+        "error"=>array()
+    );
+    
+    public static $log_files = array();
     
     public function __construct() {
         if( !self::hasProfiler() ) return;
@@ -76,61 +141,79 @@ class ProfilerLibrary {
     
     public static function handle_bootstrap()
     {
-        $request = self::load_temp();
-        $request->file->id = uniqid();
-        $request->file->name = '';
-        $request->request->time = (new DateTime())->format('Y-m-d H:i:s');
-        $request->request->raw = file_get_contents("php://input");
-        $request->request->headers = apache_request_headers();
-        $request->request->method = isset($_SERVER['REQUEST_METHOD']) ? $_SERVER['REQUEST_METHOD'] : '';
-        $request->request->uri = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '';
-        $request->request->port = isset($_SERVER['SERVER_PORT']) ? $_SERVER['SERVER_PORT'] : '';
-        $request->request->host = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '';
-        $request->request->remote_ip = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '';
-        $request->request->remote_host = isset($_SERVER['REMOTE_HOST']) ? $_SERVER['REMOTE_HOST'] : '';
-        $request->request->protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] && $_SERVER['HTTPS'] !="off" ? "HTTPS" : "HTTP";
-        $request->request->url = $request->request->protocol . "://" . $request->request->host . $request->request->uri;
-        $request->request->globals->request = $_REQUEST;
-        $request->request->globals->vars = $_SERVER;
-        $request->request->globals->get = $_GET;
-        $request->request->globals->post = $_POST;
-        $request->request->globals->cookeis = $_COOKIE;
-        $request->request->globals->files = $_FILES;
-        $request->request->globals->environment = $_ENV;
-        $request->execution->times->start = microtime(TRUE);
-        $request->execution->memory->limit = ini_get('memory_limit');
-        $request->config->php = ini_get_all(null,true);
-        $request->config->profiler = array('profiler_path'=>PROFILER_PATH,'prfiler_nimimal'=>PROFILER_MINIMAL);
-        self::save_temp($request);
+        
+        self::$request['file']['id'] = uniqid();
+        self::$request['file']['name'] = self::$request['file']['id'] . ".log";
+        self::save(self::$request);
+
+        self::$request['request']['time'] = (new DateTime())->format('Y-m-d H:i:s');
+        self::$request['request']['raw'] = file_get_contents("php://input");
+        self::$request['request']['headers'] = apache_request_headers();
+        self::$request['request']['method'] = isset($_SERVER['REQUEST_METHOD']) ? $_SERVER['REQUEST_METHOD'] : '';
+        self::$request['request']['uri'] = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '';
+        self::$request['request']['port'] = isset($_SERVER['SERVER_PORT']) ? $_SERVER['SERVER_PORT'] : '';
+        self::$request['request']['host'] = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '';
+        self::$request['request']['remote_ip'] = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '';
+        self::$request['request']['remote_host'] = isset($_SERVER['REMOTE_HOST']) ? $_SERVER['REMOTE_HOST'] : '';
+        self::$request['request']['protocol'] = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] && $_SERVER['HTTPS'] !="off" ? "HTTPS" : "HTTP";
+        self::$request['request']['url'] = self::$request['request']['protocol'] . "://" . self::$request['request']['host'] . self::$request['request']['uri'];
+        self::$request['request']['globals']['request'] = $_REQUEST;
+        self::$request['request']['globals']['vars'] = $_SERVER;
+        self::$request['request']['globals']['get'] = $_GET;
+        self::$request['request']['globals']['post'] = $_POST;
+        self::$request['request']['globals']['cookeis'] = $_COOKIE;
+        self::$request['request']['globals']['files'] = $_FILES;
+        self::$request['request']['globals']['environment'] = $_ENV;
+        self::$request['execution']['times']['start'] = microtime(TRUE);
+        self::$request['execution']['memory']['limit'] = ini_get('memory_limit');
+        self::$request['config']['php'] = ini_get_all(null,TRUE);
+        self::$request['config']['profiler_path'] = SPAGIPROFILERBASE;
+        self::save(self::$request);
+        var_dump(self::get_logs());die;
     }
     
     public static function handle_pre_system() {
-        $request = self::load_temp();
-        self::save_temp($request);
+        /*$request = self::load_temp();
+        if(!$request)
+        {
+            return;
+        }
+        self::save_temp($request);*/
     }
     
     public static function handle_pre_controller() {
         $CI = & get_instance();
-        $request = self::load_temp();
+        /*$request = self::load_temp();
+        if(!$request)
+        {
+            return;
+        }
         
-        self::save_temp($request);        
+        self::save_temp($request);*/
     }
     
     public static function handle_post_controller_constructor() {
         $CI = & get_instance();
-        $request = self::load_temp();
+        /*$request = self::load_temp();
+        if(!$request)
+        {
+            return;
+        }
         $request->request->ci_input->raw = $CI->input->raw_input_stream;
-        
         $request->request->ci_input->get = $CI->input->get();
         $request->request->ci_input->post = $CI->input->post();
         $request->request->ci_input->cookie = $CI->input->cookie();
         $request->request->ci_input->server = '';
-        self::save_temp($request);
+        self::save_temp($request);*/
     }
     
     public static function handle_post_controller() {
         $CI = & get_instance();
-        $request = self::load_temp();
+        /*$request = self::load_temp();
+        if(!$request)
+        {
+            return;
+        }
         $request->request->ci_uri = 'Unknown';
         if($CI->uri->uri_string !== '')
         {
@@ -143,29 +226,41 @@ class ProfilerLibrary {
         $request->execution->action =$CI->router->method;
         $request->config->ci = $CI->config->config;
         $request->database = self::get_databases();
-        self::save_temp($request);
+        ob_start();
+        $request->response->raw_content = html_entity_decode(ob_get_contents());
+        self::save_temp($request);*/
     }
     
     public static function handle_post_system() {
-        $CI = & get_instance();
+        /*$CI = & get_instance();
         $request = self::load_temp();
+        if(!$request)
+        {
+            return;
+        }
         //TODO: Post system operations
-        self::save_temp($request);
+        self::save_temp($request);*/
     }
     
     public static function handle_error($data) {
-        $request = self::load_temp();
+        /*$request = self::load_temp();
+        if(!$request)
+        {
+            return;
+        }
         if(!$request->error) {
             $request->error = array();
         }
         $request->error[] = $data;
-        self::save_temp($request);
+        self::save_temp($request);*/
     }
     
     public static function handle_shudown() {
-        $request = self::load_temp();
-        if(!$request->file->id)
+        /*$request = self::load_temp();
+        if(!$request)
+        {
             return;
+        }
         $request->execution->times->end = microtime(TRUE);
         $request->execution->times->total = $request->execution->times->end - $request->execution->times->start;
         $request->execution->memory->peak = memory_get_peak_usage(TRUE);
@@ -174,7 +269,7 @@ class ProfilerLibrary {
         $request->response->code = http_response_code();
         
         self::save_temp($request);
-        self::terminate($request->file->id);
+        self::terminate($request->file->id);*/
     }
     
 
@@ -182,6 +277,94 @@ class ProfilerLibrary {
      * File functions
      *---------------------------------------------------------------
      */
+    
+    private static function save($data) {
+        $dir = SPAGIPROFILERDETAILS . '/' . (new DateTime)->format('Ymd') . '/';
+        if(!is_dir($dir)) {
+            if(!mkdir($dir)) {
+                throw new Exception('PROFILER: Can\'t create profiler directory \'' . $dir . '\'!' );
+            }
+        }
+        file_put_contents($dir . $data['file']['name'], serialize($data));
+    }
+    
+    public static function load($filename) {
+        return unserialize(file_get_contents($filename));
+    }
+    
+    public static function get_logs() {
+        self::get_log_dirs(SPAGIPROFILERDETAILS);
+        usort(self::$log_files, 
+            function ($a, $b)
+            {
+                return strcmp($b['time'],$a['time']);
+            }
+        );
+        
+        foreach(self::$log_files as $log_file)
+        {
+            $contents = self::load($log_file['dir'] . $log_file['file']);
+            if($contents) {
+                
+            }
+        }
+        //TODO: Get extra data (status,ip,method, url,queries, queries times,execution time, memory peak, time)
+        return self::$log_files;
+    }
+    
+    private static function get_log_dirs($dir) 
+    {
+        if(substr($dir, strlen($dir)-1, 1) == "/") {
+            $dir = substr($dir, 0, strlen($dir)-1);
+        }
+        
+        if(!$dir_handle = opendir($dir)) 
+        {
+            throw new Exception('PROFILER: Can\'t create open directory \'' . $dir . '\'!' );
+        }
+        
+        while(false !== ($entry = readdir($dir_handle))) 
+        {
+            if ($entry == "." || $entry == "..")
+            {
+                continue;
+            }
+            
+            if(is_dir($dir. "/" . $entry))
+            {
+                self::get_log_dirs($dir . '/' . $entry);
+                continue;
+            }
+            
+            if($path_parts = pathinfo($dir . '/' . $entry))
+            {
+                if($path_parts['extension'] != 'log')
+                {
+                    continue;
+                }                    
+            }
+            
+            array_push(
+                self::$log_files,
+                array(
+                    'dir'               => $path_parts['dirname'] . "/",
+                    'file'              => $path_parts['basename'],
+                    'name'              => $path_parts['filename'],
+                    'time'              => date("Y-m-d H:i:s",filemtime($path_parts['dirname'] . '/' . $path_parts['basename'])),
+                    'status'            => NULL,
+                    'ip'                => NULL,
+                    'url'               => NULL,
+                    'queries'           => NULL,
+                    'queries_times'     => NULL,
+                    'execution_time'    => NULL,
+                    'memory_peak'       => NULL,
+                    'time'              => NULL
+                )
+            );
+        }
+        
+        closedir($dir_handle);
+    }
     
     private static function load_temp() {
         $temp_name = self::get_temp_name();
@@ -201,7 +384,7 @@ class ProfilerLibrary {
     private static function terminate($file_id) {
         $temp_name = self::get_temp_name();
         $final_name = $file_id . '.json';
-        $final_dir = PROFILER_PATH . 'requests/' . (new DateTime)->format('Ymd') . '/';
+        $final_dir = SPAGIPROFILERDETAILS . (new DateTime)->format('Ymd') . '/';
         self::create_directory($final_dir);
         rename($temp_name,$final_dir . $final_name);
         self::add_to_index($final_dir, $final_name);
@@ -213,13 +396,13 @@ class ProfilerLibrary {
         $index_data = array(
             'id' => $request->file->id,
             'status' => $request->response->code,
-            'name' => str_replace(PROFILER_PATH . "requests/" ,"",$dir) . $file_name,
+            'name' => str_replace(SPAGIPROFILERDETAILS ,"",$dir) . $file_name,
             'time' => $request->request->time,
             'method' => $request->request->method,
             'ip' => $request->request->remote_ip,
             'url' => $request->request->url,
-            'query_count' =>$request->database->total_queries,
-            'query_time' =>$request->database->total_query_times,
+            'query_count' =>$request->database['total_queries'],
+            'query_time' =>$request->database['total_query_times'],
             'execution_time'=> $request->execution->times->total,
             'execution_memory'=> $request->execution->memory->peak,
         );
@@ -227,7 +410,7 @@ class ProfilerLibrary {
     }
     
     private static function save_index($data) {
-        $index_name = PROFILER_PATH . 'indexes/idx_' . (new DateTime)->format('Ymd') . '.json';
+        $index_name = SPAGIPROFILERDATAINDEX . 'idx_' . (new DateTime)->format('Ymd') . '.json';
         $fd = fopen($index_name,'a+');
         if($fd) {
             flock($fd, LOCK_EX);
@@ -259,7 +442,7 @@ class ProfilerLibrary {
         $row_count = 0;
         $result_set = array();
         while($currentDate >= $startDate) {
-            $index_name = APPPATH . 'indexes/idx_' . $currentDate->format('Ymd') . '.json';            
+            $index_name = SPAGIPROFILERDATAINDEX . 'idx_' . $currentDate->format('Ymd') . '.json';            
             $request_rows = self::load_index($index_name);
             if(!$request_rows) {
                 $currentDate = $currentDate->sub(new DateInterval("P1D"));
@@ -310,7 +493,7 @@ class ProfilerLibrary {
     }
     
     public static function get_request($request) {
-        $filename = PROFILER_PATH . 'requests/' . $request . '.json';
+        $filename = SPAGIPROFILERDETAILS . $request . '.json';
         $data = array();
         if(file_exists($filename)) {
             $json = file_get_contents($filename);
@@ -367,9 +550,9 @@ class ProfilerLibrary {
     
     private static function check_profiler_log() 
     {
-        self::create_directory(APPPATH . 'temp/');
-        self::create_directory(APPPATH . 'requests/');
-        self::create_directory(APPPATH . 'indexes/');
+        self::create_directory(SPAGIPROFILE . 'temp/');
+        self::create_directory(SPAGIPROFILE . 'requests/');
+        self::create_directory(SPAGIPROFILE . 'indexes/');
     }
 
     private static function create_directory($dir) {
@@ -384,7 +567,7 @@ class ProfilerLibrary {
     
     private static function get_temp_name() {
         $pid = getmypid();
-        return PROFILER_PATH . 'temp/' . $pid . '.json';        
+        return SPAGIPROFILE . 'temp/' . $pid . '.json';        
     }
     
     private static function get_databases() {
@@ -483,73 +666,8 @@ class ProfilerLibrary {
         return $rows;
     }
     
-    public static function get_profiler_object() {
-        $obj = new stdClass(); //ok
-        $obj->file = new stdClass(); //ok
-        $obj->file->id = null; //ok
-        $obj->file->name = null;
-        $obj->request = new stdClass(); //ok
-        $obj->request->raw = null; //ok
-        $obj->request->time = null; //ok
-        $obj->request->uri = null; //ok
-        $obj->request->port = null; //ok
-        $obj->request->host = null; //ok
-        $obj->request->remote_ip = null; //ok
-        $obj->request->remote_host = null; //ok
-        $obj->request->ci_uri = null; //ok
-        $obj->request->method = null; //ok
-        $obj->request->content_type = null;
-        $obj->request->headers = null; //ok
-        $obj->request->globals = new stdClass(); //ok
-        $obj->request->globals->request = null; //ok
-        $obj->request->globals->vars = null; //ok
-        $obj->request->globals->get = null; //ok
-        $obj->request->globals->post = null; //ok
-        $obj->request->globals->cookeis = null; //ok
-        $obj->request->globals->files = null; //ok
-        $obj->request->globals->environment = null; //ok
-        $obj->request->ci_input = new stdClass();
-        $obj->request->ci_input->raw = null;
-        $obj->request->ci_input->post = null;
-        $obj->request->ci_input->get = null;
-        $obj->request->ci_input->put = null;
-        $obj->request->ci_input->server = null;
-        
-        $obj->response = new stdClass();
-        $obj->response->header = null; //ok
-        $obj->response->code = null; //ok
-        $obj->response->raw_content = null;
-        $obj->response->content_type = null; //ok
-        $obj->response->ci_content = null; 
-        
-        $obj->errors = null; //ok
-        
-        $obj->config = new stdClass();
-        $obj->config->ci = null; //ok
-        $obj->config->php = null; //ok
-        $obj->config->profiler = null; //ok
-        
-        $obj->session = null; //ok
-        
-        $obj->execution = new stdClass();
-        $obj->execution->times = new stdClass();
-        $obj->execution->times->start = null; //ok
-        $obj->execution->times->end = null; //ok
-        $obj->execution->times->total = null; //ok
-        $obj->execution->memory = new stdClass();
-        $obj->execution->memory->total = null; //ok
-        $obj->execution->memory->peak = null; //ok
-        $obj->execution->controller = null; //ok
-        $obj->execution->action = null; //ok
-        $obj->execution->stack = null; //ok
-        
-        $obj->database = null;
-        
-        return $obj;
-    }
-    
     public static function hasProfiler() {
-        if(!defined('PROFILER_PATH') 
+        if(!defined('SPAGIPROFILERBASE') 
                 || !defined('PROFILER_ENABLED') 
                 || PROFILER_ENABLED !== TRUE) 
         {

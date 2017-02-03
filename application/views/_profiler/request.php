@@ -9,7 +9,7 @@
         <title>Profiler for CodeIgniter</title>
         <link href="/public/assets/bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet" />
         <link href="/public/assets/font-awesome-4.6.3/css/font-awesome.min.css" rel="stylesheet" />
-        <link href="/public/_profiler/css/_profiler.css" rel="stylesheet" />
+        <link href="/public/_profiler/assets/css/_profiler.css" rel="stylesheet" />
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -27,7 +27,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>                        
                     </button>-->
-                    <a class="navbar-brand" href="/_profiler/index/index" style="width:250px;"><img alt="CodeIgniter Profiler" src="/public/_profiler/images/ci32.png" class="pull-left"/><div style="padding-top:7px;">CodeIgniter Profiler</div></a>
+                    <a class="navbar-brand" href="/_profiler/index/index" style="width:250px;"><img alt="CodeIgniter Profiler" src="/public/_profiler/assets/images/ci32.png" class="pull-left"/><div style="padding-top:7px;">CodeIgniter Profiler</div></a>
                 </div>
                 <!--<div class="collapse navbar-collapse" id="bs-profiler-collapse-1">
                     <ul class="nav navbar-nav">
@@ -226,6 +226,19 @@
                             </tbody>
                         </table>
                     </div>                    
+                    <h3>Buffer</h3>
+                    <div class="table-responsive">
+                        <table class="table table-condensed table-bordered">
+                            <thead>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th class="info" style="width:20%">Buffer</th>
+                                    <td><?php echo($data['response']['raw_content'])?></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>                    
                 </div>
             </div>
         </section>
@@ -285,9 +298,9 @@
                     <a href="http://www.spagiweb.com">Copyright &copy; 2016 - Spagi Sistemas, ME.</a>
                 </div>
         </nav>        
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="/public/_profiler/assets/js/jquery.min.js"></script>
         <script src="/public/assets/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
-        <script src="/public/_profiler/js/request.js"></script>
+        <script src="/public/_profiler/assets/js/request.js"></script>
     </body>
 </html>
 

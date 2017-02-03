@@ -59,6 +59,7 @@ class SpagiProfiler
      */
     public static function pre_system() 
     {
+        
         if(function_exists('get_sp_instance')) 
         {
             $SP = & get_sp_instance();

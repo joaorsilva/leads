@@ -317,8 +317,8 @@ switch (ENVIRONMENT)
     /* Change to FALSE to disable the profiler */    
     define('PROFILER_ENABLED',TRUE);
     
-    if(ENVIRONMENT !== 'production' && defined('PROFILER_ENABLED') && PROFILER_ENABLED === TRUE ) {
-        require_once APPPATH. 'third_party/SpagiProfiler/core/bootstrap.php';
+    if(ENVIRONMENT !== 'production' && defined('PROFILER_ENABLED') && PROFILER_ENABLED === TRUE) {
+        require_once APPPATH. 'third_party/_profiler/core/bootstrap.php';
     }
 
 /*
