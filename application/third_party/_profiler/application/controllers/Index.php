@@ -17,16 +17,18 @@ class Index extends CI_Controller{
     }
     
     public function index() {
-        $request = $this->input->get('request');
-        if(!$request) {
+        $request = $this->input->get();
+        
+        if(!isset($request['request'])) {
             $data['data']=array();
-            $res = ProfilerLibrary::get_requests();
-            if($res['result'] === 'ok') {
-                $data['data']=$res['message'];
+            $res = ProfilerLibrary::get_logs($request);
+            if($res) {
+                $data['data']=$res;
             }
             $this->load->view('_profiler/index',$data);
+            die("aqui");
         } else {
-            $data['data'] = ProfilerLibrary::get_request($request);
+            $data['data'] = ProfilerLibrary::get_request($request['request']);
             $this->load->view('_profiler/request',$data);
         }
     }

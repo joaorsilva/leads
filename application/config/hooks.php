@@ -19,35 +19,38 @@ $hook['post_controller_constructor'][] = array(
     'filepath' => 'hooks'
 );
 
+/**
+ * Profiler hooks
+ */
 $hook['pre_system'][] = array(
-    'class'    => 'SpagiProfiler',
+    'class'    => 'Profiler',
     'function' => 'pre_system',
     'filename' => 'SpagiProfiler.php',
     'filepath' => 'hooks'
 );
 $hook['pre_controller'][] = array(
-    'class'    => 'SpagiProfiler',
+    'class'    => 'Profiler',
     'function' => 'pre_controller',
     'filename' => 'SpagiProfiler.php',
     'filepath' => 'hooks'
 );
 
 $hook['post_controller_constructor'][] = array(
-    'class'    => 'SpagiProfiler',
+    'class'    => 'Profiler',
     'function' => 'post_controller_constructor',
     'filename' => 'SpagiProfiler.php',
     'filepath' => 'hooks'
 );
 
 $hook['post_controller'][] = array(
-    'class'    => 'SpagiProfiler',
+    'class'    => 'Profiler',
     'function' => 'post_controller',
     'filename' => 'SpagiProfiler.php',
     'filepath' => 'hooks'
 );
 
 $hook['post_system'][] = array(
-    'class'    => 'SpagiProfiler',
+    'class'    => 'Profiler',
     'function' => 'post_system',
     'filename' => 'SpagiProfiler.php',
     'filepath' => 'hooks'

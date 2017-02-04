@@ -40,11 +40,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * Default Location: third-party/SpagiProfiler/core
  */
 
-interface ProfilerCollectorInterface {
+interface ProfilerCollectorInterface 
+{
         
-    public function save();
-    public function load();
-    public function &get_data();
     public function register();
     
 }

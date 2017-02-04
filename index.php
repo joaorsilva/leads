@@ -1,6 +1,6 @@
 <?php
 /**
- * CodeIgniter asdasd
+ * CodeIgniter
  *
  * An open source application development framework for PHP
  *
@@ -36,7 +36,7 @@
  * @filesource
  */
 
-ini_set('date.timezone', 'America/Sao_Paulo');
+ini_set('date.timezone', 'Europe/Dublin');
 /*
  *---------------------------------------------------------------
  * APPLICATION ENVIRONMENT
@@ -315,11 +315,11 @@ switch (ENVIRONMENT)
  * NOTE: Don't use this in a production environment
  */
     /* Change to FALSE to disable the profiler */    
-    define('PROFILER_ENABLED',TRUE);
+    /*define('PROFILER_ENABLED',TRUE);
     
     if(ENVIRONMENT !== 'production' && defined('PROFILER_ENABLED') && PROFILER_ENABLED === TRUE) {
         require_once APPPATH. 'third_party/_profiler/core/bootstrap.php';
-    }
+    }*/
 
 /*
  * --------------------------------------------------------------------

@@ -47,27 +47,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /*
  * Spagi Profiler PATHS  
  */
-    define('SPAGIPROFILERBASE', APPPATH . 'third_party/_profiler/');
-    define('SPAGIPROFILERCORE', APPPATH . 'third_party/_profiler/core/');
-    define('SPAGIPROFILERASSETS', 'spagiprofiler/assets/' );
-    define('SPAGIPROFILERAPP', SPAGIPROFILERBASE . 'application/');
-    define('SPAGIPROFILERCONTROLLERS', SPAGIPROFILERAPP . 'controllers/' );
-    define('SPAGIPROFILERVIEWS', SPAGIPROFILERAPP . 'views/' );
-    define('SPAGIPROFILERLIB', SPAGIPROFILERAPP . 'libraries/' );
-    define('SPAGIPROFILERCONF', SPAGIPROFILERAPP . 'config/' );
-    define('SPAGIPROFILE',SPAGIPROFILERBASE . 'profiles/');
-    define('SPAGIPROFILERDATAINDEX', SPAGIPROFILERBASE . 'profiles/indexes/' );
-    define('SPAGIPROFILERDETAILS', SPAGIPROFILERBASE . 'profiles/requests/' );
-    define('SPAGIPROFILERTEMP', SPAGIPROFILERBASE . 'profiles/temp/' );
-    define('SPAGIPROFILERHOOKSFILE', SPAGIPROFILERCONF . 'hooks.php' );
-    define('SPAGICONTROLLER_INDEX',SPAGIPROFILERCONTROLLERS . 'index.php');
+    define('PROFILERBASE', APPPATH . 'third_party/_profiler/');
+    define('PROFILERCORE', APPPATH . 'third_party/_profiler/core/');
+    define('PROFILERASSETS', 'profiler/assets/' );
+    define('PROFILERAPP', PROFILERBASE . 'application/');
+    define('PROFILERCONTROLLERS', PROFILERAPP . 'controllers/' );
+    define('PROFILERVIEWS', PROFILERAPP . 'views/' );
+    define('PROFILERLIB', PROFILERAPP . 'libraries/' );
+    define('PROFILERCONF', PROFILERAPP . 'config/' );
+    define('PROFILE',PROFILERBASE . 'profiles/');
+    define('PROFILERDATAINDEX', PROFILERBASE . 'profiles/indexes/' );
+    define('PROFILERDETAILS', PROFILERBASE . 'profiles/requests/' );
+    define('PROFILERTEMP', PROFILERBASE . 'profiles/temp/' );
+    define('PROFILERHOOKSFILE', PROFILERCONF . 'hooks.php' );
+    define('CONTROLLER_INDEX',PROFILERCONTROLLERS . 'index.php');
     
 /*
  * Load the Profiler Class
  */    
     
-    require_once SPAGIPROFILERCORE . 'SpagiProfilerCore.php';
-    require_once SPAGIPROFILERCORE . 'ProfilerLibrary.php';
+    require_once PROFILERCORE . 'ProfilerCore.php';
+    require_once PROFILERCORE . 'ProfilerLibrary.php';
     
     if(!function_exists('get_sp_instance'))
     {
@@ -111,7 +111,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         }        
     }
     
-    $SP = new SpagiProfilerCore();
-    $SP->bootstrap();
+    $GLOBALS['SP'] = new ProfilerCore();
+    $GLOBALS['SP']->bootstrap();
     
     

@@ -1,13 +1,9 @@
 <?php
-/**
- * Description of Index
- *
- * Copyright (c) 2016 SPAGI Sistemas, ME.
- * Todos os direitos reservados.
- * @author João Lopes Ribeiro da Silva <joao.r.silva@gmail.com>
- * @version 1.0
- * @package leads
- * @subpackage controllers
- * @copyright 2016 SPAGI Sistemas, ME
+
+/* 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
- require_once "../../../third_party/_profiler/application/controllers/Index.php";
+
+require_once APPPATH . "third_party/_profiler/application/controllers/Index.php";

@@ -18,7 +18,10 @@ class Index extends CI_Controller {
     }
     
     public function index() {
-        $this->jsonresponse->respond(array('result'=>'ok','message'=>''),200);
+        //throw new Exception("Bosta");
+        //$x=$a+1;
+        $this->jsonresponse->respond(array('result'=>'ok','message'=>'a'),200);
+        return;
         $this->load->model('App_modules_model');
         
         $this->App_modules_model->name = 'Modle 1';

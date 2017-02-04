@@ -132,9 +132,10 @@ if ( ! is_php('5.4'))
  *  Define a custom error handler so we can log PHP errors
  * ------------------------------------------------------
  */
-	set_error_handler('_error_handler');
-	set_exception_handler('_exception_handler');
-	register_shutdown_function('_shutdown_handler');
+        //TODO: Fix this thing (register profiler handlers later)
+	//set_error_handler('_error_handler');
+	//set_exception_handler('_exception_handler');
+	//register_shutdown_function('_shutdown_handler');
 
 /*
  * ------------------------------------------------------
@@ -246,7 +247,7 @@ if ( ! is_php('5.4'))
 		define('MB_ENABLED', TRUE);
 		// mbstring.internal_encoding is deprecated starting with PHP 5.6
 		// and it's usage triggers E_DEPRECATED messages.
-		@ini_set('mbstring.internal_encoding', $charset);
+		//@ini_set('mbstring.internal_encoding', $charset);
 		// This is required for mb_convert_encoding() to strip invalid characters.
 		// That's utilized by CI_Utf8, but it's also done for consistency with iconv.
 		mb_substitute_character('none');
@@ -263,7 +264,7 @@ if ( ! is_php('5.4'))
 		define('ICONV_ENABLED', TRUE);
 		// iconv.internal_encoding is deprecated starting with PHP 5.6
 		// and it's usage triggers E_DEPRECATED messages.
-		@ini_set('iconv.internal_encoding', $charset);
+		//@ini_set('iconv.internal_encoding', $charset);
 	}
 	else
 	{

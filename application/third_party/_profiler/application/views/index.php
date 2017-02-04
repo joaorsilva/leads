@@ -9,7 +9,7 @@
         <title>Profiler for CodeIgniter</title>
         <link href="/public/assets/bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet" />
         <link href="/public/assets/font-awesome-4.6.3/css/font-awesome.min.css" rel="stylesheet" />
-        <link href="/public/_profiler/css/_profiler.css" rel="stylesheet" />
+        <link href="/public/_profiler/assets/css/_profiler.css" rel="stylesheet" />
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -27,7 +27,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>                        
                     </button>-->
-                    <a class="navbar-brand" href="/_profiler/index/index" style="width:250px;"><img alt="CodeIgniter Profiler" src="/public/_profiler/images/ci32.png" class="pull-left"/><div style="padding-top:7px;">CodeIgniter Profiler</div></a>
+                    <a class="navbar-brand" href="/_profiler/index/index" style="width:250px;"><img alt="CodeIgniter Profiler" src="/public/_profiler/assets/images/ci32.png" class="pull-left"/><div style="padding-top:7px;">CodeIgniter Profiler</div></a>
                 </div>
                 <!--<div class="collapse navbar-collapse" id="bs-profiler-collapse-1">
                     <ul class="nav navbar-nav">
@@ -92,11 +92,12 @@
                             </thead>
                             <tbody>
                                 <?php
-                                if($data) {
+                                if($data['rows']) {
                                     $response_class = "";
                                     $response_icon = "";
                                     foreach($data['rows'] as $row) {
-                                        switch(floor($row->status/100)){
+                                        //var_dump($row);die;
+                                        switch(floor($row['status']/100)){
                                             case 5:
                                                 $response_class = "danger";
                                                 $response_icon = "ban";
@@ -114,23 +115,24 @@
                                                 $response_icon = "check";
                                                 break;
                                             case 1:
+                                            default:
                                                 $response_class = "default";
-                                                $response_class = "envelope-o";
+                                                $response_icon = "envelope-o";
                                                 break;
                                                 
                                         }
                                 ?>
                                 <tr>
-                                    <td style="text-align:center;"><a href="/_profiler/index/index/?request=<?php echo(urlencode(str_replace('.json', '', $row->name)))?>"><?php echo($row->id)?></a></td>
-                                    <td style="text-align:center;"><span class="label label-<?php echo($response_class)?>"><?php echo($row->status)?>&nbsp;&nbsp;<span class="fa fa-<?php echo($response_icon)?>"></span></span></td>
-                                    <td style="text-align:right;"><?php echo($row->ip)?></td>
-                                    <td><?php echo($row->method)?></td>
-                                    <td><?php echo($row->url)?></td>
-                                    <td style="text-align:right;"><?php echo(number_format($row->query_count,0,'.',','))?></td>
-                                    <td style="text-align:right;"><?php echo(number_format($row->query_time,3,'.',',') . ' mi.')?></td>
-                                    <td style="text-align:right;"><?php echo(number_format($row->execution_time,3,'.',',') . ' mi.')?></td>
-                                    <td style="text-align:right;"><?php echo(number_format($row->execution_memory/1024,0,'.',',') . ' Kb')?></td>
-                                    <td style="text-align:right;"><?php echo($row->time)?></td>
+                                    <td style="text-align:center;"><a href="/_profiler/index/index/?request=<?php echo(urlencode($row['dir'] . $row['id']))?>"><?php echo($row['id'])?></a></td>
+                                    <td style="text-align:center;"><span class="label label-<?php echo($response_class)?>"><?php echo($row['status'])?>&nbsp;<span class="fa fa-<?php echo($response_icon)?>">&nbsp;</span></span></td>
+                                    <td style="text-align:right;"><?php echo($row['ip'])?></td>
+                                    <td><?php echo($row['method'])?></td>
+                                    <td><?php echo($row['url'])?></td>
+                                    <td style="text-align:right;"><?php echo(number_format($row['queries'],0,'.',','))?></td>
+                                    <td style="text-align:right;"><?php echo(number_format($row['queries_times'],3,'.',',') . ' mi.')?></td>
+                                    <td style="text-align:right;"><?php echo(number_format($row['execution_time'],3,'.',',') . ' mi.')?></td>
+                                    <td style="text-align:right;"><?php echo(number_format($row['memory_peak']/1024,0,'.',',') . ' Kb')?></td>
+                                    <td style="text-align:right;"><?php echo($row['time'])?></td>
                                 </tr>
                                 <?php
                                     }
@@ -142,29 +144,46 @@
                 </div>            
             </div>
             <?php 
+            
             if($data['rows']) {
             $pages = ceil($data['paging']['total_rows']/$data['paging']['rows']);
-            $page = ceil($data['paging']['row']+1/$data['paging']['rows']);
+            $page = ceil(($data['paging']['row']+1)/$data['paging']['rows']);
+            //echo('rows: ' . $data['paging']['total_rows'] . '<br/>');
+            //echo('rows_perpage: ' . $data['paging']['rows'] . '<br/>');
+            //echo('row: ' . $data['paging']['row'] . '<br/>');
+            //echo('page: ' . $page . '<br/>');
+            //echo('pages: ' . $pages . '<br/>');            
             
             $max_buttons = 5;
-            if($page < $max_buttons / 2) {
+            if($page <= floor($max_buttons / 2)) {
                 $start_page = 1;
-                $end_page = $max_buttons;
-            } else if($page + $max_buttons / 2 > $pages) {
-                $start_page = $page - $max_buttons;
+                if($max_buttons > $pages) {
+                    $end_page = $pages; 
+                } else {
+                    $end_page = $max_buttons;
+                }
+            } else if($page + floor($max_buttons/2) >= $pages) {
+                $start_page = $pages - $max_buttons +1;
                 $end_page = $pages;
             } else {
-                $start_page = $page - 2;
-                $end_page = $page - 2;
-            }
-            if($end_page > $pages) {
-                $end_page = $pages;
+                $start_page = $page - floor($max_buttons / 2);
+                $end_page = $page + floor($max_buttons / 2);
             }
             
             ?>
             <nav style="text-align: center;">
               <ul class="pagination">
-                <li class="<?php if($page==1)echo('disabled')?>">
+                  
+                <?php 
+                $li_class = "";
+                if($page==1) $li_class = 'disabled';
+                ?>  
+                <li class="<?php echo($li_class)?>"> 
+                  <a href="/_profiler/index/index?page=0" aria-label="First">
+                    <span aria-hidden="true">&laquo;&laquo;</span>
+                  </a>
+                </li>
+                <li class="<?php echo($li_class)?>">
                   <a href="/_profiler/index/index?page=<?php echo($page-2)?>" aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
                   </a>
@@ -176,9 +195,18 @@
                 <?php
                 }
                 ?>
-                <li  class="<?php if($page==$pages)echo('disabled')?>">
+                <?php 
+                $li_class = "";
+                if($page==$pages) $li_class = 'disabled';
+                ?>  
+                <li  class="<?php echo($li_class)?>">
                   <a href="/_profiler/index/index?page=<?php echo($page)?>" aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
+                  </a>
+                </li>
+                <li  class="<?php echo($li_class)?>">
+                  <a href="/_profiler/index/index?page=<?php echo($pages-1)?>" aria-label="Last">
+                    <span aria-hidden="true">&raquo;&raquo;</span>
                   </a>
                 </li>
               </ul>
@@ -194,9 +222,9 @@
                     <a href="http://www.spagiweb.com">Copyright &copy; 2016 - Spagi Sistemas, ME.</a>
                 </div>
         </nav>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="/public/_profiler/assets/js/jquery.min.js"></script>
         <script src="/public/assets/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
-        <script src="/public/_profiler/js/index.js"></script>
+        <script src="/public/_profiler/assets/js/index.js"></script>
     </body>
 </html>    
 <?php

@@ -9,7 +9,7 @@
         <title>Profiler for CodeIgniter</title>
         <link href="/public/assets/bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet" />
         <link href="/public/assets/font-awesome-4.6.3/css/font-awesome.min.css" rel="stylesheet" />
-        <link href="/public/_profiler/css/_profiler.css" rel="stylesheet" />
+        <link href="/public/_profiler/assets/css/_profiler.css" rel="stylesheet" />
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -27,7 +27,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>                        
                     </button>-->
-                    <a class="navbar-brand" href="/_profiler/index/index" style="width:250px;"><img alt="CodeIgniter Profiler" src="/public/_profiler/images/ci32.png" class="pull-left"/><div style="padding-top:7px;">CodeIgniter Profiler</div></a>
+                    <a class="navbar-brand" href="/_profiler/index/index" style="width:250px;"><img alt="CodeIgniter Profiler" src="/public/_profiler/assets/images/ci32.png" class="pull-left"/><div style="padding-top:7px;">CodeIgniter Profiler</div></a>
                 </div>
                 <!--<div class="collapse navbar-collapse" id="bs-profiler-collapse-1">
                     <ul class="nav navbar-nav">
@@ -41,9 +41,9 @@
                 <ul id="areas-menu" class="nav nav-pills nav-justified">
                     <li class="active" data-area="#request-area"><a href="#"><span class="fa fa-arrow-down"></span>&nbsp;Request</a></li>
                     <li data-area="#response-area"><a href="#"><span class="fa fa-arrow-up"></span>&nbsp;Response</a></li>
-                    <li data-area="#database-area"><a href="#"><span class="fa fa-database"></span>&nbsp;Database&nbsp;<span class="badge">34</span></a></li>
-                    <li data-area="#exceptions-area"><a href="#"><span class="fa fa-ban"></span>&nbsp;Exceptions&nbsp;<span class="badge">1</span></a></li>
-                    <li data-area="#execution-area"><a href="#"><span class="fa fa-tasks"></span>&nbsp;Execution&nbsp;<span class="badge">1255</span></a></li>
+                    <li data-area="#database-area"><a href="#"><span class="fa fa-database"></span>&nbsp;Database&nbsp;<?php if(isset($data['database']['total_queries']) && $data['database']['total_queries']){?><span class="badge"><?php echo($data['database']['total_queries'])?></span><?php }?></a></li>
+                    <li data-area="#exceptions-area"><a href="#"><span class="fa fa-ban"></span>&nbsp;Exceptions&nbsp;<?php if($data['error']) {?><span class="badge"><?php echo(count($data['error']))?></span><?php }?></a></li>
+                    <li data-area="#execution-area"><a href="#"><span class="fa fa-tasks"></span>&nbsp;Execution&nbsp;<?php if($data['execution']['stack']) {?><span class="badge"><?php echo(count($data['execution']['stack']))?></span><?php }?></a></li>
                     <li data-area="#configuration-area"><a href="#"><span class="fa fa-gears"></span>&nbsp;Configuration&nbsp;<span class="badge">227</span></a></li>
                     <li data-area="#logs-area"><a href="#"><span class="fa fa-file-text-o"></span>&nbsp;Logs&nbsp;<span class="badge">227</span></a></li>
                 </ul>
@@ -128,7 +128,7 @@
                                     <td>
                                 <?php
                                 foreach($data['request']['globals']['get'] as $key=>$val) { 
-                                    echo('<strong>' . $key . '</strong> => ' . $val . '<br/>');
+                                    echo('<strong>' . $key . '</strong> => ' . print_r($val, TRUE) . '<br/>');
                                 }
                                 ?>
                                     </td>    
@@ -138,7 +138,7 @@
                                     <td>
                                 <?php
                                 foreach($data['request']['globals']['post'] as $key=>$val) { 
-                                    echo('<strong>' . $key . '</strong> => ' . $val . '<br/>');
+                                    echo('<strong>' . $key . '</strong> => ' . print_r($val, TRUE) . '<br/>');
                                 }
                                 ?>
                                     </td>    
@@ -148,7 +148,7 @@
                                     <td>
                                 <?php
                                 foreach($data['request']['globals']['cookeis'] as $key=>$val) { 
-                                    echo('<strong>' . $key . '</strong> => ' . $val . '<br/>');
+                                    echo('<strong>' . $key . '</strong> => ' . print_r($val, TRUE) . '<br/>');
                                 }
                                 ?>
                                     </td>    
@@ -158,7 +158,7 @@
                                     <td>
                                 <?php
                                 foreach($data['request']['globals']['files'] as $key=>$val) { 
-                                    echo('<strong>' . $key . '</strong> => ' . $val . '<br/>');
+                                    echo('<strong>' . $key . '</strong> => ' . print_r($val, TRUE) . '<br/>');
                                 }
                                 ?>
                                     </td>    
@@ -202,10 +202,6 @@
                                     <th class="info" style="width:20%">Status</th>
                                     <td><?php echo($data['response']['code'])?></td>
                                 </tr>
-                                <tr>
-                                    <th class="info" style="width:20%">Content Type</th>
-                                    <td><?php echo($data['response']['content_type'])?></td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -235,7 +231,83 @@
                   <h3 class="panel-title">Database</h3>
                 </div>
                 <div class="panel-body">
-                    asdasd
+                    <h3>Sumary:</h3>
+                    <div class="table-responsive">
+                        <table class="table table-condensed table-bordered">
+                            <thead>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th class="info" style="width:20%">Databases:</th>
+                                    <td><?php if(array_key_exists('total_databases', $data['database'])) { echo($data['database']['total_databases']);} ?></td>
+                                </tr>
+                                <tr>
+                                    <th class="info" style="width:20%">Queries:</th>
+                                    <td><?php if(array_key_exists('total_queries', $data['database'])) { echo($data['database']['total_queries']);}?></td>
+                                </tr>
+                                <tr>
+                                    <th class="info" style="width:20%">Query Time (secs):</th>
+                                    <td><?php if(array_key_exists('total_query_times', $data['database'])) { echo($data['database']['total_query_times']);}?></td>
+                                </tr>
+                                <tr>
+                                    <th class="info" style="width:20%">Query Avg (secs):</th>
+                                    <td><?php if(array_key_exists('total_query_times', $data['database']) && $data['database']['total_queries']) { echo(($data['database']['total_query_times']/$data['database']['total_queries']));}?></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <?php 
+                    if(isset($data['database']['databases']) && is_array($data['database']['databases'])) {
+                        foreach($data['database']['databases'] as $db) {
+                    ?>
+                    <h3>Database:&nbsp;<?php echo($db['name'] . " - " . $db['driver']['driver_type']) ?></h3>
+                    <div class="table-responsive">
+                        <table class="table table-condensed table-bordered">
+                            <thead>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th class="info" style="width:20%">Queries: </th>
+                                    <td><?php echo(number_format(count($db['driver']['queries']), 0, ".", ","))?></td>
+                                </tr>
+                                <tr>
+                                    <th class="info" style="width:20%">Query Time (secs): </th>
+                                    <td><?php echo(number_format($db['driver']['benchmark'], 5, ".", ","))?></td>
+                                </tr>
+                                <tr>
+                                    <th class="info" style="width:20%">Queries: </th>
+                                    <td>
+                                        <table class="table table-condensed table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>Time</th>
+                                                    <th>Statement</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php
+                                                $current = 0;
+                                                foreach($db['driver']['queries'] as $qry) {
+                                                ?>
+                                                <tr>
+                                                    <td><?php echo(number_format($db['driver']['query_times'][$current], 5, ".", ","))?></td>
+                                                    <td><?php echo($qry)?></td>
+                                                </tr>
+                                                <?php
+                                                    $current++;
+                                                }
+                                                ?>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <?php
+                        }
+                    }
+                    ?>
                 </div>
             </div>
         </section>
@@ -245,7 +317,45 @@
                   <h3 class="panel-title">Exceptions</h3>
                 </div>
                 <div class="panel-body">
-                    asdasd
+                    <h3>Details:</h3>
+                    <?php
+                        if($data['error']) {
+                            foreach($data['error'] as $err) {
+                    ?>
+                    <div class="table-responsive">
+                        <table class="table table-condensed table-bordered">
+                            <thead>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th class="info" style="width:20%">Error Type: </th>
+                                    <td><?php echo($err['type'])?></td>
+                                </tr>
+                                <tr>
+                                    <th class="info" style="width:20%">Message: </th>
+                                    <td><?php echo($err['message'])?></td>
+                                </tr>
+                                <tr>
+                                    <th class="info" style="width:20%">File: </th>
+                                    <td><?php echo($err['file_path'])?></td>
+                                </tr>
+                                <tr>
+                                    <th class="info" style="width:20%">Line: </th>
+                                    <td><?php echo($err['line'])?></td>
+                                </tr>
+                                <tr>
+                                    <th class="info" style="width:20%">Backtrace: </th>
+                                    <td>
+                                        To be implemented
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <?php
+                            }
+                        }
+                    ?>
                 </div>
             </div>
         </section>
@@ -255,7 +365,68 @@
                   <h3 class="panel-title">Execution</h3>
                 </div>
                 <div class="panel-body">
-                    asdasd
+                    <h3>Times:</h3>
+                    <div class="table-responsive">
+                        <table class="table table-condensed table-bordered">
+                            <thead>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th class="info" style="width:20%">Start (secs): </th>
+                                    <td><?php echo($data['execution']['times']['start'])?></td>
+                                </tr>
+                                <tr>
+                                    <th class="info" style="width:20%">End (secs): </th>
+                                    <td><?php echo($data['execution']['times']['end'])?></td>
+                                </tr>
+                                <tr>
+                                    <th class="info" style="width:20%">Elapsed (secs): </th>
+                                    <td><?php echo(number_format($data['execution']['times']['total'],5,".",","))?></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <h3>Times:</h3>
+                    <div class="table-responsive">
+                        <table class="table table-condensed table-bordered">
+                            <thead>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th class="info" style="width:20%">Peak: </th>
+                                    <td><?php echo(number_format(($data['execution']['memory']['peak']/1024), 0, ".", ","))?>K</td>
+                                </tr>
+                                <tr>
+                                    <th class="info" style="width:20%">Limit: </th>
+                                    <td><?php echo($data['execution']['memory']['limit'])?></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <h3>Stack:</h3>
+                    <div class="table-responsive">
+                        <table class="table table-condensed table-bordered">
+                            <thead>
+                            </thead>
+                            <tbody>
+                                <?php
+                                if($data['execution']['stack']) {
+                                    foreach($data['execution']['stack'] as $key=>$val) {
+
+                                        $key = str_replace(array("controller_execution_time_","(",")"), "", $key);
+                                        $key = str_replace(" / ", "::", $key);
+                                ?>
+                                <tr>
+                                    <th class="info" style="width:20%"><?php echo($key)?> (secs): </th>
+                                    <td><?php echo($val)?></td>
+                                </tr>
+                                <?php
+                                    }
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </section>
@@ -285,9 +456,9 @@
                     <a href="http://www.spagiweb.com">Copyright &copy; 2016 - Spagi Sistemas, ME.</a>
                 </div>
         </nav>        
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="/public/_profiler/assets/js/jquery.min.js"></script>
         <script src="/public/assets/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
-        <script src="/public/_profiler/js/request.js"></script>
+        <script src="/public/_profiler/assets/js/request.js"></script>
     </body>
 </html>
 

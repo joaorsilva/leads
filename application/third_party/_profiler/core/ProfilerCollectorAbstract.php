@@ -40,7 +40,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * Default Location: third-party/SpagiProfiler/core
  */
 
-abstract class ProfilerCollectorAbstract implements ProfilerCollectorInterface {
+abstract class ProfilerCollectorAbstract implements ProfilerCollectorInterface 
+{
     
     public $CI;
     public $SP;
@@ -60,49 +61,10 @@ abstract class ProfilerCollectorAbstract implements ProfilerCollectorInterface {
         $this->SP = & get_sp_instance();
         $this->gid = getmyuid();
         $this->class_name = get_class($this);
-    }
-    
-    public function save()
-    {
-        if(!defined('SPAGIPROFILERTEMP'))
-        {    
-            throw new Exception('SPAGI PROFILER: No temp diretory defined, please check your Profiler\'s bootstrap!');
-        }    
-        $file_name = SPAGIPROFILERTEMP . $this->class_name . '_' . $this->gid . '.json';
-        $this->checkDiretory(SPAGIPROFILERTEMP);
-        file_put_contents($file_name,  json_encode($file_name, JSON_FORCE_OBJECT));
-    }
-    
-    public function load() 
-    {
-        $file_name = SPAGIPROFILERTEMP . $this->class_name . '_' . $this->gid . '.json';
-        if(!file_exists($file_name))
-            return array();
-        $json = file_get_contents($file_name);
-        return json_decode($json);        
-    }
-    
-    public function &get_data() 
-    {
-        return $this->data;
-    }
-    
-    public function set_CI($CI) {
-        $this->CI = $CI;
+        ProfilerLibrary::bootstrap();
     }
     
     public function register() {
         return $this->class_name;
-    }
-    
-    private function checkDiretory($dir) 
-    {
-        if(!is_dir($dir)) 
-        {
-            if(!mkdir($dir,'755')) 
-            {
-                throw new Exception('SPAGI PROFILER: The temporary directory \'' . $dir . '\' doesn\'t exists and we couldn\'t create it!');
-            }
-        }        
     }
 }

@@ -3,14 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/var/www/sites/leads/application/third_party/SpagiProfiler/application/config/hooks.php</file>
-            <file>file:/var/www/sites/leads/application/third_party/SpagiProfiler/core/ProfilerLibrary.php</file>
+            <file>file:/var/www/sites/leads/application/logs/log-2017-02-04.php</file>
+            <file>file:/var/www/sites/leads/application/third_party/_profiler/application/controllers/Index.php</file>
+            <file>file:/var/www/sites/leads/application/third_party/_profiler/core/SpagiProfilerHooks.php</file>
+            <file>file:/var/www/sites/leads/application/third_party/_profiler/application/views/index.php</file>
+            <file>file:/var/www/sites/leads/application/third_party/_profiler/core/ProfilerLibrary.php</file>
             <file>file:/var/www/sites/leads/application/views/_profiler/index.php</file>
-            <file>file:/var/www/sites/leads/application/third_party/SpagiProfiler/core/SpagiProfilerCore.php</file>
-            <file>file:/var/www/sites/leads/application/views/_profiler/request.php</file>
-            <file>file:/var/www/sites/leads/application/controllers/_profiler/Index.php</file>
-            <file>file:/var/www/sites/leads/application/third_party/SpagiProfiler/core/bootstrap.php</file>
-            <file>file:/var/www/sites/leads/application/third_party/SpagiProfiler/application/libraries/SpagiProfilerHeaders.php</file>
+            <file>file:/var/www/sites/leads/application/third_party/_profiler/application/libraries/SpagiProfilerHeaders.php</file>
+            <file>file:/var/www/sites/leads/application/third_party/_profiler/application/config/hooks.php</file>
+            <file>file:/var/www/sites/leads/application/controllers/Index.php</file>
+            <file>file:/var/www/sites/leads/application/third_party/_profiler/application/views/request.php</file>
         </group>
     </open-files>
 </project-private>
